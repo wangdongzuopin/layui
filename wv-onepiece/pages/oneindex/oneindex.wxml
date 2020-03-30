@@ -1,0 +1,23 @@
+<!--pages/oneindex/oneindex.wxml-->
+<view class="oneindex">
+	<view class="one_index">
+  <!-- 路飞 -->
+	<view class="one_person">
+  	<view class="one_img">
+			<image src="../../icon/lufei.jpg"></image>
+		</view>
+    <view class="one_img one_text">
+    船长蒙奇·D·路飞，立志成为海贼王，并遵照儿时与兄弟的约定17岁那年出海冒险，在一路上披荆斩棘，战胜诸多强敌，贯彻自己的信念，并在过程中找到与自己一样有着必须要完成的梦想的人，结伴而行，朝着各自的梦想前进。
+    </view>
+  </view>
+    <!-- 路飞 -->
+	<view class="one_person">
+  	<view class="one_img">
+			<image src="../../icon/lufei.jpg"></image>
+		</view>
+    <view class="one_img one_text">
+    船长蒙奇·D·路飞，立志成为海贼王，并遵照儿时与兄弟的约定17岁那年出海冒险，在一路上披荆斩棘，战胜诸多强敌，贯彻自己的信念，并在过程中找到与自己一样有着必须要完成的梦想的人，结伴而行，朝着各自的梦想前进。
+    </view>
+  </view>
+	</view>
+</view>
