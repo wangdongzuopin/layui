@@ -1,0 +1,1011 @@
+html,body {
+	margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+		}
+.detail_body_all {
+    margin: 0 auto;
+    margin-top: -5px;
+    width: 800px;
+    min-height:600px;
+    background-color: rgba(255, 255, 255, 0.801);
+    z-index: 1;
+	/*height: auto; */
+}
+.detail_body_box{
+    padding-bottom: 1px;
+    margin-top: 20px;
+}
+.detail_body_h{
+    margin: 20px;
+    margin-top: 20px;
+    position: absolute;
+}
+.detail_body_h div h3 {
+    display: inline;
+}
+
+.detail_body_h_font {
+    /* border: 1px solid red; */
+    margin-top: 25px;
+    float: left;
+    font-size: 10px;
+}
+
+.detail_body_member {
+    float: right;
+    margin: 20px;
+    margin-right: 70px;
+    width: 40px;
+    height: 60px;
+    display: inline;
+}
+.detail_body_member_number{
+    font-size: 24px;
+    color: gray;
+    margin-left: 7px;
+    margin: 0 auto;
+    text-align: center;
+}
+.detail_body_member_number:hover{
+    color: red;
+}
+.detail_body_member_person{
+    color: gray;
+    margin-left: 7px;
+    margin: 0 auto;
+    text-align: center;
+}
+.detail_body_member_person:hover{
+    color: red;
+}
+.detail_body_member a{
+    text-decoration: none;
+}
+.detail_body_member a:hover{
+    color: red;
+}
+
+
+.detail_body_Setting {
+    
+    width: 40px;
+    height: 60px;
+    float: right;
+    margin: 23px;
+    margin-right: -120px;
+}
+
+.detail_body_Setting_img{
+    /* border:  1px solid red; */
+    color: gray;
+    margin-left: 7px;
+    margin: 5px;
+    margin: 0 auto;
+    text-align: center;
+}
+.detail_body_Setting_set{
+    /* border:  1px solid red; */
+    color: gray;
+    margin-top: 4px;
+    text-align: center;
+    text-decoration: none;
+}
+.detail_body_Setting_set:hover{
+    color: red;
+}
+
+.detail_body_line {
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+/* 任务 */
+.detail_body_task {
+    
+    width: 40px;
+    height: 25px;
+    margin: 25px;
+    float: left;
+    display: inline;
+    font-size: 18px;
+}
+
+.detail_body_addtask {
+    width: 70px;
+    height: 25px;
+    margin: 26px;
+    float: left;
+    display: inline;
+}
+.detail_body_user{
+    float: left;
+    margin-top: -20px;
+    position: absolute;
+    font-size: 12px;
+}
+
+.detail_body_addtask button {
+    background: inherit;
+    background-color: rgba(22, 172, 213, 0.767);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+}
+
+
+.detail_body_task_screening_s{
+    width: 50px;
+    height: 15px;
+    margin-top: -15px;
+}
+.detail_body_task_screening_s label{
+    width: 50px;
+    height: 15px;
+    
+}
+.detail_body_task_screening {
+    
+    width: 17px;
+    height: 20px;
+    display: inline;
+    margin: 30px;
+    float: right;
+    margin-top: 30px;
+    margin-right: 110px;
+}
+.detail_body_task_screening img:hover{
+    opacity: 0.5;
+    filter:brightness(20%);
+    cursor: pointer;
+}
+.detail_body_task_screening_choose{
+    width: 220px;
+    height: 180px;
+    /* background-color:white; */
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-right: -170px;
+    display: none;
+}
+.detail_body_task_screening_choose label{
+    float: left;
+    margin: 12px;
+    font-size: 12px;
+    color: black;
+}
+.detail_body_task_screening_choose select{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    margin-top: 5px;
+}
+
+.detail_body_task_fenge {
+    /* border: 1px solid rebeccapurple; */
+    width: 10px;
+    height: 20px;
+    display: inline;
+    float: right;
+    margin-right: -65px;
+    margin-top: 30px;
+}
+.detail_body_task_fenge img{
+    margin-left:5px;
+    
+}
+
+.detail_body_task_user {
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid red; */
+    margin: 29px;
+    margin-right: -130px;
+    float: right;
+    cursor: pointer;
+    opacity: 0.5;
+    filter:brightness(20%);
+    margin-top: 29px;
+}
+.detail_body_task_user:hover{
+    opacity: 0.4;
+    filter:brightness(5%);
+}
+.detail_body_task_Listview {
+    float: right;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid red; */
+    margin: 30px;
+    margin-right: -100px;
+    margin-top: 30px;
+}
+.detail_body_task_Listview:hover{
+    opacity: 0.5;
+    filter:brightness(80%);
+    cursor: pointer;
+}
+
+
+.user_body_info_end {
+    margin: 0 auto;
+    width: 710px;
+    min-height: 300px;
+    margin-top: 70px;
+    /* border: 1px solid red; */
+}
+.user_user_left{
+    border: 1px solid red;
+    float: left;
+    margin-left: 0px;
+    margin-top: -25px;
+}
+
+.user_body_usershow{
+    display: inline;
+    width: 50%;
+    height: 30px;
+    float: left;
+    /* border: 1px solid red; */
+    margin: 0 auto;
+    margin-left: -150px;
+    margin-top: -10px;
+    
+}
+.user_body_info_box{
+    width: 90px;
+    height: 25px;
+    float: left;
+    margin: 4px;
+    margin-left: -70px;
+    position: absolute;
+    background:inherit;
+    /* border: 1px solid red; */
+    border-radius:10px;
+    background-color: rgba(255, 255, 255, 0.74);
+    display: none;
+}
+.user_body_info_box .user_box{
+    margin: 3px;
+    margin-left: 8px;
+    margin-top: 3px;
+}
+.user_body_info_box .user_pen{
+    margin-left: 6px;
+    margin-bottom: 5px;
+}
+.user_body_info_box .user_pen:hover{
+    opacity: 0.5;
+    filter:brightness(20%);
+}
+
+.user_body_info_red {
+    float: left;
+    margin-left: 0px;
+    margin-top: 5px;
+    cursor: default;
+    position: absolute;
+}
+.user_body_info_red1 {
+    float: left;
+    margin-left: 0px;
+    margin-top: 19px;
+    cursor: default;
+    position: absolute;
+}
+#user_tip {
+    position: absolute;
+    width: 65px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+#user_tip_red{
+    position: absolute;
+    width: 30px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+.user_body_info_red .user_red{
+    margin-top: -20px;
+    cursor: pointer;
+}
+.user_body_info_red .user_blue{
+    margin-left: 0px;
+    margin-top: -20px;
+    display: none;
+    cursor: pointer;
+}
+
+.user_body_info_check {
+    float: left;
+   
+    margin-left: 20px;
+}
+.user_body_info_check .user_img_open{
+    
+}
+.user_body_info_check .user_img_close{
+    
+    display: none;
+    
+}
+.user_task_f {
+    font-size: 13px;
+    color: gray;
+}
+
+.user_task_caveat {
+    color: red;
+}
+
+.user_task_lable {
+    color: dodgerblue;
+    font-size: 14px;
+}
+
+.user_task_pargram {
+    font-size: 14px;
+    color: grey;
+}
+
+.user_task_info {
+    padding: 4px;
+}
+
+.user_task_info label {
+    margin-top: -10px;
+    font-size: 8px;
+    color: grey;
+}
+
+.user_task_h {
+    background: inherit;
+    background-color: rgba(22, 172, 213, 0.767);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    font-size: 13px;
+    /* background-color: purple;
+    color: white; */
+}
+
+.user_task_grade {
+    width: 60px;
+    height: 50px;
+
+}
+
+.user_task_grade button {
+    background: inherit;
+    background-color: darkgoldenrod;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    margin: 4px;
+    padding: 2px;
+    font-size: 13px;
+    width: 40px;
+    height: 17px;
+}
+.user_task_people{
+    width: 80px;
+    height: 17px;
+    font-size: 11px;
+}
+/* 列表显示以及隐藏 */
+.user_task_info_list{
+    float: left;
+    margin: 1px;
+    margin-left: 80px;
+    color: gray;
+    display: none;
+    
+}/* 列表显示以及隐藏 */
+
+.user_task_info_list input{
+    
+}
+.user_task_info_list_div{
+    border: 1px solid white;
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    margin-top: 2px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user_task_info_list_div1{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user_task_info_list_div2{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user_task_info_list_div3{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user_task_info_list_div4{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user_task_info_list_box{
+    float: left;
+    margin-top: -2px;
+    
+    position: absolute;
+    
+    border-right-width: 10px;
+}
+.user_task_info_list_box1{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user_task_info_list_box2{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user_task_info_list_box3{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user_task_info_list_box4{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user_task_info_list li{
+    font-size: 12px;
+    list-style: none;
+    margin-top: 0;
+    
+}
+.user_task_info_list label{
+    color: dodgerblue;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* 详细信息2 */
+.user2_body_info_show{
+    
+    float: left;
+    
+}
+.user2_body_info_box{
+    width: 90px;
+    height: 25px;
+    float: left;
+    margin: 18px;
+    margin-left: -70px;
+    background:inherit;
+    border-radius:10px;
+    position: absolute;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.74);
+
+    
+}
+.user2_body_info_box .user_box{
+    margin: 3px;
+    margin-left: 8px;
+    margin-top: 3px;
+}
+.user2_body_info_box .user_pen{
+    margin-left: 4px;
+    margin-bottom: 5px;
+}
+
+#user_tip2 {
+    position: absolute;
+    width: 65px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+#user_tip_red2{
+    position: absolute;
+    width: 30px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+.user2_body_info_red {
+    float: left;
+    margin-left: 0px;
+    margin-top: 19px;
+    position: absolute;
+}
+.user2_body_info_red .user_red2{
+    margin-top: -20px;
+    cursor: pointer;
+}
+.user2_body_info_red .user_blue2{
+    margin-left: 0px;
+    margin-top: -20px;
+    display: none;
+    cursor: pointer;
+}
+
+.user2_body_info_red .user_blue2{
+    margin-left: 0px;
+    display: none;
+}
+
+.user2_body_info_check {
+    float: left;
+   margin-top: 20px;
+    margin-left: 20px;
+}
+.user2_body_info_check .user_img_open1{
+    
+}
+.user2_body_info_check .user_img_close1{
+    
+    display: none;
+    
+}
+.user2_task_f {
+    font-size: 13px;
+    color: gray;
+}
+
+.user2_task_caveat {
+    color: red;
+}
+
+.user2_task_lable {
+    color: dodgerblue;
+    font-size: 14px;
+}
+
+.user2_task_pargram {
+    font-size: 14px;
+    color: grey;
+}
+
+.user2_task_info {
+    padding: 4px;
+}
+
+.user2_task_info label {
+    margin-top: -10px;
+    font-size: 8px;
+    color: grey;
+}
+
+.user2_task_h {
+    background: inherit;
+    background-color: rgba(22, 172, 213, 0.767);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    font-size: 13px;
+    /* background-color: purple;
+    color: white; */
+}
+
+.user2_task_grade {
+    width: 60px;
+    height: 50px;
+
+}
+
+.user2_task_grade button {
+    background: inherit;
+    background-color: darkgoldenrod;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    margin: 4px;
+    padding: 2px;
+    font-size: 13px;
+    width: 40px;
+    height: 17px;
+}
+.user2_task_people{
+    width: 80px;
+    height: 17px;
+    font-size: 11px;
+}
+/* 列表显示以及隐藏 */
+.user2_task_info_list{
+    float: left;
+    margin: 1px;
+    margin-left: 80px;
+    color: gray;
+    display: none;
+    
+}/* 列表显示以及隐藏 */
+
+.user2_task_info_list input{
+    
+}
+.user2_task_info_list_div{
+    border: 1px solid white;
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    margin-top: 2px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user2_task_info_list_div1{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user2_task_info_list_div2{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user2_task_info_list_div3{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user2_task_info_list_div4{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user2_task_info_list_box{
+    float: left;
+    margin-top: -2px;
+    position: absolute;
+}
+.user2_task_info_list_box1{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user2_task_info_list_box2{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user2_task_info_list_box3{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user2_task_info_list_box4{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user2_task_info_list li{
+    font-size: 12px;
+    list-style: none;
+    margin-top: 0;
+    
+}
+.user2_task_info_list label{
+    color: dodgerblue;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* 详细信息3 */
+.user3_body_info_show{
+    width: 710px;
+    float: left;
+    margin: 0 auto;
+}
+.user3_body_info_box{
+    width: 90px;
+    height: 25px;
+    float: left;
+    margin: 17px;
+    margin-left: -70px;
+    position: absolute;
+    background:inherit;
+    border-radius:10px;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.74);
+}
+.user3_body_info_box .user_box{
+    margin: 3px;
+    margin-left: 8px;
+    margin-top: 3px;
+}
+.user3_body_info_box .user_pen{
+    margin-left: 4px;
+    margin-bottom: 5px;
+}
+
+#user_tip3 {
+    position: absolute;
+    width: 65px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+#user_tip_red3{
+    position: absolute;
+    width: 30px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.user3_body_info_red {
+    float: left;
+    margin-left: 0px;
+    margin-top: 18px;
+    position: absolute;
+}
+.user3_body_info_red .user_red3{
+    margin-top: -20px;
+    cursor: pointer;
+}
+.user3_body_info_red .user_blue3{
+    margin-left: 0px;
+    margin-top: -20px;
+    display: none;
+    cursor: pointer;
+}
+
+.user3_body_info_check {
+    float: left;
+   margin-top: 20px;
+    margin-left: 20px;
+}
+.user3_body_info_check .user_img_open2{
+    
+}
+.user3_body_info_check .user_img_close2{
+    
+    display: none;
+    
+}
+.user3_task_f {
+    font-size: 13px;
+    color: gray;
+}
+
+.user3_task_caveat {
+    color: red;
+}
+
+.user3_task_lable {
+    color: dodgerblue;
+    font-size: 14px;
+}
+
+.user3_task_pargram {
+    font-size: 14px;
+    color: grey;
+}
+
+.user3_task_info {
+    padding: 4px;
+}
+
+.user3_task_info label {
+    margin-top: -10px;
+    font-size: 8px;
+    color: grey;
+}
+
+.user3_task_h {
+    background: inherit;
+    background-color: rgba(22, 172, 213, 0.767);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    font-size: 13px;
+    /* background-color: purple;
+    color: white; */
+}
+
+.user3_task_grade {
+    width: 60px;
+    height: 50px;
+
+}
+
+.user3_task_grade button {
+    background: inherit;
+    background-color: darkgoldenrod;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-width: 0px;
+    margin: 4px;
+    padding: 2px;
+    font-size: 13px;
+    width: 40px;
+    height: 17px;
+}
+.user3_task_people{
+    width: 80px;
+    height: 17px;
+    font-size: 11px;
+}
+/* 列表显示以及隐藏 */
+.user3_task_info_list{
+    float: left;
+    margin: 1px;
+    margin-left: 80px;
+    color: gray;
+    display: none;
+    
+}/* 列表显示以及隐藏 */
+
+.user3_task_info_list input{
+    
+}
+.user3_task_info_list_div{
+    border: 1px solid white;
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    margin-top: 2px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user3_task_info_list_div1{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user3_task_info_list_div2{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user3_task_info_list_div3{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user3_task_info_list_div4{
+    width: 20px;
+    height: 15px;
+    margin-left: -18px;
+    float: left;
+    display: none;
+    position: absolute;
+    border: 0;
+}
+.user3_task_info_list_box{
+    float: left;
+    margin-top: -2px;
+    position: absolute;
+}
+.user3_task_info_list_box1{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user3_task_info_list_box2{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user3_task_info_list_box3{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user3_task_info_list_box4{
+    float: left;
+    margin-top: 1px;
+    position: absolute;
+}
+.user3_task_info_list li{
+    font-size: 12px;
+    list-style: none;
+    margin-top: 0;
+    
+}
+.user3_task_info_list label{
+    color: dodgerblue;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* 底部 */

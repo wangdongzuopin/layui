@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link href="/css/registered.css" type="text/css" rel="stylesheet">
+    <link href="/css/login.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="/js/login.js" type="text/javascript"></script>
+    <script src="/js/time.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+    <script src="/js/layer.js"></script>
+    <title>注册</title>
+    <style>
+
+    </style>
+    <script>
+
+    </script>
+
+</head>
+
+<body>
+    <form name="form1">
+        <div id="reg_1">
+            <div id="reg_2" style="margin-top: 30px;">
+                <span style="color:black">注册</span>
+            </div>
+            <!--<input id="gid" type="text" placeholder="gid">-->
+            <!--username-->
+            <div id="reg_3">
+                <input name="name" id="reg_3_1" type="text" placeholder="用户名" maxlength="20"
+                    onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"
+                    style="width:450px;height: 50px;font-size: 20px; " />
+                <span id="reg_3_3"></span>
+                <span id="reg_3_2"></span>
+            </div>
+
+            <!--email-->
+            <div id="reg_4">
+                <input name="email" id="reg_4_1" type="text" autocomplete="current-email" placeholder="邮箱"
+                    style="width:450px;height: 50px;font-size: 20px; " />
+                <span id="reg_4_2"></span>
+                <span id="reg_4_3"></span>
+                </td>
+                </tr>
+            </div>
+
+            <!--password-->
+            <div id="reg_5">
+                <input name="passwd" id="reg_5_1" type="password" autocomplete="current-password" value=""
+                    placeholder="密码,至少八位字符" autocomplete="off" style="width:450px;height: 50px;font-size: 20px; "
+                    onblur="passwordBlur()" />
+                <span id="reg_5_2"></span>
+                <span id="reg_5_3"></span>
+                
+                <i class="reg_eyes"><img id="reg_5_4" style="width: 24px;" src="/img/eyes.png" onclick="showHidePassword()"></i>
+            </div>
+            <!-- 重新请求 -->
+            <!-- <div class="register_seeyouagain">
+                <div class="wd_reg_left" style="width: 75%;height: 100%;">
+
+                </div>
+            </div> -->
+            <div id="reg_6_4"></div>
+            
+            <strong id="timer" style="color:red; margin-left: 30px; display: none"></strong>
+
+            <div id="reg_7">
+                <input name="" id="reg_7_1" type="submit" value="注册" onclick="register()"
+                    style="width:450px;height: 50px; cursor: pointer; " />
+                <!--progress id="load" value="22" max="100" style="display:none;">
+                        </progress id="load">注册中
+                         <progress>-->
+            </div>
+            <!--login-->
+            <div id="reg_8">
+                    <span id="reg_8_3" style="color:#666666;">已有账号？</span>
+                <span id="reg_8_1" style="color:#169BD5;">
+                    <a id="reg_8_2" href="/login/" style="text-decoration:none;margin-left: 5px;">立即登录 &rarr;</a>
+                </span>
+              
+            </div>
+
+        </div>
+        <!--覆盖-->
+        <!-- <div id="alert">
+            <div class="page-header">
+                <h3><img id="img1" src="/img/register1.jpg">新用户注册成功</h3>
+            </div>
+            <hr>
+            <div class="input-group">
+                <blockquote>
+
+                    <h3 style="text-align:center;margin-top: 150px;">您已注册成功</h3>
+                    <p>请使用邮箱激活您的账号</p>
+                </blockquote>
+                <hr class="hr1">
+
+                <a id="alert1" href="https://192.168.241.130:8080/login/" class="login"></a>
+            </div>
+        </div> -->
+    </form>
+</body>
+<script>
+
+</script>
+</script>
+
+</html>

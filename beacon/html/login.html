@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/js/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <!-- <div id="app1">
+        <input type="checkbox" name="is_auto" title="记住密码" lay-skin="primary" v-model="iss" @click="is_auto">
+    </div> -->
+    <form class="layui-form" action="">
+        <div id="lapp" class="l1">
+            <div style="margin: 0 auto;width: 90%;height: 100%;">
+                <div class="l1-title">
+                    Login
+                </div>
+                <div class="l1-form">
+                    <!-- 邮箱 -->
+                    <div class="layui-form-item" style="padding-bottom: 20px;">
+                        <label class="layui-form-label"
+                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">邮箱</label>
+                        <div class="layui-input-block layui-margin-zero">
+                            <input type="text" name="email" lay-verify="email" placeholder="请输入标题" autocomplete="off"
+                                class="layui-input" v-model="add.email">
+                        </div>
+                    </div>
+                    <!-- 密码 -->
+                    <div class="layui-form-item" style="padding-bottom: 0px;margin-bottom: 0;">
+                        <label class="layui-form-label"
+                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">密码</label>
+                        <div class="layui-input-block layui-margin-zero">
+                            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                                autocomplete="off" class="layui-input" v-model="add.password">
+                        </div>
+                    </div>
+                    <!-- 两功能 -->
+                    <div style="display: flex;justify-content: space-between;">
+                        <!-- 复选框 -->
+                        <div class="layui-form-item">
+                            <!-- <label class="layui-form-label">复选框</label> -->
+                            <div class="layui-input-block layui-margin-zero">
+                                <input type="checkbox" name="is_auto" title="记住密码" lay-skin="primary" v-model="add.is_auto" @click="is_uto">
+                            </div>
+                        </div>
+                        <!-- 忘记密码 -->
+                        <div class="layui-form-item">
+                            <!-- <label class="layui-form-label">复选框</label> -->
+                            <div class="layui-input-block" style="margin-left: 0;display: flex;align-items: center;">
+                                <a href="">忘记密码？</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 提交 -->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block layui-margin-zero">
+                            <!-- <button style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo"></button> -->
+                            <input type="submit" value="登 录" @click="login" style="width: 100%;font-size: 17px;"
+                                class="layui-btn" lay-submit lay-filter="formDemo">
+                        </div>
+                    </div>
+                    <!-- 注册链接 -->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block layui-margin-zero flex">
+                            没有账号？<a href="">立即注册</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</body>
+<script src="/js/layui/layui.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/node_modules/axios/dist/axios.js"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+
+    var login1 = new Vue({
+        el: '#lapp',
+        data() {
+            return {
+                add: {
+                    email: '',
+                    password: '',
+                    is_auto: true
+                },
+            }
+        },
+        methods: {
+            login: function () {
+                // this.axios.post('/login/check', this.add)
+                //     .then((res) => {
+                //         console.log('res=>',res);
+                //     })
+            },
+            is_uto: function () {
+                console.log(this.add.is_auto)
+            }
+        }
+    })
+
+</script>
+
+</html>

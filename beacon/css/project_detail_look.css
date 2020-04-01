@@ -1,0 +1,1013 @@
+.wd_body_look{
+    background-color: white;
+	display: block;
+	overflow-y: hidden;
+	margin: 0 auto;
+	height: 100%;
+	min-width: 900px;
+}
+/*项目名称*/
+.stand_look{
+	/*position: relative;*/
+	/*width: 100px;*/
+	/* float: left; */
+	/* height: 60px; */
+	margin-left: 10px;
+	/*border:1px solid red;*/
+	padding-top: 18px;
+	/* color: black; */
+	cursor: pointer;
+}
+.stand_look h4{
+	/* color: rgb(85, 85, 85); */
+	font-weight: bold;
+}
+.stand_note{
+	font-size: 12px;
+	width: 300px;
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	margin-top: 5px;
+	color: rgb(85, 85, 85);
+}
+.stand_look p{
+	/* float: left; */
+	height: 60px;
+	font-size: 12px;
+	color: gray;
+	/* padding-top: 20px; */
+}
+/*项目人员*/
+.stand-look-mmber{
+	float: right;
+	height: 60px;
+	margin-right: 35px;
+	padding-top: 40px;
+}
+.stand-look-member{
+	float: right;
+	height: 60px;
+	margin-right: -21px;
+	/*border:1px solid red;*/
+	padding-top: 10px;
+	/*font-size: 17px;*/
+}
+.stand-look-user{
+	color: rgb(85, 85, 85);
+	font-weight: bold;
+	float: right;
+}
+.stand-look-user:hover{
+	color: #339966;
+}
+.stand-look-setpro{
+	color: rgb(85, 85, 85);
+	/* opacity: 1;
+    filter: brightness(50%); */
+}
+.stand-look-setpro img{
+	/* color: rgb(85, 85, 85); */
+	opacity: 1;
+    filter: brightness(50%);
+}
+.stand-look-setpro:hover{
+	color: #339966;
+	opacity: 1;
+    filter: brightness(100%);
+}
+
+/*项目设置*/
+.stand-look-set{
+	font-weight: bold;
+	float: right;
+	height: 60px;
+	margin-right: 10px;
+	/*border:1px solid red;*/
+	padding-top: 40px;
+	/* color: rgb(85, 85, 85); */
+}
+.stand-look-setting{
+	float: right;
+	height: 60px;
+	margin-right: -25px;
+	/*border:1px solid red;*/
+	padding-top: 10px;
+}
+.stand-look-setting img{
+	width: 22px;
+}
+.stand-set-member label{
+	margin-left: 4px;
+}
+.stand_set_mmb{
+	display: inline;
+	margin-left: 10px;
+}
+.stand_kanban_wei{
+	display: inline;
+	margin-left: 10px;
+}
+.kanban_submint_set input{
+	margin: 10px auto;
+	margin-left: 15px;
+	color:
+	white;
+	padding: 5px;
+	background-color:
+	rgba(22, 172, 213, 0.767);
+	border: 0px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+.kanban_submint_set {
+	clear: both;
+	width: 100%;
+	text-align: center;
+}
+
+/* 成员 */
+.kanban_mmb{
+	width: 70%;
+	clear: both;
+	margin: 0 auto;
+	min-height: 500px;
+}
+.kanban_mmber_all{
+	margin: 10px;
+	font-size: 12px;
+	color: rgb(85, 85, 85);
+}
+.kanban_mmber_all a{
+	color: black;
+	font-weight: bold;
+}
+.kanban_mmber_all a:hover{
+	color:#339966;
+}
+
+/* 任务清单 */
+.wd_kanban_taskqingdan{
+	flex: 0 0 310px;
+	overflow: hidden;
+	/* height: 639px; */
+	/* min-height: 700px; */
+	border: 1px solid;
+	margin-left: 15px;
+	background-color: #efefef;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	display: inline-block;
+	/* height: 100%; */
+}
+
+.wd_kanban_Checklist{
+	width: 100%;
+	height: 30px;
+	/* border: 1px solid; */
+	margin-top: 10px;
+}
+.wd_kanban_Checklist_number{
+	float: left;
+	min-width: 20px;
+	border: 1px solid#999;
+	margin-left: 5px;
+	border-radius: 10px;
+	background-color:#999;
+	color:white;
+	font-size: 15px;
+	text-align: center;
+	box-sizing: border-box;
+	font-weight: 400;
+	height: 22px;
+	/* line-height: 32px; */
+	/* margin-top: 5px; */
+}
+.wd_kanban_Checklist_name{
+	float: left;
+	margin-top: 2px;
+	font-size: 12px;
+	color:#000;
+	font-weight: bold;
+	margin-left: 5px;
+	width: 100px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: default;
+}
+.wd_kanban_Checklist_add{
+	float: right;
+	width: 57px;
+}
+
+/* 任务 */
+.wd_knaban_task{
+	width: 95%;
+	min-height: 45px;
+	margin: 0 auto;
+	border: 1px solid #e3e3e3;
+	background-color: white;
+	white-space: initial;
+	margin-top: 3px;
+	border-radius: 5px;
+	display: flex;
+}
+/* 添加任务清单 */
+.wd_kanban_add_qingdan{
+	width: 300px;
+	height: 60px;
+	/* margin-left: 15px; */
+	/* background-color:#efefef; */
+	border: 1px solid
+	#e3e3e3;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.wd_kanban_add_qingdan:hover{
+	color: #339966 ;
+	background-color: rgba(63,151,157,.04);
+}
+.kanban_add_qingdan{
+	/* border: 1px solid #e3e3e3; */
+	width: 70%;
+	margin: 0 auto;
+	height: 30px;
+	/* line-height: 102px; */
+	vertical-align: middle;
+	position: relative;
+	top: 17%;
+	text-align: center;
+	font-size: 12px;
+}
+.kanban_shuru{
+	width: 70%;
+	margin: 0 auto;
+	height: 30px;
+	/* line-height: 102px; */
+	vertical-align: middle;
+	position: relative;
+	top: 17%;
+	text-align: center;
+	font-size: 12px;
+}
+.kanban_shuru input[type=text]{
+	width: 222px;
+	height: 20px;
+	border-radius: 5px;
+	color: rgba(0,0,0,.87);
+	border: 1px solid #e3e3e3;
+}
+.kanban_shuru div{
+	float: left;
+}
+.kanban_shuru input[type=submit]{
+	height: 24px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:
+	#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background:#337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 4px;
+}
+
+.task_form_qingdan{
+	height: 100%;
+	display: flex;
+	white-space: nowrap;
+	display: flex;
+	justify-content: flex-start;
+	align-items: stretch;
+	padding-left: 30px;
+}
+.task_form_qingdan .wd_kanban_taskqingdan{
+	/* white-space: nowrap; */
+}
+#kanban_wd{
+	width: 100%;
+	
+}
+#add_qingdan{
+	/* width: 300px; */
+	/* overflow: hidden; */
+	height: 100%;
+	min-height: 600px;
+	margin-left: 15px;
+	/* background-color: #efefef; */
+	border-radius: 4px;
+	display: inline-block;
+}
+#taskform{
+	
+	padding-top: 10px;
+}
+
+.wd_kanban_dantask{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: calc(98% - 42px);
+}
+.queue{
+	
+}
+
+/* 修改删除清单 */
+.wd_kanban_operating{
+	clear: both;
+	position: absolute;
+	width: 115px;
+	min-height: 100px;
+	background-color: var(--mdc-theme-surface,#efefef);
+	margin-top: 20px;
+	margin-left: 20px;
+	box-shadow: 0 8px 16pxrgba(0,0,0,.16);
+	border-radius: 5px;
+	font-size: 11px;
+	border: 1px solid azure;
+}
+.wd_kanban_operating div:hover{
+	color: #339966;
+}
+.wd_kanban_oper_bj{
+	width: 100%;
+	margin-top: 10px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+}
+.wd_kanban_Checklist_add img:hover{
+	width: 18px;
+	opacity: 1;
+	filter: brightness(10%);
+}
+.wd_kanban_oper_bj div{
+	/* width: 80%; */
+	display: inline;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.wd_kanban_oper_sc{
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+}
+.wd_kanban_oper_sc div{
+	display: inline;
+	margin-left: 10px;
+	
+}
+.wd_kanban_oper_gd{
+	width: 100%;
+	margin-top: 0px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+}
+.wd_kanban_oper_gd div{
+	margin-left: 10px;
+}
+
+
+/* 清单保存于删除 */
+.kanban_edit_class input[type="submit"]{
+	height: 24px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background: #337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+
+/* 添加任务 */
+.wd_kanban_addtask{
+	display: flex;
+	justify-content: center;
+	min-height: 250px;
+	width: 95%;
+	margin: 0 auto;
+	align-items: center;
+	border: 1px solid#e3e3e3;
+	background-color:white;
+	border-radius: 5px;
+}
+.wd_kanban_just{
+	width: 90%;
+	/* border: 1px solid; */
+	height: 90%;
+	/* display: flex; */
+	font-size: 12px;
+	padding-bottom: 20px;
+	
+}
+.wd_kanban_just select{
+	width: 212px;
+	border: 0;
+	border-bottom: 1px dashed gainsboro;
+	font-family: 仿宋, serif;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.addtask_input input{
+	width: 200px;
+	border: 0;
+	border-bottom: 1px dashed gainsboro;
+}
+.addtask_input{
+	display: flex;
+	
+}
+.addtask_time input{
+	/* width: 201px; */
+	border: 0;
+	border-bottom: 1px dashed gainsboro;
+}
+.addtask_time input[type="submit"]{
+	height: 24px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background:#337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 4px;
+	width: 78px;
+}
+.wd_kanban_username{
+	width: 55.5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+}
+.wd_kanban_userdate{
+	width: 71.5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.wd_kanban_mo{
+	/* position: absolute; */
+	float: left;
+	width: 45px;
+	margin-left: -23px;
+	background:white;
+}
+
+.wd_kanban_sub_check{
+	float: left;
+	width: 10%;
+	margin-left: 5px;
+}
+.d_wd_kanban_sub_check{
+	float: left;
+	width: 5%;
+	margin-left: 5px;
+}
+.wd_kanban_subtask{
+	/* border-top: 1px solid #e3e3e3; */
+	/* padding-top: 5px; */
+	padding-bottom: 5px;
+	width: 89%;
+	margin: 0 auto;
+	clear: both;
+	float: left;
+	margin-left: 13px;
+}
+.d_wd_kanban_subtask{
+	/* border-top: 1px solid #e3e3e3; */
+	/* padding-top: 5px; */
+	/* padding-bottom: 5px; */
+	width: 100%;
+	margin: 0 auto;
+	clear: both;
+	float: left;
+	margin-left: 13px;
+}
+.d_wd_kanban_subtask div{
+	margin: 0;
+}
+.wd_kanban_sub_use{
+	margin-left: 5px;
+	/* display:inline; */
+	float: left;
+	width: 5%;
+}
+.wd_kanban_sub_name{
+	font-size: 12px;
+	margin-left: 5px;
+	/* color: #999999; */
+	word-break: break-all;
+}
+.d_wd_kanban_sub_name{
+	font-size: 12px;
+	margin-left: 5px;
+	/* color: #999999; */
+	word-break: break-all;
+}
+.wd_kanban_subnum{
+	/* padding-left: 55px;
+	text-indent: -59.5px; */
+	margin-left: 5px;
+}
+.wd_kanban_sub_time{
+	font-size: 12px;
+	color: #999999;
+	margin-left: 5px;
+}
+.wd_addsubtask{
+	width: 88%;
+	padding-bottom: 10px;
+	text-align: right;
+}
+.wd_addsubtask div{
+	/* display: inline; */
+}
+.wd_addsubtask div input[type="text"]{
+	width: 80px;
+	border: 0;
+	border-bottom: 1px dashed;
+	
+}
+.wd_addsubtask div input[type="submit"]{
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background:#337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 2px;
+}
+.wd_addsubtask div input[type="reset"]{
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 10px;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background: none;
+	color:black;
+	font-size: 11px;
+	border: 1px solid #286090;
+	padding: 2px;
+}
+.wd_kanban_task_mo{
+	border: 1px solid white;
+	border-radius: 5px;
+	background:white none repeat scroll 0% 0%;
+}
+.wd_kanban_modity{
+	float: left;
+	width: 49px;
+	/* border: 1px solid; */
+	margin-left: -45px;
+	position: absolute;
+	height: 20px;
+}
+.wd_kanban_sub_usetwo{
+	border: 1px solid white;
+	border-radius: 5px;
+	background:white none repeat scroll 0% 0%;
+}
+.wd-kanban-sub-use{
+	/* margin-left: -46px; */
+	width: 37.5px;
+	height: 20px;
+	/* border: 1px solid black; */
+	position: absolute;
+	display: none;
+}
+.d_wd-kanban-sub-use{
+	width: 37.5px;
+	height: 20px;
+	float: left;
+}
+.wd_kanban_motask{
+	display: flex;
+	justify-content: center;
+	min-height: 250px;
+	width: 95%;
+	margin: 0 auto;
+	align-items: center;
+	border: 1px solid#e3e3e3;
+	background-color:white;
+	border-radius: 5px;
+}
+.wd_kanban_motask_user select{
+	width: 200px;
+	border: 0;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+	border-bottom: 1px dashed
+	gainsboro;
+	font-family: 仿宋, serif;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+.wd_kanban_motask_date input{
+	width: 190px;
+	border: 0;
+	border-bottom-color: currentcolor;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-bottom: 1px dashed gainsboro;
+}
+.wd_kanban_motask_name{
+	display: inline-block;
+}
+.wd_kanban_motask_name input{
+	margin-left: -3px;
+	display: inline-block;
+	border: 0;
+	border-bottom-color: currentcolor;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-bottom: 1px dashed gainsboro;
+	width: 187px;
+}
+
+/* info */
+.wd_knaban_taskinfo{
+	/* display: inline-block; */
+	position: absolute;
+	width: 450px;
+	height: 400px;
+	background:white;
+	z-index: 2;
+	border: 1px solid;
+	overflow: auto;
+	padding-bottom: 5px;
+	margin-top: 15px;
+}
+.the_look{
+	width: 100%;
+	height: 80%;
+	/* display: flex; */
+	/* align-items: center; */
+}
+.tl_log{
+	width: 90%;
+	margin:  0 auto;
+	color:rgb(85, 85, 85);;
+	font-size: 12px;
+	font-family: "microsoft yahei", 宋体;
+	margin-top: 10px;
+	float: left;
+	margin-left: 20px;
+}
+.d_tl_log{
+	width: 100%;
+	margin:  0 auto;
+	color:rgb(85, 85, 85);;
+	font-size: 12px;
+	font-family: "microsoft yahei", 宋体;
+	margin-top: 10px;
+	float: left;
+	margin-left: 20px;
+	min-height: 33px;
+}
+.tl_comment{
+	width: 90%;
+	margin:  0 auto;
+	color:rgb(85, 85, 85);;
+	font-size: 12px;
+	font-family: "microsoft yahei", 宋体;
+	margin-top: 10px;
+	float: left;
+	margin-left: 20px;
+	min-height: 50px;
+}
+.tl_div_timename div{
+	display: inline-block;
+}
+.tl_log div{
+	/* display: inline-block; */
+	/* width: 68%; */
+	float: left;
+}
+.thelog_div{
+	margin-top: 20px;
+}
+.tl_div_timename{
+	width: 35.5%;
+	float: left;
+}
+.d_tl_div_timename{
+	width: 25.5%;
+	float: left;
+}
+.tl_div_Opername{
+	margin-left: 7px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	width: 52px;
+}
+.d_tl_div_Opername{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	width: 65px;
+}
+.thelog_submit{
+	width: 90%;
+	clear: both;
+	margin: 0 auto;
+	padding-top: 7px;
+	cursor: pointer;
+	padding-bottom: 7px;
+	text-align: center;
+	font-size: 12px;
+}
+.thelog_submit :hover{
+	color: #339966;
+}
+
+/* 子任务修改 */
+.wd_kanban_s_div div{
+	display: inline-block;
+}
+.wd_kanban_s_div input[type="text"]{
+	width: 80px;
+	border: 0;
+	border-bottom: 1px dashed;
+}
+.wd_kanban_s_div input[type="submit"]{
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background:#337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 2px;
+}
+.wd_kanban_s_div input[type="button"]{
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 10px;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background: none;
+	color:black;
+	font-size: 11px;
+	border: 1px solid#286090;
+	padding: 2px;
+}
+.wd_kanban_s_div input[type="button"]:hover{
+	background: none;
+	color: #339966;
+}
+
+/* 任务详情页面 */
+.k_d_alldiv{
+	width: 100%;
+	height: 97%;
+	overflow: auto;
+	background-color:rgba(228, 228, 228, 1);
+	/* margin: -10px auto; */
+	/* padding: 0;
+	padding-bottom: 0px;
+	padding-bottom: 0px;
+	padding-bottom: 26px; */
+}
+.k_d_taskall{
+	/* min-height: 473px; */
+	background-color:white;
+	margin: 0 auto;
+	width: 820px;
+	/* line-height: 3; */
+}
+.k_d_alltask div{
+	margin-top: 8px;
+}
+.k_d_colse{
+	width: 95%;
+	height: 40px;
+	/* border: 1px solid; */
+	margin: 0 auto;
+}
+.k_d_task{
+	width: 79%;
+	min-height: 400px;
+	margin-left: 30px;
+	display: inline-block;
+}
+.k_d_mo{
+	width: 10%;
+	min-height: 115px;
+	float: right;
+	cursor: pointer;
+	/* margin: -37px; */
+    margin-top: 25px;
+}
+.k_d_alltask{
+	width: 93%;
+	min-height: 358px;
+	padding-bottom: 1px;
+	margin: 0 auto;
+	margin-top: 5px;
+	color: rgb(85, 85, 85);
+}
+.k_d_alltask div{
+	display: inline-block;
+}
+.k_d_task_name{
+	width: 60%;
+	margin-left: 5px;
+}
+.k_d_task_name input{
+	width: 60%;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px dashed gainsboro;
+}
+.k_d_task_user{
+	width: 88%;
+	margin: 0 auto;
+}
+.k_d_task_user div select{
+	cursor: pointer;
+	width: 100%;
+	-webkit-appearance: none;
+	border-top: 0;
+	margin-left: 10px;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px dashed gainsboro;
+	line-height: 2;
+	font-size: 13px;
+}
+.k_d_task_time div input{
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px dashed gainsboro;
+}
+.k_d_task_note div textarea{
+	font-size: 12px;
+	height: 100%;
+	width: 315px;
+	resize: none;
+	border: 1px solid gainsboro;
+	line-height: 20px;
+}
+.k_d_task_note{
+	margin-top: 5px;
+}
+.d_the_details_sub_hide div{
+	line-height: 1;
+}
+
+
+/* 评论 */
+.kanban_p_send{
+	line-height: 1.5;
+	width: 70%;
+	text-align: right;
+}
+.kanban_p_send input[type="submit"]{
+	color:white;
+	padding: 5px;
+	background-color:rgba(22, 172, 213, 0.767);
+	border: 0px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+/* 评论的操作 */
+.p_d_pera div{
+	display: inline-block;
+}
+.p_d_mo_content{
+	width: 100%;
+	line-height: 1;
+	height: 60px;
+}
+.p_d_mo_input input[type="submit"]{
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 10px;
+	color:#fff;
+	letter-spacing: 2px;
+	border-radius: 3px;
+	background:#337ab7;
+	border: 1px solid#286090;
+	font-size: 11px;
+	padding: 2px;
+	width: 51px;
+	line-height: 1.4;
+}
+.k_d_all_wd{
+	height: 800px;
+}
+
+
+/* 任务暂停开始 */
+.d_pause img{
+	width: 15px;
+}
+.d_zrw img{
+	width: 32px;
+}
+.d_wd_kanban_sub_check span img{
+	width: 17px;
+}
+.wd_kanban_sub_check span img{
+	width: 17px;
+}
+.kanban_rev{
+	width: 74%;
+	margin: 0 auto;
+	font-size: 12px;
+	color:rgb(85, 85, 85);
+	cursor: pointer;
+}
+.d_kanban_rev{
+	width: 75%;
+	margin: 0 auto;
+	color:rgb(85, 85, 85);
+	font-size: 12px;
+	cursor: pointer;
+}
+.kanban_loading_style >span{
+	pointer-events: none;
+}
+
+.wd_kanban_t_addtask{
+	width: 95%;
+	min-height: 31px;
+	margin: 0 auto;
+	border: 1px solid#e3e3e3;
+	background-color:white;
+	white-space: initial;
+	margin-top: 3px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	cursor: pointer;
+}
+.wd_kanban_t_addtask div{
+	align-items: center;
+	justify-content: center;
+}
+.wd_kanban_t_addtask:hover{
+	background-color:rgba(255, 255, 255, 0.815);
+}
+
+/* 已完成任务 */
+.open_the_even{
+	font-size: 12px;
+	cursor: pointer;
+}
+.open_the_even div:hover{
+	color: #339966;
+}
+.open_the_even div{
+	display: inline-block;
+}
+
+/* 加载更多 */
+.wd_kanban_loadding{
+	font-size: 12px;
+	margin: 0 auto;
+	width: 93%;
+	cursor: pointer;
+	text-align: center;
+}
+.wd_kanban_loadding:hover{
+	color: #339966;
+}
+.kanbna_root{
+	width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

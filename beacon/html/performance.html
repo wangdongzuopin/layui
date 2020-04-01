@@ -1,0 +1,304 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+
+<body>
+	{{.}}
+	<!--head-->
+	{{ end }}
+	{{ template "head"}}
+
+	<title>绩效考核 - beacon</title>
+</body>
+
+<body id="performance" style="overflow-x: hidden;">
+
+
+	<div class="alltheblue" cellspacing="0">
+		<!-- 具体功能按钮 -->
+		<div class="titelall_bath">
+			<div class="title">
+				<div style="color: black;font-weight: bold;">团队绩效考核统计表</div>
+			</div>
+			<div style="text-align: right;">
+				<div>
+					<a class="wd-per-new" href="new/">新建考核报告表</a>
+				</div>
+			</div>
+			<!-- <div class="wd-per-submit">
+				<div class="wd-per-new">
+					<a href="new/">新建考核报告表</a>
+				</div>
+			</div> -->
+		</div>
+		<div id='divId'>
+
+		</div>
+	</div>
+	<div style="width:100%;height:30px;"></div>
+
+
+	<!-- {{.performance}} -->
+
+	<script>
+		$(document).ready(function () {
+			hreff()
+		});
+		function hreff() {
+			let href = window.location.href;
+			// console.log(href)
+			let text = href.split('/')
+			let windo = text[0] + '//' + text[2] + '/' + text[3] + '/' + text[4];
+			let win = text[0] + '//' + text[2] + '/';
+			let houmain = text[3] + '/' + text[4];
+			if (houmain == houmain) {
+				$('#index_1_7 a').css('color', 'black')
+				$('#index_1_7 a').css('font-weight', 'bold')
+			} else {
+			}
+		}
+
+
+		var performance = '{{.performance}}'
+		var new_performance = decodeURIComponent(performance)
+		// 类型转换
+		var new_per = JSON.parse(new_performance)
+		// console.log(new_per)
+		for (var i = 0; i < new_per.length; i++) {
+			for (k = i + 1; k < new_per.length; k++) {
+				if (new_per[i].check_end_date > new_per[k].check_end_date) {
+					let temp = new_per[i];
+					new_per[i] = new_per[k];
+					new_per[k] = temp;
+				}
+			}
+		}
+
+		// console.log(new_per)
+		new_per.forEach((val, key) => {
+			// console.log(val['check_end_date'])
+			let week = checkToday(val['check_end_date']);
+			// console.log('考核结束日期是周几',week)
+			let newweek = weekAdd(week, val['check_end_date'])
+			// console.log('考核结束日期所在周的周五日期为',newweek)
+			val['normDate'] = newweek;
+			val['month'] = newweek.split('-')[1];
+		})
+		// console.log('新数组',new_per)
+		// new_pers = paopao(new_per)
+		let newArry = []
+		let newNorm = formateArrData(new_per, 'normDate', newArry)
+		// console.log('根据新字段重组',newNorm)
+		let newnameArry = []
+		let newname = formateArrData(new_per, 'reporter_name', newnameArry)
+		for (var i = 0; i < newname.length; i++) {
+			for (k = i + 1; k < newname.length; k++) {
+				if (newname[i].reporter_name > newname[k].reporter_name) {
+					let temp = newname[i];
+					newname[i] = newname[k];
+					newname[k] = temp;
+				}
+			}
+		}
+		// console.log('根据reporter_name重组',newname)
+
+		var str = '';
+		var num = 0;
+		let aee = JSON.parse(localStorage.getItem('userLogin'));
+		var ugid = aee.ugid;
+		// console.log(ugid)
+		str += "<table class='table' border='1' cellspacing='0px'>";
+		str += '<tr style="width:107px;height:40px;"><td></td>';
+		for (var ir = 0; ir < newname.length; ir++) {
+
+			if (newname[ir][0]) {
+				var name = '<td id="name' + ir + '">' + decodeURIComponent(newname[ir][0]['reporter_name']) + '<p>(' + getScoreTotal(newname[ir]) + ')</p></td>';
+			} else {
+				var name = '<td></td>';
+			}
+			str += name;
+
+		}
+		str += '</tr>';
+		// str += '<tr>';
+		// for (let i = 0; i < newNorm.length; i++) {
+		// console.log(newNorm.length)
+		for (let i = newNorm.length - 1; i >= 0; i--) {
+			var ui = decodeURIComponent(newNorm[newNorm.length - 1][0]['check_end_date']);
+			// console.log('第ddddd'+ui+'轮',decodeURIComponent(newNorm[newNorm.length-1][0]['normDate']).split('-')[1])
+			if (newNorm[i][0]) {
+				var nordate = decodeURIComponent(newNorm[i][0]['normDate']).split('-')
+				// console.log('111',nordate,num)
+				let scoreDay = getScoremTotal(newname, nordate[1]);
+
+				if (decodeURIComponent(newNorm[newNorm.length - 1][0]['normDate']).split('-')[1] == nordate[1]) {
+					var total = '<tr class="wd-per-month-all" bgcolor="#DDDDDD" id="trt' + i + '"><td>当月统计</td>' + scoreDay;
+				} else {
+					var total = '<tr class="wd-per-month-all" bgcolor="#DDDDDD" id="trt' + i + '"><td>' + nordate[1] + '月统计</td>' + scoreDay;
+					// str += total;
+				}
+
+				// console.log('111',newNorm[i])
+				if (nordate[1] != num) {
+					str += total;
+					str += '</tr>';
+					// var names = '<tr id="trt'+i+'"><td>' +decodeURIComponent(newNorm[i-1][0]['normDate']) + '</td></tr>';
+					num = nordate[1]
+
+				} else {
+					// var names = '<tr id="trt'+i+'"><td>' +decodeURIComponent(newNorm[i-1][0]['normDate']) + '</td></tr>';
+				}
+				var nnnn = '<tr id="normDate' + i + '" style="width:107px;height:30px;"><td>' + decodeURIComponent(newNorm[i][0]['normDate']) + '</td>';
+				str += nnnn;
+				// console.log(newNorm[i].length)
+
+				// console.log('ssss',decodeURIComponent(newname[iri][0]['reporter_name']))
+				var ace = [];
+				var sss = [];
+				for (var k = newNorm[i].length - 1; k >= 0; k--) {
+					var iu = newNorm[i].length - 1
+					// console.log('111111111',newNorm[ui][iu])
+
+
+					for (var iri = 0; iri < newname.length; iri++) {
+						// console.log('ace',ace.indexOf(iri))
+						if (ace.indexOf(iri) == -1) {
+							if (decodeURIComponent(newNorm[i][k]['reporter_name']) == decodeURIComponent(newname[iri][0]['reporter_name'])) {
+								// 报告状态，0为草稿状态，1为待审核状态，2为待确认状态，3为完成状态，4为打回状态，默认为0。
+								// if(newNorm[i][k]['check_end_date'] == ui){
+
+								if (decodeURIComponent(newNorm[i][k]['state']) == 0) {
+									if (getUgid() == decodeURIComponent(newNorm[i][k]['reporter_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/new">未提交</a>' + '</td>'
+									} else if (getUgid() == decodeURIComponent(newNorm[i][k]['checker_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">未提交</a>' + '</td>'
+									} else {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:black;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">未提交</a>' + '</td>'
+									}
+									// sss[iri] = '<td>'+'<a style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/'+decodeURIComponent(newNorm[i][k]['gid'])+'">未提交</a>'+'</td>'
+								}
+								if (decodeURIComponent(newNorm[i][k]['state']) == 1) {
+									if (getUgid() == decodeURIComponent(newNorm[i][k]['reporter_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '" >待审核</a>' + '</td>'
+
+									}else if(getUgid() == decodeURIComponent(newNorm[i][k]['checker_id'])){
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '" >待审核</a>' + '</td>'
+									}else{
+										sss[iri] = '<td>' + '<a target="_blank" style="color:black;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '" >待审核</a>' + '</td>'
+									}
+
+									// sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '" >待审核</a>' + '</td>'
+								}
+								if (decodeURIComponent(newNorm[i][k]['state']) == 2) {
+									if (getUgid() == decodeURIComponent(newNorm[i][k]['reporter_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">待确认</a>' + '</td>'
+									}else if(getUgid() == decodeURIComponent(newNorm[i][k]['checker_id'])){
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">待确认</a>' + '</td>'
+									}else{
+										sss[iri] = '<td>' + '<a target="_blank" style="color:black;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">待确认</a>' + '</td>'
+									}
+									// sss[iri] = '<td>' + '<a target="_blank" style="text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">待确认</a>' + '</td>'
+								}
+								if (decodeURIComponent(newNorm[i][k]['state']) == 3) {
+									sss[iri] = '<td style="cursor:pointer;">' + '<a target="_blank" style="text-decoration: underline;font-weight:400;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '"><label style="cursor:pointer;" class="scorenum" title="分数">' + decodeURIComponent(newNorm[i][k]['score']) + '</label>/<label style="cursor:pointer;" class="daynum" title="考核校正工时">' + decodeURIComponent(newNorm[i][k]['check_work_day_num']) + '</label></a>' + '</td>'
+								}
+								if (decodeURIComponent(newNorm[i][k]['state']) == 4) {
+									if (getUgid() == decodeURIComponent(newNorm[i][k]['reporter_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/new/">打退</a>' + '</td>'
+									} else if (getUgid() == decodeURIComponent(newNorm[i][k]['checker_id'])) {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:red;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">打退</a>' + '</td>'
+									} else {
+										sss[iri] = '<td>' + '<a target="_blank" style="color:black;text-decoration: underline;font-weight:700;" href="/performance/view/' + decodeURIComponent(newNorm[i][k]['gid']) + '">打退</a>' + '</td>'
+									}
+
+									// sss[iri] = '<td style="text-decoration: underline;">'+'<a style="font-weight:700;" href="new/">打退</a>'+'</td>'
+								}
+
+								// sss[iri] = '<td id="iri'+i+k+'" style="text-decoration: underline;">111'+decodeURIComponent(newNorm[i][k]['reporter_name'])+decodeURIComponent(newNorm[i][k]['score'])+'</td>'
+								// }else{
+								// 	sss[iri] = '<td id="iri'+i+k+'" style="text-decoration: underline;"><a href="/performance/view/'+decodeURIComponent(newNorm[i][k]['gid'])+'">'+decodeURIComponent(newNorm[i][k]['score'])+'</a></td>'
+								// }
+
+								ace.push(iri);
+							} else {
+								sss[iri] = '<td id="iri' + i + k + '">-</td>';
+							}
+						}
+
+					}
+
+				}
+				b = sss.join();
+				b = b.replace(/,/g, "");
+				str += b;
+
+
+				str += '</tr>';
+
+			} else {
+				// var names = '<tr></tr>';
+			}
+			// str += names;
+		}
+		// str += '</tr>';
+		str += "</table>"
+		// console.log(str)
+		$('#divId').html(str);
+
+		// 获取单个成员的总分数
+		function getScoreTotal(newname) {
+			let totalscore = 0;
+			let totalday = 0;
+			for (let i = 0; i < newname.length; i++) {
+				// console.log(newname[i])
+				if (newname[i]['score']  && newname[i]['state'] == 3) {
+					totalscore += parseInt(newname[i]['score'])
+					totalday += parseInt(newname[i]['check_work_day_num'])
+				}
+			}
+			total = '<label label class="scorenum" title="分数">' + totalscore + '</label>分/<label label class="daynum" title="考核校正工时">' + totalday + '</label>天'
+			return total
+		}
+
+		// 获取每个成员每个月的总分数
+		function getScoremTotal(newNorm, nordate) {
+			let newmouthArry = []
+			let str = '';
+			// let newmonth = formateArrData(newNorm, 'month', newmouthArry)
+
+			// var ber = 0;
+			for (let i = 0; i < newNorm.length; i++) {
+				var number = 0;
+				var daynum = 0;
+				// console.log('aaaaaaaaaaa',newNorm[i])
+				for (let k = 0; k < newNorm[i].length; k++) {
+					// console.log(newNorm[i][k]['month'])
+					if (newNorm[i][k]['month'] == nordate && newNorm[i][k]['state'] == 3) {
+						number += parseInt(newNorm[i][k]['score'])
+						daynum += parseInt(newNorm[i][k]['check_work_day_num'])
+					}
+				}
+				newmouthArry[i] = number + '/' + daynum
+			}
+			for (var y = 0; y < newmouthArry.length; y++) {
+				str += '<td>' + newmouthArry[y] + '</td>';
+			}
+			// console.log(str)
+			return str
+		}
+
+		function getUgid() {
+			let aee = JSON.parse(localStorage.getItem('userLogin'));
+			var ugid = aee.ugid;
+			return ugid;
+		}
+		//数据存储
+
+		let na = decodeURIComponent(aee.name);
+		let nname = na.replace(/\+/g, '')
+		var result = nname.replace(/(^\s+)|(\s+$)/g, "");//去掉前后空格
+		$('.wd-view-reportman-people').html(result);
+	</script>
+</body>

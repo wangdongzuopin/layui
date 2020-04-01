@@ -1,0 +1,224 @@
+body{
+    margin: 0;
+	padding: 0;
+}
+#performance{
+	overflow-x: hidden;
+}
+.alltheblue{
+    width: 100%;
+	height: 100%;
+	padding-left: 26px;
+	background-color: white;
+	overflow-y: hidden;
+	/* overflow-x: hidden; */
+	padding-bottom: 1%;
+}
+.titelall_bath{
+	width: 1300px;
+	padding-top: 2%;
+	margin: 0 auto;
+}
+#divId{
+	width: 1300px;
+	/* padding-top:2%; */
+	/*overflow: auto;*/
+	overflow: auto;
+	margin: 0 auto;
+	min-height: 700px;
+}
+.title{
+	/* text-align: center;
+	margin: 6px auto;
+	position: relative;
+	top: 12px;
+	left: 45%;
+	display: inline; */
+	width: 100%;
+	margin: 0 auto;
+	font-size: 16px;
+}
+.title div{
+	margin: 0 auto;
+	text-align: center;
+}
+.table{
+	font-kerning: normal;
+	border: 0;
+	table-layout: fixed;
+	margin: 25px auto;
+	width: 96%;
+	height: 28px;
+	font-size: 14px;
+	text-align: center;
+}
+.wd-per-date{
+	/* float: left; */
+}
+.wd-per-per{
+	margin-top: 10px;
+}
+.wd-per-per td{
+
+	width: 90px;
+	text-align: center;
+}
+.wd-per-per p{
+	font-size: 12px;
+	color: #666666;
+}
+
+/*//当月总结*/
+.wd-per-month-all{
+	text-align: center;
+	color: #666666;
+}
+.wd-per-month-all td:first-child{
+	color: black;
+}
+/*当月日期最大*/
+.wd-per-month-big{
+	height: 25px;
+}
+.wd-per-month-big td{
+	font-weight: bold;
+}
+.wd-per-month-big td:first-child{
+	font-weight: 1;
+}
+/*当月日期第二大*/
+.wd-per-month-two td:not(:first-child){
+	text-decoration: underline;
+}
+.wd-per-month-three td:not(:first-child){
+	text-decoration: underline;
+}
+/*具体功能按钮*/
+.wd-per-submit{
+	/* width: 145px;
+	height: 8px;
+	float: right;
+	margin-left: -150px;
+	margin-top: -7px; */
+}
+/*新建考核报告表*/
+.wd-per-new{
+	background-color: rgba(22, 155, 213, 1);
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin:6px;
+	width: 105px;
+	height: 20px;
+	font-size: 13px;
+	font-family: 'Arial Normal', 'Arial';
+	text-align: center;
+	line-height: normal;
+	padding-top: 3px;
+	cursor: pointer;
+	/* margin-top: 28px; */
+	margin-left: 13px;
+	padding: 5px;
+	margin-right: 31px;
+}
+.wd-per-new a{
+	color: #FFFFFF;
+}
+/*已提交*/
+.wd-per-finish{
+	background-color: rgba(22, 155, 213, 1);
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin:6px;
+	width: 105px;
+	height: 20px;
+	font-size: 13px;
+	font-family: 'Arial Normal', 'Arial';
+	text-align: center;
+	line-height: normal;
+	margin-top: 10px;
+	padding-top: 3px;
+	cursor: pointer;
+}
+/*待确认*/
+.wd-per-wait-yes{
+	background-color: rgba(22, 155, 213, 1);
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin:6px;
+	width: 105px;
+	height: 20px;
+	font-size: 13px;
+	font-family: 'Arial Normal', 'Arial';
+	text-align: center;
+	line-height: normal;
+	margin-top: 10px;
+	padding-top: 3px;
+	cursor: pointer;
+}
+/*打退*/
+.wd-per-quit{
+	background-color: rgba(22, 155, 213, 1);
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin:6px;
+	width: 105px;
+	height: 20px;
+	font-size: 13px;
+	font-family: 'Arial Normal', 'Arial';
+	text-align: center;
+	line-height: normal;
+	margin-top: 10px;
+	padding-top: 3px;
+	cursor: pointer;
+}
+/*审核人*/
+.wd-new-Reviewman{
+	display: inline;
+}
+.wd-new-Reviewman div{
+	display: inline;
+	position: relative;
+	top: 6px;
+	text-align: right;
+}
+.wd-per-table{
+	width: 80%;
+	min-height: 500px;
+	border: 1px solid red;
+	margin:  0 auto;
+}
+.wd-per-date-ul{
+	float: left;
+	margin: 0 auto;
+}
+.wd-per-date-ul li{
+	width: 106px;
+	height: 35px;
+	line-height: 37px;
+	border: 1px solid;
+	text-align: center;
+}
+.wd-per-per-ul{
+	float: left;
+	border: 1px solid;
+	min-height: 35px;
+	line-height: 17px;
+	width: 105px;
+	text-align: center;
+	
+}
+.wd-per-per-ul li p{
+	font-family: 'Arial Normal', 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	font-size: 13px;
+	color: #333333;
+	text-align: center;
+	line-height: normal;
+}
+.wd-per-per-ul li{
+	min-width: 50px;
+	height: 35px;
+	line-height: 16px;
+	border: 1px solid;
+}

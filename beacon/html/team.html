@@ -1,0 +1,90 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+<body>
+    
+    <!--head-->
+
+
+        {{ end }}
+        {{ template "head"}}
+		<title>团队 - beacon</title>
+<!--结果集标题与导航组件 开始-->
+<div class="detail_body_all">
+    <div class="crumb_warp">
+        <h3 style="font-size: 12px;letter-spacing:1px">团队成员（共{{len .member}}人）</h3>
+    </div>
+
+<!--     {{range $k, $v := .member}}
+    	{{$k}} => {{$v}} 
+    {{end}} -->
+
+    <div>
+    	<div class="team_tab">
+    		<table class="table-members">
+    			<tbody>
+    				{{range $k, $v := .member}}
+    				<tr>
+    					<td class="team-member">
+    						<!-- <a href="javascript:;" onclick="getname('{{$k}}')"> -->
+                            <a href="/team/member/{{$k}}">
+    							<!-- <img src="/img/index3.png"> -->
+	    						<div class="team-member-name">
+	    							<span class="team-name" id="testid" >{{$v.name}}</span>
+	    							<!-- <span class="team-row">成员</span> -->
+	    						</div>
+    						</a>
+    					</td>
+    					<!-- <td class="team-wu">
+    						-
+    					</td> -->
+    					<td team-email>
+    						<span>{{.email}}</span>
+    					</td>
+    					<!-- <td>
+    						-
+    					</td> -->
+    				</tr>
+    				{{end}}
+    			</tbody>
+    		</table>
+    	</div>
+    	
+    </div>
+
+    
+</div>
+</body>
+<script>
+	$(document).ready(function () {
+	hreff()
+});
+function hreff(){
+    let href = window.location.href;
+    // console.log(href)
+    let text = href.split('/')
+    let windo = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4];
+    let win = text[0]+'//'+text[2]+'/';
+	let houmain = text[3]+'/'+text[4];
+	
+	let mmhoumain = text[3];
+    // console.log(windo)
+	if(houmain == houmain){
+        $('#index_1_9 a').css('color','black')
+        $('#index_1_9 a').css('font-weight','bold')
+	}
+}
+
+
+
+    $(document).ready(function () {
+        var arr = {{.member}};
+        localStorage.setItem('arr', JSON.stringify(arr))
+	})
+	
+
+
+</script>
+</html>

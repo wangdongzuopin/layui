@@ -1,0 +1,327 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+<body>
+    {{.}}
+    <!--head-->
+
+
+        {{ end }}
+        {{ template "head"}}
+        <title>动态 - beacon</title>
+<!--结果集标题与导航组件 开始-->
+<div class="detail_body_all">
+    <div class="crumb_warp">
+        <h3 style="font-size: 12px;letter-spacing:1px">动态首页</h3>
+    </div>
+    <div class="defaultcontent">
+<!--         <div class="default-selset">
+            <div id="u339" class="ax_default">
+                <p><span>筛选动态:</span></p>
+            </div>
+            <div id="u340" class="ax_default_droplist">
+                <select id="u340_input">
+                    <option selected="" value="所有项目">所有项目</option>
+                    <option value="项目一">项目一</option>
+                    <option value="项目二">项目二</option>
+                </select>
+            </div>
+            <div id="u341" class="ax_default_userlist">
+                <select id="u341_input">
+                    <option selected="" value="所有成员">所有成员</option>
+                    <option value="张三">张三</option>
+                    <option value="李四">李四</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="dynamic-content">
+            <!-- <div class="dynamic-content-one">
+                <h4 class="events-day-title">
+                    <span class="date">8/13</span>
+                    <span class="day">周二</span>
+                </h4>
+                <div class="dynamic-event-comment">
+                    <div class="events-ancestor">
+                        <h5 class="events-ancestor-title">
+                            <a href="">前端开发</a>
+                        </h5>
+                        <div class="event-todo-assign">
+                            <span>17:32</span>
+                            <span class="event-span">张三 </span>
+                            <span>将任务完成时间从 没有截止日期 修改为 本周三</span>
+                            <span>前端界面 任务一</span>
+                        </div>
+                        <div class="event-todo-assign">
+                            <span>17:32</span>
+                            <span class="event-span">张三 </span>
+                            <span>将任务完成时间从 没有截止日期 修改为 本周三 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+                            <span>前端界面 任务一</span>
+                        </div>
+                    
+                    </div>
+                    <div class="events-ancestor">
+                        <h5 class="events-ancestor-title">
+                            <a href="">前端开发</a>
+                        </h5>
+                        <div class="event-todo-assign">
+                            <span>17:32</span>
+                            <span class="event-span">张三 </span>
+                            <span>将任务完成时间从 没有截止日期 修改为 本周三</span>
+                            <span>前端界面 任务一</span>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+            </div> -->
+            <!-- <div class="dynamic-content-one">
+                <h4 class="events-day-title">
+                    <span class="date">8/13</span>
+                    <span class="day">周二</span>
+                </h4>
+                <div class="dynamic-event-comment">
+                    <div class="events-ancestor">
+                        <h5 class="events-ancestor-title">
+                            <a href="">前端开发</a>
+                        </h5>
+                        <div class="event-todo-assign">
+                            <span>17:32</span>
+                            <span>张三 </span>
+                            <span>将任务完成时间从 没有截止日期 修改为 本周三</span>
+                            <span>前端界面 任务一</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div> -->
+
+            <!-- <div class="dynamic-content-two">
+                222
+            </div> -->
+            
+        </div>
+        <div class="dynamicmore"></div>
+        <!-- <div class="nomore">没有更多了</div> -->
+    </div>
+    <!-- <div onclick="changePass();">点击事件</div> -->
+    
+</div>
+</body>
+<!-- // https://www.jb51.net/article/95870.htm -->
+<script>
+
+    $(function(){
+        
+        /*初始化*/
+        var counter = 0; /*计数器*/
+        var pageStart = 0; /*offset*/
+        var pageSize = 50; /*size*/
+        var checktime;
+        var idnum;
+        window.newArrid = [];
+
+        /*首次加载*/
+        // getDatas(pageStart, pageSize,counter);
+        getDatas(pageStart, pageSize,counter,function(err,data){})
+
+        /*滚动监听加载更多*/
+        var C = 10;//滚动条距离底部的距离
+        let flag = true;
+        // console.log('1111',$(document).scrollTop())
+            // console.log('2222',$(document).height()-$(window).height())
+        $(window).scroll(function() {
+            var windowHeight = $(window).height();//当前窗口的高度             
+            var scrollTop = $(window).scrollTop();//当前滚动条从上往下滚动的距离            
+            var docHeight = $(document).height(); //当前文档的高度 
+            if(scrollTop >= docHeight - windowHeight){
+                if(flag){
+                    // console.log('flag',flag)
+                    flag = false;
+                    counter ++;
+                    pageStart = counter;
+                    $('.dynamicmore').html('<div id="pppp"><img src="/img/loadinga.gif"></div>')
+                    getDatas(pageStart, pageSize,counter,function(err,data){
+                        // console.log(data.data.task)
+                        if(data.data.length >6){
+                            flag = true;
+                            $('.dynamicmore').html('<div id="pppp"></div>')
+                        }else{
+                            $('.dynamicmore').html('<div id="pppp">没有更多了</div>')
+                        }
+                    })
+                
+                }
+            }
+        });
+
+
+        // /*监听加载更多*/
+        // $(document).on('click', '.dynamicmore', function(){
+        //     counter ++;
+        //     // pageStart = counter * pageSize;
+        //     pageStart = counter;
+        //     // 0 = 0 * 50
+        //     // 50 = 1 * 50
+        //     // 100 = 2 * 50
+
+        //     getDatas(pageStart, pageSize,counter);
+        //     // console.log(counter)
+        // });
+    });
+
+function getDatas(page,limit,counter,callback) {
+    // console.log(page)
+    // console.log(limit)
+    // console.log(counter)
+    // /dynamic/log/:page/:limit
+    // var page = '0';
+    // var limit = '50'
+    // var data = $("#addpersinal").serialize();
+    // dynamic_log 接口为动态页面请求数据接口
+    $.ajax({
+        url : "/dynamic/log/"+page+"/"+limit,
+        type : 'get',
+        dataType:'json',
+        success:function(data, msg, testStatus){
+            callback(null,data)
+            if(data.state == 1){
+                if((data.data).length >0){
+                    let dynamics = decodeURIComponent(data.data)
+                        if(dynamics.length >2){
+                            let temp = JSON.parse(dynamics)
+                            // console.log('---',temp)
+                            // ymdtime  去掉动态页面里时间中的时分秒
+                            let tempArr = ymdtime(temp)
+                            // console.log(tempArr)
+                            // console.log('请求出的所有数据↑')
+                            if(tempArr != null){
+                                let newArrA = []
+                                let dynamiclog = formateArrData(tempArr, 'add_time', newArrA)
+                                // console.log('此时按照时间的长度--------'+dynamiclog.length)
+                                // console.log(dynamiclog)
+                                // console.log('即将开始大遍历')
+                                for(i=0;i<dynamiclog.length;i++){
+                                    // console.log('总共需要遍历 '+dynamiclog.length+' 次')
+                                    let newArrType = []
+                                    let dynamiclogType = formateArrData(dynamiclog[i], 'pj_name', newArrType)
+                                    // console.log(dynamiclogType)
+                                    // console.log('第'+i+'次遍历下，按照项目名称分类的数组↑↑↑')
+                                    // console.log('按照  时间  分类的数组进行第 '+i+' 次遍历')
+                                    let add_time = dynamiclog[i][0]['add_time']
+                                    if(counter == 0 && i ==0){
+                                        idnum = "onediv"+counter+i
+                                        // console.log('执行此处，说明是首次加载。')
+                                        let a = dynamiclog.length
+                                        let c = dynamiclog[a-1]
+                                        let b = c.length
+                                        checktime = add_time
+
+                                        // let MandD = add_time.split('-')
+                                        // if(add_time.split(' ')[0] == sub_CurentTime().split(' ')[0]){var thetime = "今天"}else{var thetime = MandD[1]+'/'+MandD[2]}
+                                        $('.dynamic-content').append('<div class="dynamic-content-one"><h4 class="events-day-title"><span class="date">'+checktimes(add_time)+'</span><span class="day">'+checkToday(add_time)+'</span></h4><div class="dynamic-event-comment" id="'+idnum+'"></div></div>');
+                                        // console.log('此时checktime为 '+checktime)
+                                    }else{
+                                        // console.log('此时checktime为111 '+checktime)
+                                        // console.log('此时add_time为1111 '+add_time)
+
+                                    if(add_time != checktime){
+                                        // console.log('执行此处，说明时间不同，创建前一天DIV，此时id为')
+                                        let MandD = add_time.split('-')
+                                        // if(add_time.split(' ')[0] == sub_CurentTime().split(' ')[0]){var thetime = "今天"}else{var thetime = MandD[1]+'/'+MandD[2]}
+                                        $('.dynamic-content').append('<div class="dynamic-content-one"><h4 class="events-day-title"><span class="date">'+checktimes(add_time)+'</span><span class="day">'+checkToday(add_time)+'</span></h4><div class="dynamic-event-comment" id="onediv'+counter+i+'"></div></div>');
+                                        idnum = "onediv"+counter+i
+                                        // console.log(idnum)
+                                        checktime = add_time
+                                        // console.log('newArrid数组为。。。')
+                                        // console.log(newArrid)
+                                        // console.log(newArrid.length)
+                                        // console.log('因为执行新的一天，所以需要清空数组')
+                                        newArrid = [];
+
+                                    }
+                                    }
+
+                                    // console.log(idnum)
+                                    // console.log('dynamiclogType的长度为 '+dynamiclogType.length)
+                                    for(zz=0;zz<dynamiclogType.length;zz++){
+                                        let abc = counter+'a'+i+'a'+zz
+                                        // console.log(newArrid.hasOwnProperty(dynamiclogType[zz][0]['pj_name']))
+                                        // console.log(abc)
+                                        if(newArrid.hasOwnProperty(dynamiclogType[zz][0]['pj_name'])){
+                                            // console.log(dynamiclogType[zz][0]['pj_name']+' 这个项目名称在数组中')
+                                            var ancestorid = newArrid[dynamiclogType[zz][0]['pj_name']]
+                                            // console.log(ancestorid)
+
+                                        }else{
+                                            // console.log(dynamiclogType[zz][0]['pj_name']+' 不在在数组中，创建新的div')
+                                            // console.log('创建'+abc)
+                                            var  ancestorid = abc
+                                            $('#'+idnum).append('<div class="events-ancestor" style="clear: both;" id="'+ancestorid+'"><h5 class="events-ancestor-title">'+dynamiclogType[zz][0]['pj_name']+'</h5></div>')
+
+                                            newArrid[dynamiclogType[zz][0]['pj_name']] = ancestorid
+
+                                        }
+
+
+                                        // console.log('走到这')
+                                        // console.log(ancestorid)
+                                        for ( kk= 0; kk < dynamiclogType[zz].length; kk++) {
+                                            let cona = JSON.parse(decodeURIComponent(dynamiclogType[zz][kk]['content'].replace(/\+/g, '%20')));
+                                            // let cona = dynamiclogType[zz][kk]['content'].replace('\\u003c','&lt;')
+                                            // let conb = cona.replace('\\u003e','&gt;')
+                                            // console.log(dynamiclogType[zz][kk]['main_name'])
+                                            $('#'+ancestorid).append('<div class="event-todo-assign" style="clear: both;display: inline-block;padding-bottom: 5px;"><span style="float: left;">'+dynamiclogType[zz][kk]['add_time_his']+'</span><span style="float: left;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 40px;" class="event-span">'+dynamiclogType[zz][kk]['operator']+'</span><span style="float: left;width: 82%;">将  '+parsing(dynamiclogType[zz][kk]['main_name'])+' '+htmlspecialchars(cona.msg)+'</span></div>')
+                                        }
+                                    }
+
+
+
+
+                                }
+                                // console.log('大遍历结束')
+
+                            }
+                            // $('.dynamicmore').html('<div id="pppp">加载更多</div>');
+
+                        }
+
+                }else{
+                    layer.msg(data.msg)
+                }
+
+            }else{
+                layer.msg(data.msg)
+            }
+
+
+            },
+        error: function (xhr, errorMessage, e) {
+                alert(e);
+            }
+        });
+}
+
+
+
+$(document).ready(function () {
+    hreff()
+});
+function hreff(){
+    let href = window.location.href;
+    // console.log(href)
+    let text = href.split('/')
+    // console.log(text)
+    let windo = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4];
+    let win = text[0]+'//'+text[2]+'/';
+    let houmain = text[3]+'/'+text[4];
+    // console.log(win+houmain)
+    if(href == win+houmain){
+        $('#index_1_3 a').css('color','black')
+        $('#index_1_3 a').css('font-weight','bold')
+    }else{
+    }
+}
+</script>
+</html>

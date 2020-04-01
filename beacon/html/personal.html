@@ -1,0 +1,156 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+<body>
+    
+    <!--head-->
+    {{.}}
+
+        {{ end }}
+        {{ template "head"}}
+
+
+<!--结果集标题与导航组件 开始-->
+<div class="detail_body_all">
+    <div class="crumb_warp">
+        <h3>个人设置</h3>
+    </div>
+
+    <div class="modal fade" id="set_note" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: hidden; padding-right: 17px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title" id="if_auth_title">
+                          更改密码
+                      </h4>
+                </div>
+                <form id="addForm" method="post">
+                <div class="modal-body">
+                    <div id="set_sellid">
+                        当前密码：<input type="password" value="" name="old_pw" id="set_note_id"><br/>
+                        <br/><br/>
+                        新密码： &nbsp;&nbsp;&nbsp;<input type="password" value="" name="new_pw" id="set_note_id">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn blue" onclick="set_note()" id="set_auth_ok">确定</button>
+                    <button id="close-set-note" type="button" class="btn default" data-dismiss="modal">关闭</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<!--结果集标题与导航组件 结束-->
+    <div class="result_wrap">
+        {{range .}}
+        <form id="addpersinal" method="post">
+            <table class="add_tab">
+                <tbody>
+                <tr>
+                    <th width="120">姓名：</th>
+                    <td>
+                        <input type="text" maxlength="20" class="personalname" name="name" value="{{.name}}"></i></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require"></i>密码：</th>
+                    <td>
+                        <a href="javascript:;" onclick="open_set_note()" class="btn btn-xs default">修改密码</a>
+                        <a href="/login/find_passwd" class="btn btn-xs default">找回密码</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="button" onclick="changePass()" value="提交">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        {{end}}
+    </div>
+</div>
+</body>
+<script>
+    //========================添加备注==============================
+    function open_set_note(){
+        $('#set_note').modal();
+    }
+
+    function set_note(){
+        var oldpass = $("input[name='old_pw']").val()
+        var newpass = $("input[name='new_pw']").val()
+        if(oldpass==""||newpass==""){
+            alert('新旧密码都要填写哦！！');
+            return;
+        }
+        if(oldpass == newpass){
+            alert('两个密码不能相同！！');
+            return;
+        }
+        // var data = $("#addForm").serialize(); 
+        // console.log(data);
+        $.ajax( {
+            url : "/personal/change_password",
+            type : 'post',
+            dataType:'json',
+            data : 'old_pw='+oldpass+"&new_pw="+newpass,
+            success:function(data){
+                if(data.state == 1){
+                    alert('修改成功，即将退出，请重新登录');
+                    user_exit();
+                }else{
+                    alert(data.msg);
+                }
+                
+            },
+            error: function (xhr, errorMessage, e) {
+                    alert("异常");
+                }
+        });
+    }
+
+    //========================修改个人信息==============================
+    function changePass(){
+        // 判断名称是否为空
+        let inppt = $('.personalname').val();
+        if ($.trim(inppt) == "") {
+            alert('不能为空')
+            return false;
+        }
+        // 去掉首尾空格
+        var dataname = $.trim(($("input[name='name']").val()))
+        if(dataname.length < 20){
+            $.ajax( {
+                url : "/personal/edit_save",
+                type : 'post',
+                dataType:'json',
+                data : 'name='+dataname,
+                success:function(data){
+                    if(data.state == 1){
+                        alert('修改成功');
+                        window.location.reload();
+                    }else{
+                        alert(data.msg);
+                    }
+                    
+                },
+                error: function (xhr, errorMessage, e) {
+                        alert("异常");
+                    }
+            });
+        }else{
+            layer.msg("名称过长！")
+        }
+        // var dataname = $("#addpersinal").serialize();
+        
+
+    }
+
+</script>
+</html>

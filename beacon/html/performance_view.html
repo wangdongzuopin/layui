@@ -1,0 +1,868 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+
+<body>
+	{{.}}
+	<!--head-->
+	{{ end }}
+	{{ template "head"}}
+
+	<title>绩效考核表 - beacon</title>
+	<form id="wd-view-performant" onsubmit="return false" method="POST">
+		<div class="wd-view-per">
+			<!-- 标题 -->
+			<div class="wd-view-title">
+				<!-- 考核报告表 -->
+				<div class="wd-view-h3">
+					<div>考核报告表</div>
+				</div>
+				<!-- 审核用户 -->
+				<div>
+					<!-- 报告人 -->
+					<div class="wd-view-reportman">
+						<div>
+							<input class="wd-view-reportman-id" type="hidden" name="id">
+						</div>
+						<div>报告人:
+							<div class="wd-view-reportman-people"></div>
+						</div>
+					</div>
+					{{.check_start_date}}
+					<!-- 考核开始日期 -->
+					<div class="wd-view-reportdate">
+						<div>考核开始/结束日期：</div>
+						<div class="wd-view-reportdate-time"><input class="check_start_date"
+								value="{{.check_start_date}}" placeholder="开始日期" autocomplete="off" type="text"
+								onclick="J.calendar.get();">&nbsp~&nbsp<input id="c1" class="check_end_date"
+								placeholder="结束日期" autocomplete="off" type="text"
+								onclick="J.calendar.get({dir:'right'});"></div>
+
+						<div style="position: relative;left: 50px;">
+							<div>
+								<span style="cursor: default">报告工时:</span>
+							</div>
+							<div class="wd-view-work-input">
+								&nbsp<input style="color: red;width: 9px;height: 24px;font-size: 14px;border: 0;"
+									name="work_day_num" class="wd-view-work-days" value="0">&nbsp天
+							</div>
+						</div>
+					</div>
+					<!-- 审核人 -->
+					<div class="wd-view-Reviewman" style="display: inline;float: right;">
+						<!-- 审核人 -->
+						<div style="display: inline;">
+							审核人：
+						</div>
+						<!-- 审核人姓名 -->
+						<div style="display: inline;">
+							<select class="wd-view-Reviewman-select">
+								<option class="wd-view-select" selecte="selected">请选择审核人</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 任务检查项 -->
+			<div class="wd-view-task">
+				<!-- 任务检查项字 -->
+				<div class="wd-view-task-check-font">
+					<div>• 任务检查项</div>
+				</div>
+				<!-- 后台升级项目 -->
+				<div class="wd-view-Backstage-update">
+					<!-- js添加项目id和名称 -->
+				</div>
+			</div>
+			<!-- 任务考核 -->
+
+			<!-- 创新检查项 -->
+			<div>
+				<!-- 创新检查字 -->
+				<div class="wd-view-update">
+					<div>• 创新检查项</div>
+				</div>
+				<!-- 创新检查填写 -->
+				<div class="wd-view-update-text">
+					<textarea class="wd-view-update-textarea" placeholder="内容概要"></textarea>
+				</div>
+			</div>
+			<!-- 分享检查项 -->
+			<div>
+				<!-- 分享检查项 字 -->
+				<div class="wd-view-share">
+					<div>• 分享检查项</div>
+				</div>
+				<!-- 分享检查项日期 -->
+				<div>
+					<!-- 分享主题 -->
+					<div class="wd-view-share-theme">
+						<input class="wd-view-share-zhuti" type="text" placeholder="分享的主题...">
+						<input class="wd-view-share-renshu" type="text" placeholder="实际参与人数">
+						<input class="wd-view-share-shijian" id="datatime" class="wd-view-share-theme-date"
+							autocomplete="off" type="text" onclick="J.calendar.get();" placeholder="请选择分享日期">
+					</div>
+				</div>
+				<!-- 分享检查项填写 -->
+				<div class="wd-view-share-text">
+					<textarea class="wd-view-share-textarea" placeholder="内容概要"></textarea>
+				</div>
+
+			</div>
+			<!-- 报告附言 -->
+			<div>
+				<!-- 报告人附言 -->
+				<div class="wd-view-postscript">
+					<div>• 报告人附言</div>
+				</div>
+				<!-- 报告人填写 -->
+				<div class="wd-view-postscript-text">
+					<textarea class="wd-view-postscript-textarea" placeholder="意见、建议等"></textarea>
+				</div>
+			</div>
+			<!-- 填充 -->
+			<div>
+				<div class="wd-view-chong"></div>
+			</div>
+			<div id="performance_view">
+				<i class="task_tt"></i>
+			</div>
+		</div>
+	</form>
+
+	<div class="layui-layer layui-layer-page" id="newww" type="page" times="9" showtime="0" contype="object"
+	style="position: fixed;z-index: 1000; margin: auto; left: 0;right: 0;bottom: 0;top: 0; width: 500px; height: 460px; display: none;">
+		<div id="" class="layui-layer-content" style="margin: 0 auto;width: 90%;">
+			<ol id="layer_wrap" class="layer_notice layui-layer-wrap" style="display: block;font-size: 12px;">
+				<div style="margin-top: 5px;color: red;" for="">评分规则</div>
+				<li style="margin-top: 7px;">"态度" <label style="color: red;">1</label> 分只要提交了报表均有；</li>
+				<li style="margin-top: 7px;">含有 "未通过项" 时除 "态度" <label style="color: red;">1</label>分外，其它项均为<label style="color: red;">0</label>分；</li>
+				<li style="margin-top: 7px;">含有 "BUG任务" 时扣除 "工作质量" <label style="color: red;">1</label>分；</li>
+				<li style="margin-top: 7px;">含有 "延期任务" 时 "校正工时" 只能选择1天；</li>
+				<li style="margin-top: 7px;">"报告工时" 与 "校正工时" 不一致时扣除 "工作效率" <label style="color: red;">1</label>分；</li>
+				<li style="margin-top: 7px;">"分享检查项" 与 "创新检查项" 任意一项标为 "通过" 则 "创新与分享" <label style="color: red;">1</label>分可获得。</li>
+				<!-- <li style="margin-top: 7px;">某项任务超过"预计完成时间"3倍且无"合理解释"则应标为"延期"，如某个任务的"预计完成时间"为2个工作日，但到第7个工作日该任务还未完成且无"合理解释"则标为"延期"；</li>
+				<li style="margin-top: 7px;">"合理解释"指因任务内容改变致"预计完成时间"延长、任务优先级降低致"预计完成时间"延后或者是任务负责人的上级所认可的原因。</li> -->
+			</ol>
+			<ul id="layer_wropli" class="layer_notice layui-layer-wrap" style="display: block;font-size: 12px;">
+				<div style="margin-top: 10px;padding-bottom: 5px;color: red;">名词术语解释</div>
+				<li>"未通过项"：指在 "任务检查项" 中的 "检查项" 内容不属实、或与本人负责的任务无关，则被标记为 "未通过"；</li>
+				<li>"BUG任务"：项目上线后发现的 "BUG"，且累计修正 "BUG" 工时达到一个工作日则任务应标记为 "BUG"；</li>
+				<li> "延期任务"：某项任务超过 "预计完成时间" 3倍且无 "合理解释" 则应标为 "延期"，如某个任务的 "预计完成时间" 为2个工作日，但到第7个工作日该任务还未完成且无 "合理解释" 则标为 "延期"；</li>
+				<li> "合理解释"：指因任务内容改变致 "预计完成时间" 延长、任务优先级降低致 "预计完成时间" 延后或者是任务负责人的直接上级所认可的原因；</li>
+				<li>"报告工时"：指报告人实际工作天数，最小单位为1天，不足1天按1天算；</li>
+				<li>"校正工时"：指审核者根据报告人当前应具备能力与工作内容，评估报告人应花费的工时，"校正工时" 不超过 "报告工时"，最小单位为1天。 </li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		Checkitem = [];// 总计检查项
+		wangHTT = [];	  		 // 评分数组
+		var checker = [];//审核人id
+		// 模板引擎分配数据
+		var performance = '{{.performance}}';
+		var tlmpper = JSON.parse(decodeURIComponent(performance).replace(/\+/g, '%20'));
+		var checker_id = tlmpper.checker_id;
+		var check_start_date = tlmpper.check_start_date;
+		var check_end_date = tlmpper.check_end_date;
+		var innovate_content = decodeURIComponent(tlmpper.innovate_content);
+		var checker_postscript = decodeURIComponent(tlmpper.checker_postscript);
+		var reporter_postscript = decodeURIComponent(tlmpper.reporter_postscript);
+		var reporter_id = tlmpper.reporter_id;
+		var reporter_name = decodeURIComponent(tlmpper.reporter_name);
+		var share_content = decodeURIComponent(tlmpper.share_content);
+		var state = tlmpper.state;
+		var performance_id = tlmpper.performance_id;
+		var work_day_num = tlmpper.work_day_num;
+		var check_work_day_num = tlmpper.check_work_day_num;
+		var checker_name = decodeURIComponent(tlmpper.checker_name);
+		var review_time = decodeURIComponent(tlmpper.review_time.replace(/\+/g, '%20'));
+		var confirm_time = decodeURIComponent(tlmpper.confirm_time.replace(/\+/g, '%20'));
+		var check_result = decodeURIComponent(tlmpper.check_result);
+		work_days(work_day_num)
+		time(review_time)
+		confirtime(confirm_time)
+		contime(confirm_time) //判断日期显示
+		if (check_result.length > 0) {
+			var nnresult = JSON.parse(decodeURIComponent(check_result)); //分享创新分数显示通过
+			var innovate = nnresult.innovate;
+			var share = nnresult.share;
+			var check_num = nnresult.check_num;
+			var bad_task_sub = nnresult.bad_task_sub;
+			var bug_task = nnresult.bug_task;
+		}
+		var score_1 = tlmpper.score_1;
+		var score_2 = tlmpper.score_2;
+		var score_3 = tlmpper.score_3;
+		var score_4 = tlmpper.score_4;
+		var score_5 = tlmpper.score_5;
+		// 将id分给成员
+		checker.push(checker_id)
+		// 创新的类型转换
+
+		var inn = innovate_content;
+		var inn_tmp = JSON.parse(inn)
+		if (inn_tmp != '') {
+			wangHTT.push(inn_tmp);
+		}
+		//报告人附言
+		postscript(reporter_postscript)
+
+		// 附加数据中
+		$('input[name="id"]').val(performance_id)
+		$('input[class="check_start_date"]').val(check_start_date) //开始时间
+		$('input[class="check_end_date"]').val(check_end_date) //结束时间
+		$('.wd-view-update-text textarea[class="wd-view-update-textarea"]').val(decodeURIComponent(inn_tmp.check_note)) //结束时间
+		// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+		if (decodeURIComponent(share_content).length > 59) {
+			// console.log(decodeURIComponent(share_content))
+			//分享的类型转换
+			wangHTT.push(share_content);
+			var v_share = share_content;
+			var share_tmp = JSON.parse(v_share)
+			$('input[class="wd-view-share-zhuti"]').val(decodeURIComponent(share_tmp.subject)) //分享主题时间
+			$('input[class="wd-view-share-renshu"]').val(decodeURIComponent(share_tmp.participation) + '人') //实际参加人数
+			$('input[class="wd-view-share-shijian"]').val(decodeURIComponent(share_tmp.date)) //实际参加时间
+			$('.wd-view-share-text textarea[class="wd-view-share-textarea"]').val(sign(decodeURIComponent(share_tmp.check_note))) //分享的内容概要
+		} else {
+			$('.wd-view-share-performance').hide();
+			$('input[class="wd-view-share-zhuti"]').val('') //分享主题时间
+			$('input[class="wd-view-share-renshu"]').val('') //实际参加人数
+			$('input[class="wd-view-share-shijian"]').val('') //实际参加时间
+			$('.wd-view-share-text textarea[class="wd-view-share-textarea"]').val('') //分享的内容概要
+		}
+		// 模板引擎js解码{{.user_name}}
+		var user_name = '{{.user_name}}';
+		let user = user_name.replace(/\+/g, '')
+		var username = decodeURIComponent(user)
+		// console.log(username)
+		// 将报告人添加进去
+		$('.wd-view-reportman-people').html(username);
+		//循环任务下
+		var url = '{{.task}}';
+		var encodedUrl = decodeURIComponent(url);
+		var tmp = JSON.parse(encodedUrl);
+		// 开始遍历
+		// 判断数据是否为空，不为空则进行下一步
+		if (tmp != '') {
+			for (var i = 0; i < tmp.length; i++) {
+				// 打印出所有数据，开始遍历
+				// console.log(tmp[i])
+				// 项目的id和名称
+				let id = tmp[i].Id;
+				let Name = tmp[i].Name;
+				// 添加项目id和名称
+				// 当名称里有空格时需要替换掉成空格并重新定义项目名称
+				let name = Name.replace(/\+/g, ' ')
+				// 遍历添加项目的id和名称
+				$('.wd-view-Backstage-update').append('<div class="wd-view-Backstage" id="wd-view-Backstage' + i + '"><input type="hidden" value="' + id + '">' + '<div class="wd-view-Backstage-name">' + decodeURIComponent(name) + '</div></div>')
+				// 定义项目中的任务
+				let Task = tmp[i].Task;
+				// 遍历任务
+				for (k = 0; k < Task.length; k++) {
+					// console.log(Task[k])
+					// 定义任务中的字段
+					let Add_time = Task[k].Add_time;
+					let End_time = Task[k].End_time;
+					let Expect_end_time = Task[k].Expect_end_time;
+					let Head_user_id = Task[k].Head_user_id;
+					let task_Id = Task[k].Id;
+					let task_name = Task[k].Name.replace(/\+/g, '%20');
+					let task_note = Task[k].Note.replace(/\+/g, '%20');
+					let Start_time = Task[k].Start_time;
+					let task_state = Task[k].State;
+					let Tag = Task[k].Tag.replace(/\+/g, '%20');
+					// 标签根据（，）切割
+					let task_Tag = decodeURIComponent(Tag);
+					let tag = task_Tag.split(',')
+					// console.log(tag)
+					let new_task_tag = '';
+					// 判断如果标签为空，则不显示
+					if (tag != '') {
+						for (r = 0; r < tag.length; r++) {
+							let newtag = tag[r]
+							if (newtag == '<BUG>') {
+								new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#df7d7d;">' + htmlspecialchars(newtag) + '</div>'
+							} else if (newtag == '<延迟>') {
+								new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#B8860B;">' + htmlspecialchars(newtag) + '</div>'
+							}
+							else {
+								new_task_tag += '<div class="wd-view-bugger"  style="margin-left: 3px;background-color:rgb(135, 138, 236);">' + newtag + '</div>'
+							}
+						}
+					} else {
+						new_task_tag += ''
+					}
+					// 切割添加时间和结束时间
+					let add_time = Add_time.split('+');
+					let end_time = End_time.split('+');
+					if (task_state == '1' || task_state == '2') {
+							end_time[0] = Expect_end_time.split('+')[0];
+						}else{
+							if (end_time[0] == '0000-00-00') {
+								end_time[0] = Expect_end_time.split('+')[0];
+							}
+						}
+					//子任务的遍历
+					let subTask = Task[k].Sub;
+					// wd-view-Backstage-update中添加任务
+					$('.wd-view-Backstage-update').append('<div class="wd-view-task-all"><div class="wd-view-task-task">' +
+						'<div class="wd-view-task-task-show" style="float: left;"><div style="float: left;">' +
+						// 任务的勾选框
+						'<input id="wd-view-cbx-all' + k + i + '" type="checkbox" name=""></div>' +
+						'<input id="wd-view-cbx-all" type="hidden"  value="' + decodeURIComponent(task_Id) + '">' +
+						'<div style="float: left;"><img src="/img/u537.png"></div>' +
+						'<div class="wd-view-task-task-wrap" style="float: left;">' +
+						'<div class="wd-view-task-task-name">' +
+						// 任务名称
+						'<div>' + parsing(decodeURIComponent(task_name)) + '</div></div><div><img  class="wd-view-task_note' + k + i + '" title="' + decodeURIComponent(task_note) + '" src="/img/Remarks.png"></div>' +
+						'<div class="wd-view-task-task-tag">' + new_task_tag + '</div>' +
+						// 添加时间到结束时间
+						'<div class="wd-view-task-task-date"><div>' + decodeURIComponent(add_time[0]) + '~' + decodeURIComponent(end_time[0]) + '</div></div></div></div>' +
+						// <!-- 子任务的显示 -->
+						'<div class="wd-view-sub" id="wd-view-sub' + i + k + '">' +
+						'</div>' +
+						'</div>')
+					// 遍历子任务
+					// 判断子任务如果为空
+					taskstate(task_state, k, i)
+					viewtitlenote(decodeURIComponent(task_note), k, i)
+					if (subTask != null) {
+						for (j = 0; j < subTask.length; j++) {
+							// console.log(subTask[j])
+							let sub_Add_time = subTask[j].Add_time;
+							let sub_Check_note = subTask[j].Check_note.replace(/\+/g, '%20');
+							let sub_Content = subTask[j].Content.replace(/\+/g, '%20');
+							let sub_End_time = subTask[j].End_time;
+							let sub_Expect_end_time = subTask[j].Expect_end_time;
+							let sub_Id = subTask[j].Id;
+							let sub_Start_time = subTask[j].Start_time;
+							let sub_State = subTask[j].State;
+							let sub_Check_result = subTask[j].Check_result.replace(/\+/g, '%20');
+							// 对时间的切割
+							let sub_start_time = decodeURIComponent(sub_Start_time.split('+')[0]);
+							let sub_end_time = decodeURIComponent(sub_End_time.split('+')[0]);
+							// 开始时间减结束时间相差几天
+							var days = daybetween(sub_start_time, sub_end_time);
+							// 未通过项
+							// 添加子任务
+							$('#wd-view-sub' + i + k).prepend('<div id="wd-view-sub-task' + k + i + j + '" class="wd-view-sub-task">' +
+								// 子任务的ID
+								// '<input type="hidden" name="task_sub_id" value="'+sub_Id+'">'+
+								// <!-- 子任务的勾选框 -->
+								'<div style="float: left; width:100%"><input id="wd-view-sub-cbx' + k + j + '" class="wd-view-sub-cbx" type="checkbox" name="task_sub_id" value="' +
+								sub_Id + '"></div>' +
+								// <!-- 为了好看的 -->
+								'<div style="float: left;"><img src="/img/u545.png"></div>' +
+								// <!-- 子任务的换行 -->
+								'<div class="wd-view-sub-task-wrap" style="float: left;">' +
+								// <!-- 子任务的名称 -->
+								'<div class="wd-view-sub-task-name">' +
+								'<div>' + decodeURIComponent(sub_Content) + '</div>' +
+								'</div>' +
+								// <!-- 子任务的时间 -->
+								'<div class="wd-view-sub-task-date">' + '(' + days + '天' + ')' + '</div></div>' +
+								// <!-- 评论框 -->
+								'<div class="wd-view-sub-task-textarea"><textarea placeholder="考核备注" >' + sign(decodeURI(sub_Check_note)) + '</textarea></div>' +
+								'</div>' +
+								'</div>')
+							//判断接口的状态,未完成状态则添加
+							// 数据存储并与人员判断进入所看到的哦也也
+
+							//数据存储
+							let aee = JSON.parse(localStorage.getItem('userLogin'));
+							var ugid = aee.ugid;
+
+							if (state == '1') {
+								if (ugid == checker_id) {
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									// alert('1')
+									// 在任务里添加可以点击的项
+									$('#wd-view-sub-task' + k + i + j).after(
+										//考核确认
+										'<div id="wd-view-sub-rights' + k + i + j + '" class="wd-view-sub-rights">' +
+										//考核确认通过
+										'<div class="wd-view-sub-confirm">' +
+										'<input name="ok_task_sub"  id="wd-view-sub-ok' + k + i + j + '" type="checkbox" value="' + sub_Id + '">' +
+										'<img onclick="confirm(\'' + k + "','" + i + "','" + j + '\')" class="wd-view-sub-confirm-img' + k + i + j + '" src="/img/u1309.png"></div>' +
+										//考核确认不通过
+										'<div class="wd-view-sub-deny">' +
+										'<input name="bad_task_sub"  id="wd-view-sub-bad' + k + i + j + '" type="checkbox" value="' + sub_Id + '">' +
+										'<img onclick="unconfirm(\'' + k + "','" + i + "','" + j + '\')" class="wd-view-sub-unconfirm-img' + k + i + j + '" src="/img/u1310.png"></div>' +
+										'</div>' +
+										'<div id="wd-view-sub-audit' + k + i + j + '" class="wd-view-sub-audit">' +
+										'<div class="wd-view-sub-through" id="wd-view-sub-through' + k + i + j + '">通过</div>' +
+										'<div id="wd-view-sub-unthrough' + k + i + j + '">未通过</div>' +
+										'</div>'
+									)
+								}
+							} else if (state == '2') {
+								if (ugid == checker_id) {  //审核人
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								} else if (ugid == reporter_id) { //报告人
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								} else if (checker_id != ugid || checker_id != reporter_id) { //游客
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								}
+							} else if (state == '3') {
+								if (ugid == checker_id) {  //审核人
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								} else if (ugid == reporter_id) { //报告人
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								} else if (checker_id != ugid || checker_id != reporter_id) { //游客
+									Checkitem.push(sub_Id)
+									wangHTT.push(sub_Id);
+									ugidone(k, i, j, sub_Id);
+									taskok(k, i, j, ugid, checker_id, state, sub_Check_result, reporter_id)
+								}
+							} else if (state == '4') {
+								if (ugid == checker_id) {  //审核人
+
+								} else if (ugid == reporter_id) { //报告人
+
+								} else if (checker_id != ugid || checker_id != reporter_id) { //游客
+
+								}
+							}
+						}
+					}
+				}
+				// 在页面中添加字段
+				$('.wd-view-per').append('')
+			}
+		} else {			// 如果为空则弹出提示框
+			$('.wd-view-Backstage-update').html('<div class="wd-new-task-shenhe">空空如也~~<div>')
+		}
+		//设置标签的属性
+		$(document).ready(function () {
+			// $('.wd-view-Preview').append()//新加按钮
+			$('input:checkbox').css('display', 'none');//选中框消失
+			$('textarea').attr('readonly', 'readonly');//禁止输入，只读
+			$('textarea').css('border', '0');//边框消失
+			$('input').attr('readonly', 'readonly');//禁止输入，只读
+			$('input').css('pointer-events', 'none');//事件结束
+			$('input').css('border', '0');//边框消失
+			$('select').css('pointer-events', 'none');//事件结束
+			$('.wd-view-Preview input').hide();//按钮隐藏
+
+			$('.wd-view-peformance-text textarea').removeAttr('readonly', 'readonly');
+			$('.wd-view-peformance-text textarea').removeAttr('border', '0');
+		})
+
+		// 数据存储并与人员判断进入所看到的哦也也
+		$(document).ready(function () {
+			//数据存储
+			let aee = JSON.parse(localStorage.getItem('userLogin'));
+			var ugid = aee.ugid;
+
+
+			if (state == '0') {
+				if (checker_id != ugid || checker_id != reporter_id) {
+					$('textarea[class="wd-view-postscript-textarea"]').hide()//报告人附言
+					$('.wd-view-postscript').hide()
+				}
+			}
+			if (state == '1') {
+				if (ugid == checker_id) {
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+
+					// 创新添加
+					$('.wd-view-update-text').after(
+						// <!-- 审核创新 -->
+						'<div class="wd-view-update-performance">' +
+						// <!-- 两张图片按钮 -->
+						'<div>' +
+						'<input name="innovate" value="0" class="wd-view-innovate-performance-up" id="" type="checkbox" style="display:none">' +
+						'<img onclick="update()" class="wd-view-update-img" src="/img/u1309.png">' +
+						'</div>' +
+						'<div>' +
+						'<input name="innovate" class="wd-view-innovate-performance-un"  id="" type="checkbox" style="display:none">' +
+						'<img onclick="unupdate()" class="wd-view-update-img" src="/img/u1310.png">' +
+						'</div>' +
+						// <!-- 通过与未通过 -->
+						'<div style="width: 50px;">' +
+						'<div class="wd-view-update-through">通过</div>' +
+						'<div class="wd-view-update-unthrough">未通过</div>' +
+						'</div>' +
+						'</div>')
+
+					$('.wd-view-share-text').after(
+						// 分享添加
+						'<div class="wd-view-share-performance">' +
+						// <!-- 两张图片按钮 -->
+						'<div>' +
+						'<input name="share" value="0" class="wd-view-share-performance-up" id="" type="checkbox" style="display:none">' +
+						'<img onclick="nshare()" class="wd-view-share-img" src="/img/u1309.png">' +
+						'</div>' +
+						'<div>' +
+						'<input name="share" class="wd-view-share-performance-un"  id="" type="checkbox" style="display:none">' +
+						'<img onclick="unshare()" class="wd-view-share-img" src="/img/u1310.png">' +
+						'</div>' +
+						// <!-- 通过与未通过 -->
+						'<div style="width: 50px;">' +
+						'<div class="wd-view-share-through">通过</div>' +
+						'<div class="wd-view-share-unthrough">未通过</div>' +
+						'</div>' +
+						'</div>'
+					)
+					// <!-- 审评结果 -->
+					$('.wd-view-postscript').parent().after(
+						'<div>' +
+						// <!-- 报告人附言 -->
+						'<div class="wd-view-evaluation">' +
+						'<div>• 审评结果</div>' +
+						'</div>' +
+						// <!-- 表格填写 -->
+						'<table border="1" class="wd-view-evaluation-table">' +
+						// <!-- 第一个tr是看 -->
+						'<tr class="wd-view-evaluation-title">' +
+						'<td colspan="6">任务检查项</td>' +
+						'<td>创新检查项</td>' +
+						'<td>分享检查项</td>' +
+						'</tr>' +
+						'<tr class="wd-view-evaluation-font">' +
+						'<td>检查项<p style="color: #3399FF;"><label class="wd-view-Checkitem">' + Checkitem.length + '</label>项</p>' +
+						'</td>' +
+						'<td>未通过项<p style="color: red;"><label class="wd-view-nothrough">0</label>项</p>' +
+						'</td>' +
+						'<td>BUG任务<p style="color: red;"><label class="wd-view-evaluation-bug">0</label>个</p>' +
+						'</td>' +
+						'<td>延期任务<p style="color: #9933CC;"><label class="wd-view-evaluation-delay">0</label>个</p>' +
+						'</td>' +
+						'<td class="wd-view-work_day">报告工时<p class="Report_time" style="color: #3399FF;">' +
+						'<input type="hidden" name="work_day_num" value="' + work_day_num + '">天</p>' +
+						'</td>' +
+						'<td class="wd_view-corre"  style="cursor: pointer;">' +
+						'<label style="cursor: pointer;color: red;text-decoration: underline;" onclick="dianjicor()" >校正工时</label><p style="color: red;">' +
+						'<span class="wd_view_correction" onclick="dianjispan()" style="text-decoration: underline;">' +
+							check_work_day_num + '</span>' +
+						'<input class="wd-view-corrinput" type="hidden" onclick="dianjiinput()" name="check_work_day_num" value="' + check_work_day_num + '">' +
+						'<span onclick="dinajispant()" style="text-decoration: underline;">天</span></p>' +
+						'<div class="wd_view-corre-option">' +
+						'<option class="wd-view-option1" onclick="option1()"><label  style="cursor: pointer;">1</label>天</option>' +
+						'<option class="wd-view-option2" onclick="option2()"><label  style="cursor: pointer;">2</label>天</option>' +
+						'<option class="wd-view-option3" onclick="option3()"><label  style="cursor: pointer;">3</label>天</option>' +
+						'<option class="wd-view-option4" onclick="option4()"><label  style="cursor: pointer;">4</label>天</option>' +
+						'<option class="wd-view-option5" onclick="option5()"><label  style="cursor: pointer;">5</label>天</option>' +
+						'<input class="wd-view-shuru-input" maxlength="2" type="text" placeholder="天数">' +
+						'<button class="wd-view-shuru-queding" onclick="button()">确定</button>' +
+						'<div>' +
+						'</td>' +
+						'<td class="td-innovate"><label>【无】</label></td>' +
+						'<td class="td-share"><label>【无】</label></td>' +
+						'</tr>' +
+						'</table>' +
+						'</div>'
+					)
+					// 报告工时添加天数
+					$('.Report_time').prepend(work_day_num)
+					// <!-- 绩效评分 -->
+					$('.wd-view-evaluation').parent().after(
+						'<div>' +
+						// <!-- 报告人附言 -->
+						'<div class="wd-view-score">' +
+						'<div>• 绩效评分</div>' +
+						'</div>' +
+						'<table class="wd-view-score-table" border="1">' +
+						'<tr>' +
+						'<td>态度(1分)</td>' +
+						'<td>真实度(1分)</td>' +
+						'<td>工作效率(1分)</td>' +
+						'<td>都为新任务(1分)</td>' +
+						'<td>创新与分享(1分)</td>' +
+						'<td>总计(5分)' +
+						'<label class="wd-view-doubt" style="font-weight: 700;position: relative;left: 17px;cursor: pointer;color: red;">?</label>' +
+						'</td>' +
+						'</tr>' +
+						'<tr>' +
+						'<td>1</td>' +	//注意你的态度
+						'<td class="wd-view-truth"></td>' + //真实度
+						'<td class="wd-view-bug"></td>' +	//工作效率，和bug挂钩
+						'<td class="wd-view-Newtask"></td>' + //都为新任务
+						'<td class="share-score">0</td>' + //创新与分享
+						'<td class="wd-view-total"></td>' + //合计总分
+						'</tr>' +
+						'</table>' +
+						'</div>'
+					)
+					$('.wd-view-score').parent().after(
+						// <!-- 考核人附言 -->
+						'<div>' +
+						'<div class="wd-view-peformance-talk">' +
+						'<div>• 考核人附言</div>' +
+						'</div>' +
+						'<div class="wd-view-peformance-text">' +
+						'<textarea style="boder:1px solid;" name="checker_postscript" placeholder="意见、建议等"></textarea>' +
+						'</div>' +
+						'</div>'
+					)
+					$('.wd-view-peformance-text').parent().after(
+						// <!-- 完成审核 -->
+						'<div>' +
+						'<div class="wd-view-finish-performance">' +
+						'<input type="submit" value="完成审核" onclick="finish_performance()">' +
+						'</div>' +
+						'</div>' +
+						// <!-- 打退 -->
+						'<div>' +
+						'<div class="wd-view-finish-Beat">' +
+						'<span class="wd-view-finish-Beat-up" onclick="refuse(\'' + performance_id + '\')">打 退</span>' +
+						'</div>' +
+						'</div>'
+					)
+					doubt()
+					bug()
+					efficiency()
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+				} else if (ugid == reporter_id) {
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+
+				} else if (checker_id != ugid || checker_id != reporter_id) {
+					$('textarea[class="wd-view-postscript-textarea"]').hide()//报告人附言
+					$('.wd-view-postscript').hide()
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+				}
+			} else if (state == '2') {
+				if (ugid == checker_id) {
+					$('.wd-view-finish-performance').parent().hide(); //不显示按钮
+					ugidtwo(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time, check_work_day_num)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+
+					
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					checkertalk(checker_postscript)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaff()
+				} else if (ugid == reporter_id) {
+					ugidthree(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+					checkertalk(checker_postscript)
+
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaff()
+				} else if (checker_id != ugid || checker_id != reporter_id) {
+					ugidfour(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaff()
+				}
+			} else if (state == '3') {
+				if (ugid == checker_id) {
+					$('.wd-view-finish-performance').parent().hide(); //不显示按钮
+					ugidtwo(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time, check_work_day_num)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					checkertalk(checker_postscript)
+
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg(confirm_time, reporter_name)
+				} else if (ugid == reporter_id) {
+					ugidthree(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time, reporter_name)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+					checkertalk(checker_postscript)
+					
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg(confirm_time, decodeURIComponent(reporter_name))
+				} else if (checker_id != ugid || checker_id != reporter_id) {
+					ugidfour(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time)
+					var reporter = decodeURIComponent(decodeURIComponent(reporter_postscript));
+					reporterstate(reporter) //附言函数
+
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg(confirm_time, reporter_name)
+				}
+			} else if (state == '4') {
+				if (ugid == checker_id) {
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg()
+				} else if (ugid == reporter_id) {
+
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg()
+				} else if (checker_id != ugid || checker_id != reporter_id) {
+					result(innovate, share, state, ugid, checker_id, share_content, innovate_content)
+					ugidfive(Checkitem, work_day_num, performance_id, checker_name, review_time, confirm_time)
+					// 判断检查项如果创新有，则显示，没有则不显示
+					inn_tmpstate(inn_tmp)
+					// 对分享检查项进行判断，如果为空则显示空，而不是未定义
+
+					wd_neww_share(share)
+					// 评审结果
+					evaluastate(nnresult)
+					// 分数指定
+					scorestate(score_1, score_2, score_3, score_4, score_5)
+					// 事件不允许
+					eventpaffg()
+				}
+			}
+		})
+
+		// 获取所有成员接口
+		$(document).ready(function () {
+			//数据存储
+			let aee = JSON.parse(localStorage.getItem('userLogin'));
+			var ugid = aee.ugid;
+			let na = decodeURIComponent(aee.name);
+			let nname = na.replace(/\+/g, '')
+			var result = nname.replace(/(^\s+)|(\s+$)/g, "");//去掉前后空格
+			//将名称分给报告人
+			$('.wd-view-reportman-people').html(decodeURIComponent(reporter_name));
+			$.get('/member/all', function (data, status) {
+				// 定义数据变量
+				let member_data = data.data;
+				// 为数据增加下标
+				var pdata = member_data.map(item => {
+					let itemKey = Object.keys(item)[0];//注释
+					return {
+						gid: itemKey,
+						name: item[itemKey]
+					}
+				})
+				// 循环数据
+				for (i = 0; i < pdata.length; i++) {
+					// 将所有人增加入审核人中
+					let shenhen_name = decodeURIComponent(pdata[i].name);
+					let shenhe = shenhen_name.replace(/\+/g, '');
+					// 定义id
+					var cid = JSON.stringify(checker)
+					var temp_cid = cid.replace(/\"/g, '')
+					var obj_cid = temp_cid.replace(/\[/g, '')
+					var str_cid = obj_cid.replace(/\]/g, '')
+					// 判断id相同则显示
+					if (str_cid == pdata[i].gid) {
+						$('.wd-view-select').html(shenhe)
+					}
+					$('.wd-view-Reviewman-select').append('<option value="' + pdata[i].gid + '">' + shenhe + '</option>')
+				}
+			})
+
+
+		})
+		$(document).ready(function () {
+			hreff()
+		});
+		function hreff() {
+			let href = window.location.href;
+			// console.log(href)
+			let text = href.split('/')
+			let windo = text[0] + '//' + text[2] + '/' + text[3] + '/' + text[4];
+			let win = text[0] + '//' + text[2] + '/';
+			let houmain = text[3] + '/' + text[4];
+			if (houmain == houmain) {
+				$('#index_1_7 a').css('color', 'black')
+				$('#index_1_7 a').css('font-weight', 'bold')
+			} else {
+			}
+		}
+	</script>
+</body>

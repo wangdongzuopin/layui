@@ -1,0 +1,105 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html>
+
+
+<body>
+    <!--head-->
+
+
+    {{ end }}
+    {{ template "head"}}
+    <title>项目主页面 - beacon</title>
+    <!--body-head-->
+    <form id="form1" onsubmit="return false" action="/project/list" method="GET">
+
+        <div id="index_2" class="cf">
+            <!--body-所有项目-->
+            <div id="index2_1">
+                <label id="wd_allproject" class="all_pro" onclick="all_pro()" style="display: none;">所有项目</label>
+                <a href="#wd_allproject" class="all_pro">所有项目</a>
+            </div>
+            <!--body-已删除项目-->
+            <div id="index2_2">
+                <label id="wd_guidang_pro" class="pro_guidang" onclick="guidang_pro()"
+                    style="display: none;">已归档项目</label>
+                <a href="#wd_guidang_pro" class="pro_guidang">已归档项目</a>
+            </div>
+            <!-- 切换 -->
+            <!-- <div class="index_qiehuan" title="切换成标准页面">列表视图</div>
+            <div class="index_kanban" title="切换成看板页面">网格视图</div> -->
+            <!--body-新建项目-->
+            <div id="index2_3"><span>
+                    <a id="" href="/project/add">新建项目</a>
+                </span>
+            </div>
+            <!--body-=======-->
+
+            <div id="index2_4">
+                <hr>
+            </div>
+            <div class="project_map">
+            </div>
+            <div class="wd-project-archive" style="display: table;">
+            </div>
+    </form>
+    <script>
+        $(document).ready(function(){
+            projecthash()
+            // all_pro()
+            // allhov()
+           
+        })
+        function projecthash() {
+            window.onhashchange = Hash();
+            // $('.project_map').show();
+        }
+        function Hash() {
+            var hash = window.location.hash;
+            switch (hash) {
+                case '#wd_allproject':
+                all_pro()
+                allhov()
+                    break;
+                case '#wd_guidang_pro':
+                guidang_pro()
+                all_gui()
+                    break;
+                default:
+            }
+        }
+
+
+        var project_map = '{{.project_list}}'
+        var project_list = JSON.parse(decodeURIComponent(project_map).replace(/\+/g, '%20'))
+        if (project_list.length > 0) {
+            // 遍历项目
+            for (var i = 0; i < project_list.length; i++) {
+                for (k = i + 1; k < project_list.length; k++) {
+                    if (project_list[i].add_time > project_list[k].add_time) {
+                        let temp = project_list[i];
+                        project_list[i] = project_list[k];
+                        project_list[k] = temp;
+                    }
+                }
+            }
+            for (y = 0; y < project_list.length; y++) {
+                let add_time = project_list[y].add_time; //添加时间
+                let add_user_id = project_list[y].add_user_id; //添加者id
+                let gid = project_list[y].gid;//项目id
+                let name = project_list[y].name; //项目名称
+                let note = project_list[y].note; //项目备注
+                let state = project_list[y].state; //项目状态
+                let type = project_list[y].type; //项目类型
+                prodd(gid, name, state, y, type,add_time)
+                // 定义的那啥
+            }
+        } else {
+            $('#index2_4').after('<div class="project_null">' + '<img style="width: 30px;cursor: default;" src="/img/img/chaxun.png">' + '</div><div style="cursor: default;color: gray;font-size: 13px;margin-top: 5px;">暂时没有内容</div>')
+            $('.wd-project-archive').hide();
+            $('.project_map').hide();
+        }
+    </script>
+</body>
+
+</html>

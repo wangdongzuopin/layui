@@ -1,0 +1,1851 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+<body>
+
+
+{{ end }}
+{{ template "head"}}
+<title id="localtitle"></title>
+<div class="detail_body_all">
+	<div>
+	    <div class="member-info">
+	  		<img class="avatar" style="cursor: default;" alt="" src="/img/index_user.png">
+			  <div class="member-card">
+			    <h1>
+			      <span id="localname" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 200px;display: block;"></span>
+			    </h1>
+			    <p class="member-comment">
+			      <span id="localemail"></span>
+			    </p>
+			      <p class="member-comment"></p>
+			  </div>
+
+		  	<div class="member-control">
+		  		
+		  	</div>
+		</div>
+
+		<div class="member-nav">
+      		<span class="active">任务</span>
+        	<span class="lo"></span>
+		</div>
+
+		<p class="page-tips moveout inbox-moveout"></p>
+	    <div class="member-section member-todos" data-view-by="created_at">
+	    	<div class="team-list">
+	    		<a href="#incomplete"><li class="incompleteTask">未完成任务</li></a>
+	    		<a href="#complete"><li class="completeTask">已完成任务</li></a>
+	    		<a href="#add"><li class="addTask">创建的任务</li></a>
+
+				<li class="incompleteTask" id="incomplete" onclick="incompleteTask();" style="display: none;">未完成任务</li>
+				<li class="completeTask" id="complete" onclick="completeTask();" style="display: none;">已完成任务</li>
+				<li class="addTask" id="add" onclick="addTask();" style="display: none;">创建的任务</li>
+			</div>
+	    </div>
+	    <div class="clearfix" data-view-by="created_at">
+			<!-- <div class="filters">
+				<select>
+					<option>所有项目</option>
+					<option>项目一</option>
+					<option>项目二</option>
+				</select>
+			</div> -->
+	    	<span id="task_tmp"></span>
+	    	<div class="todolist">
+	    		<!-- <div class="todolist-one">
+					<div class="todolist-1">
+						<div class="todo-actions">
+							<img src="/img/red_end.png">
+						</div>
+						<div class="todo-checkbox">
+							<input type="checkbox" id="" class="">
+						</div>
+						<div class="todo-content">
+		                    <span><img src="/img/+.png"></span>
+		                    <span>2/7</span>
+		                    <span>!7</span>
+		                    <span class="task_name"></span>
+		                    <span>客户要求爬取的稿源任务</span>
+		                    <span><img src="/img/detail.png"></span>
+		                    <span><img src="/img/info.png">12</span>
+		                    <span class="biaoti">前端界面</span>
+		                    <span>延期</span>
+		                    <span>(5月20日)</span>
+		                    <span>项目一</span>
+						</div>
+					</div>
+					<div class="todolist-2">
+						<div class="todolist-2-1">
+							<div class="todo-2">
+								<input type="checkbox" id="" class="">
+							</div>
+							<div class="todo-2">
+			                    <span><img src="/img/-.png"></span>
+			                    <span>!7</span>
+			                    <span class="task_name"></span>
+			                    <span>客户要求爬取的稿源任务</span>
+			                    <span><img src="/img/detail.png"></span>
+			                    <span><img src="/img/info.png">12</span>
+			                    <span>(5月20日)</span>
+							</div>
+						</div>
+						<div class="todolist-2-1">
+							<div class="todo-2">
+								<input type="checkbox" id="" class="">
+							</div>
+							<div class="todo-2">
+			                    <span><img src="/img/-.png"></span>
+			                    <span>!7</span>
+			                    <span class="task_name"></span>
+			                    <span>客户要求爬取的稿源任务</span>
+			                    <span><img src="/img/detail.png"></span>
+			                    <span><img src="/img/info.png">12</span>
+			                    <span>(5月20日)</span>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			
+				
+	    </div>
+	    <div class="todolist-complete">
+				<!-- <div class="team-more">
+					加载更多
+				</div> -->
+		</div>
+	</div>
+	<div id="zhezhao">
+	</div>
+	
+</div>
+</body>
+<script>
+	
+// function hreff(){
+//     let href = window.location.href;
+// 	let text = href.split('/')
+//     let windo = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4]+'/'+text[5];
+//     let win = text[0]+'//'+text[2]+'/';
+// 	let houmain = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4];
+//     if(houmhrefain == windo){
+// 			$('#index_1_9 a').css('color','black')
+// 			$('#index_1_9 a').css('font-weight','bold')
+//     }
+// }
+
+function hreff(){
+    let href = window.location.href;
+	let text = href.split('/')
+	// console.log(text)
+	let eetex = text[5].split('#');
+    let windo = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4]+'/'+eetex[0]+'#'+eetex[1];
+    let win = text[0]+'//'+text[2]+'/';
+	let houmain = text[0]+'//'+text[2]+'/'+text[3]+'/'+text[4]+'/'+text[5];
+
+    let hhh = text[3]+'/'+text[4];
+	// console.log(eetex[0])
+	let aee = JSON.parse(localStorage.getItem('userLogin'));
+	var ugid = aee.ugid;
+	 if(eetex[0] == ugid){
+			$('#index_1_5 a').css('color','black')
+			$('#index_1_5 a').css('font-weight','bold')
+		}else{
+			if(houmain == houmain){
+				$('#index_1_9 a').css('color','black')
+				$('#index_1_9 a').css('font-weight','bold')
+    	}
+	}
+	if(href == win+hhh){
+			$('#index_1_5 a').css('color','black')
+			$('#index_1_5 a').css('font-weight','bold')
+
+			// $('#index_1_9 a').css('color','#aeaaaa')
+			// $('#index_1_9 a').css('font-weight','bold')
+			// $('#index_1_9 a').hover('color','#339966')
+	}
+}
+	$(document).ready(function(){
+		hreff()
+		window.onhashchange = getHash();
+	});
+	
+
+	$(document).on('click', '.incompleteTask', function(){
+		incompleteTask();
+	})
+	$(document).on('click', '.completeTask', function(){
+		completeTask();
+	})
+	$(document).on('click', '.addTask', function(){
+		addTask();
+	})
+
+	function getHash(){
+		var hash = window.location.hash;
+		// alert(hash)
+		switch(hash){
+			case '#incomplete':
+				incompleteTask();
+				break;
+			case '#complete':
+				completeTask()
+
+				break;
+			case '#add':
+				addTask()
+				break;
+			default:
+				incompleteTask();
+		}
+	}
+
+
+	// 点击未完成任务
+	function incompleteTask(){
+		// 滚动条回到顶部
+		window.scrollTo(0, 0);
+
+		$(".completeTask").removeClass('selected');
+		$(".addTask").removeClass('selected');
+		$('.incompleteTask').addClass('selected');
+		$('.todolist-complete').html('');
+
+		$('.todolist').html('');
+
+		/*初始化*/
+		var counter = 0; /*计数器*/
+		var page = 0; /*offset*/
+		var limit = 30; /*size*/
+		$('#zhezhao').css('display','block');
+		loading.showLoading({
+			type:1,
+			tip:"加载中..."
+		})
+
+		// getMember(page, limit,counter);
+		getMember(page, limit,counter,function(err,data){
+		})
+
+		/*滚动监听加载更多*/
+		var C = 10;//滚动条距离底部的距离
+		let flag = true;
+		// console.log('1111',$(document).scrollTop())
+			// console.log('2222',$(document).height()-$(window).height())
+		$(window).scroll(function() {
+			let href = window.location.href;
+			let miaodiana = href.split('#')
+			if(miaodiana[1] == undefined || miaodiana[1] == 'incomplete'){
+				// console.log('未完成的任务',miaodiana[1])
+				var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
+				var positionValue = (scrollTop + windowHeight) - scrollHeight;
+				// var scrollTop = $(document).scrollTop();
+				// var scrollHeight = $(document).height();
+				// var windowHeight = $(window).height();
+				var positionValue = (scrollTop + windowHeight)
+				if (positionValue >= -C) {
+					// console.log(flag)
+					if(flag){
+						// console.log('flag',flag)
+						flag = false;
+						counter ++;
+						page = counter;
+						$('.todolist-complete').html('<div class="team-more"><div class="incomplete_task"><img src="/img/loadinga.gif"></div></div>')
+						getMember(page, limit,counter,function(err,data){
+							if(err){
+								layer.msg(err)
+								('.load-view').hide();
+								return
+							}
+							// console.log(data.data.task)
+							if(data.data.task.length >6){
+								flag = true;
+								$('.todolist-complete').html('<div class="team-more"></div></div>')
+							}else{
+								$('.todolist-complete').html('<div class="team-more">没有更多了</div></div>')
+							}
+						})
+					
+					}
+				}
+			}
+		});
+
+	}
+
+	// 点击已完成的任务
+	function completeTask(){
+		window.scrollTo(0, 0);
+		// 取消其他选择框的字体颜色，被点击选择框变为红色
+		$(".incompleteTask").removeClass('selected');
+		$(".addTask").removeClass('selected');
+		$('.completeTask').addClass('selected');
+		$('.todolist-complete').html('');
+
+		// $('.incompleteTask').css('color','');
+		// $('.addTask').css('color','');
+		// $('.completeTask').css('color','black');
+		// 清除class为todolist的div内的内容
+		$('.todolist').html('');
+
+		var counter = 0; /*计数器*/
+        var page = 0; /*offset*/
+        var limit = 30; /*size*/
+
+        $('#zhezhao').css('display','block');
+        loading.showLoading({
+			type:1,
+			tip:"加载中..."
+		})
+		// complete_task(page, limit,counter);
+		complete_task(page, limit,counter,function(err,data){
+		})
+
+		var C = 10;//滚动条距离底部的距离
+		let flag = true;
+		$(window).scroll(function() {
+			let href = window.location.href;
+			let miaodiana = href.split('#')
+			if(miaodiana[1] == 'complete'){
+				// console.log('完成的任务',miaodiana[1])
+				var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
+				var positionValue = (scrollTop + windowHeight) - scrollHeight;
+				// var scrollTop = $(document).scrollTop();
+				// var scrollHeight = $(document).height();
+				// var windowHeight = $(window).height();
+				var positionValue = (scrollTop + windowHeight)
+				// console.log('1111',scrollHeight)
+				// console.log('2222',positionValue)
+				if (positionValue >= -C) {
+					// console.log(flag)
+					if(flag){
+						// console.log('flag',flag)
+						flag = false;
+						counter ++;
+						page = counter;
+						$('.todolist-complete').html('<div class="team-more"><div class="complete_task"><img src="/img/loadinga.gif"></div></div>')
+						complete_task(page, limit,counter,function(err,data){
+							if(err){
+								layer.msg(err)
+								('.load-view').hide();
+								return
+							}
+							// console.log(data.data.task)
+							if(data.data.task.length >6){
+								flag = true;
+								$('.todolist-complete').html('<div class="team-more"></div></div>')
+							}else{
+								$('.todolist-complete').html('<div class="team-more">没有更多了</div></div>')
+							}
+						})
+					
+					}
+
+					// if(flag){
+					// 	counter ++;
+					// 	page = counter;
+					// 	let no = $(".complete_task").html();
+					// 	console.log(no)
+					// 	if(no == "没有更多了"){
+					// 		flag = false;
+					// 		return;
+					// 	}
+					// 	complete_task(page, limit,counter);
+					// 	flag = true;
+					
+					// }
+				}
+			}
+		});
+		// $(window).scroll(function() {
+		// 	var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
+		// 	var positionValue = (scrollTop + windowHeight) - scrollHeight;
+		// 	console.log(positionValue)
+		// 	if (positionValue >= -C) {
+		// 		if(flag){
+					
+		// 			counter ++;
+		// 			page = counter;
+		// 			let no = $(".complete_task").html();
+		// 			console.log(no)
+		// 			if(no == "没有更多了"){
+		// 				flag = false;
+		// 				return;
+		// 			}
+		// 			complete_task(page, limit,counter);
+		// 			flag = true;
+		// 		}
+		// 	}
+		// });
+	}
+
+	// 点击创建的任务
+	function addTask(){
+		// window.removeEventListener('scroll',completeTask())
+		// window.removeEventListener('scroll',incompleteTask())
+		window.scrollTo(0, 0);
+		// 取消其他选择框的字体颜色，被点击选择框变为红色
+		$(".incompleteTask").removeClass('selected');
+		$(".completeTask").removeClass('selected');
+		$('.addTask').addClass('selected');
+		$('.todolist-complete').html('');
+
+		// 清除class为todolist的div内的内容
+		$('.todolist').html('');
+
+		var counter = 0; /*计数器*/
+        var page = 0; /*offset*/
+        var limit = 30; /*size*/
+
+        $('#zhezhao').css('display','block');
+        loading.showLoading({
+			type:1,
+			tip:"加载中..."
+		})
+		add_task(page, limit,counter,function(err,data){
+		})
+
+		var C = 10;//滚动条距离底部的距离
+		let flag = true;
+		$(window).scroll(function() {
+			let href = window.location.href;
+			let miaodiana = href.split('#')
+			if(miaodiana[1] == 'add'){
+				// console.log('创建的任务',miaodiana[1])
+				var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
+				var positionValue = (scrollTop + windowHeight) - scrollHeight;
+				// var scrollTop = $(document).scrollTop();
+				// var scrollHeight = $(document).height();
+				// var windowHeight = $(window).height();
+				var positionValue = (scrollTop + windowHeight)
+				// console.log('1111',scrollHeight)
+				// console.log('2222',positionValue)
+				if (positionValue >= -C) {
+					// console.log(flag)
+					if(flag){
+						// console.log('flag',flag)
+						flag = false;
+						counter ++;
+						page = counter;
+						$('.todolist-complete').html('<div class="team-more"><div class="add_task"><img src="/img/loadinga.gif"></div></div>')
+						add_task(page, limit,counter,function(err,data){
+							if(err){
+								layer.msg(err)
+								('.load-view').hide();
+								return
+							}
+							// console.log(data.data.task)
+							if(data.data.task.length >6){
+								flag = true;
+								$('.todolist-complete').html('<div class="team-more"></div></div>')
+							}else{
+								$('.todolist-complete').html('<div class="team-more">没有更多了</div></div>')
+							}
+						})
+						// let no = $(".incomplete_task").html();
+						// console.log(no)
+						// if(no == "没有更多了"){
+						// 	flag = false;
+						// 	return;
+						// }
+						// add_task(page, limit,counter);
+						// flag = true;
+					
+					}
+				}
+			}
+		});
+
+		// $(window).scroll(function() {
+		// 	var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
+		// 	var positionValue = (scrollTop + windowHeight) - scrollHeight;
+		// 	console.log(positionValue)
+		// 	if (positionValue >= -C) {
+		// 		if(flag){
+		// 			flag = false;
+		// 			//do something
+		// 			// if (pageno < totalPages - 1) {
+		// 				// alert('222')
+		// 				// pageno++;
+		// 				// doSomething(pageno);
+		// 				counter ++;
+		// 				page = counter;
+		// 				add_task(page,limit,counter);
+		// 				flag = true;
+		// 			// } else {
+		// 				// alert('没有更多了');
+		// 			// }
+		// 		}
+		// 	}
+		// });
+
+	}
+
+	
+	// 获取未完成任务
+	function getMember(page,limit,counter,callback){
+		counter = counter+1
+		// console.log(counter)
+		// console.log('counter',counter)
+		$(document).ready(function () {
+			let id = {{.ugid}};
+			$.ajax( {
+	            url : "/team/member/incomplete_task",
+	            type : 'post',
+	            dataType:'json',
+	            data : 'id='+id+'&limit='+limit+'&page='+page,
+	            success:function(data){
+	            	callback(null,data)
+	            	$('#zhezhao').css('display','none');
+	            	$('.load-view').hide();
+	            	if (data && data.state == 1){
+	            		// $('#load').remove();
+	            		let res = data.data;
+	            		$('.lo').html('<span>上次登录时间：'+ShowTime(decodeURIComponent(res.last_login_time))+'</span>');
+	            		// console.log(decodeURIComponent(res.last_login_time))
+	            		// console.log(ShowTime(decodeURIComponent(res.last_login_time)))
+	            		let tasks = decodeURIComponent(res.task);
+						document.getElementById("localname").innerHTML = decodeURIComponent(res.member_name);
+						document.getElementById("localemail").innerHTML = decodeURIComponent(res.member_mail);
+	            		let obj = JSON.parse(tasks);
+						// console.log(obj);
+						// 追加title代码
+						document.getElementById("localtitle").innerHTML = decodeURIComponent(res.member_name) +' '+ '-' +' '+'beacon';
+	            		if(counter ==1 && obj.length == 0){
+	            			$('.todolist-complete').html('<div class="team-more">暂无数据</div></div>')
+	            			return;
+	            		}
+	            		// console.log(obj.length);
+	            		// console.log(typeof(obj));
+	            		for(let kk=0;kk<obj.length;kk++){
+	            		// for(k in obj){
+
+	            			let pre = obj[kk];
+	            			// console.log(pre);
+	            			// console.log(pre.Task_name.replace(/\+/g,"%20"))
+	            			// console.log(decodeURIComponent(pre.Task_name.replace(/\+/g,"%20")))
+	            			// console.log(decodeURIComponent(decodeURIComponent(pre.Task_tag)))
+	            			// console.log(pre.Task_tag)
+
+	            			let Task_class_id = decodeURIComponent(pre.Task_class_id);
+	            			let Task_class_name = decodeURIComponent(pre.Task_class_name);
+	            			let Task_comment = decodeURIComponent(pre.Task_comment);
+	            			let Task_end_time = decodeURIComponent(pre.Task_end_time);
+	            			let Task_expect_end_time = decodeURIComponent(pre.Task_expect_end_time);
+	            			let Task_id = decodeURIComponent(pre.Task_id);
+	            			let Task_name = decodeURIComponent(pre.Task_name.replace(/\+/g,"%20"));
+	            			let Task_note = decodeURIComponent(pre.Task_note.replace(/\+/g,"%20"));
+	            			let Task_project_id = decodeURIComponent(pre.Task_project_id);
+	            			let Task_project_name = decodeURIComponent(pre.Task_project_name.replace(/\+/g,"%20"));
+	            			let Task_project_type = decodeURIComponent(pre.Task_project_type);
+	            			let Task_start_time = decodeURIComponent(pre.Task_start_time);
+	            			let Task_state = decodeURIComponent(pre.Task_state);
+	            			let Task_sub = decodeURIComponent(pre.Task_sub);
+	            			let Task_tag = decodeURIComponent((pre.Task_tag.replace(/\%2B/g,"%20")).replace(/\+/g,"%20"));
+	            			// let Task_taga = decodeURIComponent(pre.Task_tag.replace(/\+/g,"%20"));
+	            			let Task_log_comment_total = decodeURIComponent(pre.Task_log_comment_total);
+
+	            			// let suiji = Math.floor(Math.random () * 900) + 100;
+	            			// k = parseInt(counter +''+ kk+ '' + suiji)
+	            			k = parseInt(counter +''+ kk)
+	            			// k = parseInt(k)
+	            			// console.log('kkkkk',k)
+
+	            			var pau = check_state(decodeURIComponent(pre.Task_state));
+	            			// console.log('111111')
+
+	            			// 判断有没有任务描述
+	            			if(Task_note){
+	            				// note_title = 'title="任务描述：'+Task_note+'"'
+	            				note_title = '<span title="任务描述：'+Task_note+'"><img src="/img/detail.png" style="width: 12px;height: 12px;"></span>';
+	            								// <span title="任务描述：描述"><img src="/img/detail.png"></span>
+	            			}else{
+	            				note_title = ''
+	            			}
+	            			// console.log('222222')
+
+	            			// 判断有没有评论
+	            			if(Task_log_comment_total.length > 0){
+	            				discuss_member = '<span id="comment'+k+'" class="comment"><img src="/img/info.png" class="asd" id="imginfo'+k+'" onclick="open_discuss('+k+',\''+Task_id+'\')" value="y"><div class="team-comment" id="team-comment'+k+'"><div class="discusscomment" id="discusscomment'+k+'"><div class="pinlun"></div><div class="nomorepl" id="morepl'+k+'" style="display: none !important;"><img src="/img/loadinga.gif"></div></div></div></span>'
+
+	            				
+	            			}else{
+	            				discuss_member = '';
+	            			}
+	            			// console.log('333333')
+
+	            			let apc = tagSet(Task_tag);
+
+	            			// console.log(apc);
+	            			// console.log("当前时间："+getNowFormatDate());
+
+							let endtime = Task_expect_end_time.split('+')[0]
+							// console.log('444444')
+							// tab(endtime,getNowFormatDate())
+							// let overdue = tab(endtime,getNowFormatDate())
+							// aaa(Task_sub);
+							// console.log('1111111',pre.Task_sub)
+
+	            			// if (pre.Task_sub != null){
+	            				// let subtask = '0/1'
+            				var subtask = forsub(pre.Task_sub);
+            				// <span class="deltask" id="deltask'+k+'" onclick="deletetask(0,'+k+',\''+Task_id+'\');"></span>
+            				$('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div></div><div class="todo-checkbox"><span class="zrw" id="zrw'+k+'" onclick="boxover('+k+',\''+Task_id+'\')"><img src="/img/uncheck.png" style="width: 17px;" value="0"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+ShowTime(endtime)+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+            				aaa(pre.Task_sub,k);
+	            			// }else{
+	            				// var subtask = '0/0';
+	            				// $('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div></div><div class="todo-checkbox"><span id="zrw'+k+'"><input type="checkbox" onclick="boxover(this,'+k+',\''+Task_id+'\')"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+',\''+subtask+'\');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+endtime+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+	            				// var ccc = ''
+	            			// }
+	            			if(pre.Task_log_comment.length < 50){
+	            				$('#imginfo'+k).attr("value","n");
+	            				$('#morepl'+k).html('没有更多了')
+	            				$('#morepl'+k).css('display','block')
+	            			}
+	            			cycle(k,pre.Task_log_comment,Task_id);
+
+	            			if(Task_state == 3){
+								$('#pause'+k).css('visibility','hidden');
+								$('#todolist'+k+' input').prop('checked',true);
+								$('#todolist'+k+' .zirenwu').css('visibility','hidden');
+	            			}
+	            			// if(Task_state == 4){
+	            			// 	$('#todolist'+k+' .zirenwu').css('visibility','hidden');
+
+	            			// }
+							// $("#team-comment").one("click",function(){
+							// 	$(this).animate({fontSize:"+=6px"});
+							// });
+
+	            			
+	            		}
+
+	            		
+	            		// let a = decodeURIComponent(data.data)
+	            		// console.log(a);
+	            	}else{
+	            		layer.msg(data.msg)
+	            		// alert(data.msg)
+	            	}
+	            	// let obj = JSON.parse(data);
+	            	
+	            	// console.log(typeof(data));
+	            	// let a = decodeURIComponent(data.task)
+	            	// console.log(a);
+	                
+	            },
+				error: function (xhr,textStatus,errorThrown) {
+					callback(errorThrown)
+				}
+	            
+	        });
+		})
+
+	}
+
+
+	function cycle(k,content,Task_id){
+		// console.log(content)
+		// console.log(decodeURIComponent(content['Content']))
+		for(key=0;key<content.length;key++){
+			// console.log(content[key]['Id'],'----',Task_id)
+			// console.log(decodeURIComponent(content[key]['Content']))
+			if(content[key]['Id'] == Task_id){
+				var theid = '';
+			}else{
+				var theid = '<label style="color:#101011">'+decodeURIComponent(content[key]['Name'].replace(/\+/g, '%20'))+'</label>';
+				
+			}
+			let qwe = content[key]
+			// AddTime  Content  Id  Name  OperatorId  OperatorName  Type
+
+			if(content[key]['Type'] == 'comment'){
+				// alert('111')
+				$('#discusscomment'+k+' .pinlun').append('<div class="ct"><div class="ct-time"><label>'+updatetime(decodeURIComponent(qwe['AddTime']))+'</label></div><div class="ct-content"><label>'+decodeURIComponent(qwe['OperatorName'].replace(/\+/g, '%20'))+'</label><label>评论</label><img src="/img/info.png"><br><p>'+decodeURIComponent(qwe['Content'].replace(/\+/g, '%20')).replace(/(\\r\\n)|(\n)/g,'<br>')+'</p></div></div>')
+			}
+			if(content[key]['Type'] == 'log'){
+				let newcon = JSON.parse(decodeURIComponent(qwe['Content'].replace(/\+/g, '%20')))
+				// console.log(qwe['Content'])
+				// alert('222')
+				// console.log(parsingcontent(decodeURIComponent(qwe['Content'])))
+				$('#discusscomment'+k+' .pinlun').append('<div class="log"><div class="ct-time"><label>'+updatetime(decodeURIComponent(qwe['AddTime']))+'</label></div><div class="ct-content"><label>'+decodeURIComponent(qwe['OperatorName'].replace(/\+/g, '%20'))+'</label>将<label>'+theid+htmlspecialchars(newcon.msg)+'</label></div></div>')
+			}
+		}
+		// console.log(content.length)
+		// if(content.length >= 50){
+		// 	let num = 0
+		// 	$('#nomorepl'+k).html('<span><a href="javascript:void(0)" onclick="loadingmore('+k+',\''+Task_id+'\','+num+');">加载更多</a></span>')
+		// }else{
+		// 	$('#nomorepl'+k).html('<span style="cursor:default;">没有更多了</span>')
+		// }
+		
+	}
+	//因为冒泡了，会执行到下面的方法。
+	function stopPropagation(e) {
+		var ev = e || window.event;
+		if (ev.stopPropagation) {
+			ev.stopPropagation();
+		}
+		else if (window.event) {
+			window.event.cancelBubble = true;//兼容IE
+		}
+	}
+
+
+	function open_discuss(k,Task_id){
+		let imgsval = $('#imginfo'+k).attr("value");
+		$(".team-comment").hide();
+		$("#team-comment"+k).show();
+		// console.log(imgsval)
+		// console.log(k)
+		// console.log(Task_id)
+		if(imgsval == 'y'){
+			let numb = 0; /*计数器*/
+			let flagd = true;
+			$("#discusscomment"+k).scroll(function() {
+				let sum = this.scrollHeight-40;
+				if (sum <= $(this).scrollTop() + $(this).height()) {
+					if(flagd){
+						flagd = false;
+						numb ++;
+						page = numb;
+						// console.log(numb)
+						// $('#morepl'+k).html('<img src="/img/loadinga.gif">')
+						$('#morepl'+k).css('display','block')
+						// $('<div class="nomorepl" id="nomorepl'+k+'"><img src="/img/loadinga.gif"></div>').appendTo('#discusscomment'+k);
+						loadingmore(k,Task_id,page,function(err,data){
+							// console.log('11111')
+							// console.log(data)
+							let teammember = decodeURIComponent(data.data)
+							let temp = JSON.parse(teammember)
+							// console.log(temp)
+							if(temp.LogComment.length >=50){
+								flagd = true;
+								// $('#morepl'+k).html('')
+								$('#morepl'+k).css('display','none')
+								// console.log('继续加载')
+							}else{
+								$('#morepl'+k).html('没有更多了')
+								$('#imginfo'+k).attr("value","n");
+								// $('<div class="nomorepl" id="nomorepl'+k+'">没有更多了</div>').appendTo('#discusscomment'+k);
+								// console.log('没有更多了')
+							}
+
+						})
+					}
+				}
+			});
+		}
+		$("#comment"+k).click(function (e) {
+			stopPropagation(e);
+			
+		});
+	}
+
+	function loadingmore(k,Task_id,page,callback){
+		let limit = 50;
+		// let page = num;
+		$.ajax({
+			url: "/task/log_comment/" + Task_id+"/"+page+"/"+limit,
+			async: false,
+			type: "GET",
+			success: function (data, msg, testStatus, result) {
+				callback(null,data)
+				let teammember = decodeURIComponent(data.data)
+				// console.log(teammember)
+				let temp = JSON.parse(teammember)
+				if(temp.LogComment){
+					cycle(k,temp.LogComment,Task_id);
+				}
+			},
+			error: function (xhr,textStatus,errorThrown) {
+				alert(errorThrown)
+			}
+		});
+		
+	}
+
+
+	$(document).bind('click', function () {
+		$(".team-comment").hide();
+	});
+
+	$(".team-comment").click(function (e) {
+		stopPropagation(e);
+	});
+
+	// function loadingmore(k,Task_id,num){
+	// 	num ++;
+	// 	// 0 49
+	// 	// 50 99
+	// 	// 100 149
+	// 	let limit = 50;
+	// 	let page = num;
+	// 	// console.log(page)
+	// 	let number = num;
+	// 	// console.log('number',number)
+	// 	$.ajax({
+	// 	url: "/task/log_comment/" + Task_id+"/"+page+"/"+limit,
+	// 	async: false,
+	// 	type: "GET",
+	// 	success: function (data, msg, testStatus, result) {
+	// 		let teammember = decodeURIComponent(data.data)
+	// 		// console.log(teammember)
+	// 		let temp = JSON.parse(teammember)
+	// 		if(temp.LogComment){
+	// 			if(temp.LogComment.length < 50){
+	// 				cycle(k,temp.LogComment);
+	// 				$('#nomorepl'+k).html('<span><a href="javascript:void(0)">没有更多了</a></span>')
+	// 			}else{
+	// 				cycle(k,temp.LogComment);
+	// 				// $('#nomorepl'+k).html('<span><a href="javascript:void(0)" onclick="loadingmore('+k+',\''+Task_id+'\','+number+');">加载更多</a></span>')
+	// 			}
+	// 		}else{
+	// 			$('#nomorepl'+k).html('<span><a href="javascript:void(0)">没有更多了</a></span>')
+	// 		}
+	// 		},
+	// 	error: function (xhr, errorMessage, e) {
+	// 		alert('系统异常')
+	// 		}
+	// 	});
+		
+	// }
+
+
+	// 触发父任务完成和重新打开
+	function boxover(k,Task_id){
+		let zrw = $('#zrw'+k+' img').attr("value");
+		if(zrw == 0){
+			setTimeout(function(){
+				$('#zrw'+k).html('<img src="/img/loading.gif" style="width: 17px;" title ="等待中">');
+				$('#zrw'+k).css('pointer-events','none');
+			});
+			setTimeout(function(){
+			// 当父任务完成时，子任务要全部完成
+				Task_complete(Task_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#zrw'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#zrw'+k).html('<img src="/img/checked.png" style="width: 17px;" title ="已完成" value="1">');
+						$('#pause'+k).html('<img src="/img/kb.png" title ="已完成" value="11">');
+						$('#todolist'+k+' .zirenwu').css('pointer-events','none');
+						$('#pause'+k).css('pointer-events','none');
+						// let arr = $('#todolist'+k+' .zirenwu img');
+						let arr = $('#todolist'+k+' .complete');
+						// console.log(arr)
+						for(let j=0;j<arr.length;j++){
+							// console.log(arr[j])
+							// console.log(typeof(arr[j]))
+							// 获取子任务下开始暂停图标的span的id
+							let fff = arr[j].getAttribute('id');
+							// console.log(fff)
+							// 获取子任务开始暂停图标的vaue值用以判断是开始还是暂停
+							let yy = $('#'+fff+' img').attr('value');
+							// console.log(yy)
+							if(yy == 0){
+								let nff = fff.split('cboxid')
+								// console.log(nff)
+								// console.log('说明该任务需要更改为完成')
+								$('#'+fff).html('<img src="/img/checked.png" style="width: 17px;" title="已完成" value="1">');
+								$('#zipause'+nff[1]).html('<img src="/img/kb.png" title ="已完成" value="11">');
+								$('#zipause'+nff[1]).css('pointer-events','none');
+							}
+						}
+
+						let numval = $('#symbol'+k+' .num').text()
+						let picnum = $('#symbol'+k+' img').attr('value')
+						if(picnum == 0){
+							var phtot = '<img src="/img/+.png" value="0">'
+						}else{
+							var phtot = '<img src="/img/-.png" value="1">'
+						}
+						let numa = numval.split('/')
+						let fractional = (fs(k)) + '/' + String(numa[1])
+						$('#symbol'+k).html(''+phtot+'<span class="num">'+fractional+'</span>')
+					}
+					if (data.state == 0){
+						layer.msg(data.msg)
+						$('#zrw'+k).html('<img src="/img/uncheck.png" style="width: 17px;" title ="未完成" value="0">');
+						$('#zrw'+k).css('pointer-events','');
+					}
+
+				})
+			},700);
+			// Task_complete(Task_id,k)
+		}else{
+			setTimeout(function(){
+				$('#zrw'+k).html('<img src="/img/loading.gif" style="width: 17px;" title ="等待中">');
+				$('#zrw'+k).css('pointer-events','none');
+			});
+			setTimeout(function(){
+				Task_Reopen(Task_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#zrw'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#zrw'+k).html('<img src="/img/uncheck.png" style="width: 17px;" title ="未完成" value="0">');
+						$('#pause'+k).html('<img src="/img/blue_begin.png" title ="已完成" value="1">');
+						$('#pause'+k).css('pointer-events','');
+						// $('#todolist'+k+' .zirenwu').css('pointer-events','');
+					}
+					if (data.state == 0){
+						layer.msg(data.msg)
+						$('#zrw'+k).html('<img src="/img/checked.png" style="width: 17px;" title ="已完成" value="1">');
+						$('#zrw'+k).css('pointer-events','');
+					}
+				})
+			},700);
+		}
+		
+	}
+	// 触发子任务完成和重新打开
+	function zirenwu(k,i,Sub_id){
+		let ad = $('#cboxid'+k+i+' img').attr("value");
+		// let ad = $('#cboxid'+k+i).attr("value");
+		if(ad == 0){
+			setTimeout(function(){
+				$('#cboxid'+k+i).html('<img src="/img/loading.gif" style="width: 17px;" title ="等待中">');
+				$('#cboxid'+k+i).css('pointer-events','none');
+			});
+			setTimeout(function(){
+				sub_Complete(Sub_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#cboxid'+k+i).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#cboxid'+k+i).html('<img src="/img/checked.png" style="width: 17px;" title ="已完成" value="1">');
+						$('#zipause'+k+i).html('<img src="/img/kb.png" title ="已完成" value="11">');
+						$('#zipause'+k+i).css('pointer-events','none');
+						// 当子任务完成时，父任务上的加减号展示的数字也要变化
+						let numval = $('#symbol'+k+' .num').text()
+						let numa = numval.split('/')
+						// let molecular = parseInt(numa[0]) + 1
+						// let fractional = (molecular) + '/' + String(numa[1])
+						// $('#symbol'+k).html('<img src="/img/-.png" value="1"><span class="num">'+fractional+'</span>')
+
+						// console.log('zzzz',zirenwuok(k,i))
+						// console.log('bbbb',zhuzi(k,i))
+
+						// 当一个子任务完成，其他的子任务都是暂停时，父任务也暂停
+						if(zhuzi(k,i) == -1){
+							$('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+							$('#pause'+k).css('pointer-events','');
+							// 当子任务是最后一个完成的子任务时，父任务自动完成
+							if(zirenwuok(k,i) == '-1'){
+								$('#pause'+k).html('<img src="/img/kb.png" title ="空白" value="11">');
+								$('#zrw'+k).html('<img src="/img/checked.png" style="width: 17px;" title ="已完成" value="1">');
+								$('#pause'+k).css('pointer-events','none');
+								// $('#zrw'+k).css('pointer-events','none');
+							}
+						}
+						// fs(k,i)
+						let fractional = (fs(k)) + '/' + String(numa[1])
+						$('#symbol'+k).html('<img src="/img/-.png" value="1"><span class="num">'+fractional+'</span>')
+						// 将完成的子任务移动到最下边
+						$('#zirenwua'+k+i).appendTo('#todolist'+k+' .a');
+						$('#zirenwua'+k+i).css('animation','fade 600ms infinite')
+						    setTimeout(function(){
+						        $('#zirenwua'+k+i).css('animation','')
+						    },1000)
+					}
+					if (data.state == 0){
+						layer.msg(data.msg)
+						$('#cboxid'+k+i).html('<img src="/img/uncheck.png" style="width: 17px;" title ="未完成" value="0">');
+						$('#cboxid'+k+i).css('pointer-events','');
+					}
+				})
+			},700);
+		}else{
+			setTimeout(function(){
+				$('#cboxid'+k+i).html('<img src="/img/loading.gif" style="width: 17px;" title ="等待中">');
+				$('#cboxid'+k+i).css('pointer-events','none');
+			});
+			setTimeout(function(){
+				sub_Reopen(Sub_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#cboxid'+k+i).css('pointer-events','');
+						layer.msg(data.msg)
+						// 子任务重新打开时，改为未选中状态的图标
+						$('#cboxid'+k+i).html('<img src="/img/uncheck.png" style="width: 17px;" title ="未完成" value="0">');
+						// 子任务重新打开时，显示开始暂停按钮
+						$('#zipause'+k+i).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+						$('#zipause'+k+i).css('pointer-events','');
+						// 当子任务完成时，父任务上的加减号展示的数字也要变化
+						let numval = $('#symbol'+k+' .num').text()
+						let numa = numval.split('/')
+						// let molecular = parseInt(numa[0]) - 1
+						// let fractional = (molecular) + '/' + String(numa[1])
+						// $('#symbol'+k).html('<img src="/img/-.png" value="1"><span class="num">'+fractional+'</span>')
+
+
+						// 子任务重新打开时，父任务重新打开，并且显示父任务的开始暂停按钮
+						// console.log('aaaa',zhuzi(k,i))
+						if(zhuzi(k,i) == -1){
+							$('#zrw'+k).html('<img src="/img/uncheck.png" style="width: 17px;" title ="未完成" value="0">');
+							$('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+							$('#pause'+k).css('pointer-events','');
+						}
+						// fs(k)
+						let fractional = (fs(k)) + '/' + String(numa[1])
+						$('#symbol'+k).html('<img src="/img/-.png" value="1"><span class="num">'+fractional+'</span>')
+						$('#zirenwua'+k+i).prependTo('#todolist'+k+' .a');
+						
+					}
+					if (data.state == 0){
+						layer.msg(data.msg)
+						$('#cboxid'+k+i).html('<img src="/img/checked.png" style="width: 17px;" title ="已完成" value="1">');
+						$('#cboxid'+k+i).css('pointer-events','');
+					}
+				})
+			},700);
+		}
+		// if (checkbox.checked == true){
+		// 	sub_complete(Sub_id);
+		// 	// 如果结果为-1说明子任务都完成。于是自动完成主任务，并设置子任务不可操作
+		// 	if(zirenwuok(k,i) == '-1')
+		// 	{
+		// 		//如果子任务全部完成，后台会自动修改父任务的状态为完成
+		// 		$('#zrw'+k+' input').prop('checked',true);
+		// 		// $('#boxover'+k).css('text-decoration','line-through');
+		// 		// $('#pause'+k).css('pointer-events','none');
+		// 		// $('#todo-actions-id'+k).css('cursor','not-allowed');
+		// 		$('#todolist'+k+' input').prop('checked',true);
+		// 		$('#pause'+k).css('visibility','hidden');
+		// 		// $('#todolist'+k+' input').attr('disabled',true);
+		// 		// $('#todolist'+k+' div').css('text-decoration','line-through');
+		// 		// $('#todolist'+k+' .zirenwu').css('pointer-events','none');
+		// 		// $('#todolist'+k+' .zirenwu').css('cursor','not-allowed');
+
+		// 	}
+		// 	$('#zipause'+k+i).css('visibility','hidden');
+		// 	// $('#zipause'+k+i).css('pointer-events','none');
+		// 	// $('#todo-zi'+k+i).css('cursor','not-allowed');
+
+		// 	// 将完成的子任务移动到最下边
+		// 	$('#zirenwua'+k+i).appendTo('#todolist'+k);
+		// }else{
+		// 	sub_reopen(Sub_id);
+		// 	// 显示父任务开始结束图标，并且取消完成状态
+		// 	$('#zrw'+k+' input').prop('checked',false);
+		// 	$('#pause'+k).css('visibility','visible');
+		// 	// 显示子任务开始结束图标
+		// 	$('#zipause'+k+i).css('visibility','visible');
+		// 	// $('#pause'+k).css('visibility','visible');
+		// 	// $('#zipause'+k+i).css('pointer-events','');
+		// 	// $('#todo-zi'+k+i).css('cursor','');
+		// 	// $('#zirenwua'+k+i+' div').css('text-decoration','');
+		// 	// $('#zipause'+k+i).css('pointer-events','');
+		// 	// $('#zipause'+k+i).css('cursor','');
+		// 	// 子任务重新打开后，开始暂停图标变为暂停
+		// 	$('#zipause'+k+i).html('<img src="/img/blue_begin.png" value="1">');
+		// 	// 子任务重新打开后，父任务的开始暂停图标变为暂停
+		// 	$('#pause'+k).html('<img src="/img/blue_begin.png" value="1">');
+		// 	$('#zirenwua'+k+i).prependTo('#todolist'+k);
+
+		// }
+	}
+	// 获取点击事件触发后，子任务已完成的一共有几个
+	function fs(k){
+		// console.log(ad)
+		var rrr = new Array();
+		// $('#zipause'+k+i).html('<img src="/img/blue_begin.png" value="1">');
+		let arr = $('#todolist'+k+' .complete img');
+		// console.log(arr)
+		for(let j=0;j<arr.length;j++){
+			if(arr[j].getAttribute('value') >=1){
+				rrr.push(arr[j].getAttribute('value'));
+			}
+		}
+		// console.log('大于等于1的',rrr.length);
+		let len = rrr.length;
+		return len
+	}
+
+	// 判断子任务是否全部都设置为完成，如果是，则主任务也完成
+	function zirenwuok(k,i){
+		
+		// console.log(ad)
+		var rrr = new Array();
+		// $('#zipause'+k+i).html('<img src="/img/blue_begin.png" value="1">');
+		let arr = $('#todolist'+k+' .complete img');
+		// console.log(arr)
+		for(let j=0;j<arr.length;j++){
+			// console.log(arr[j].getAttribute('value'));
+			// console.log(typeof(arr[j]))
+			rrr.push(arr[j].getAttribute('value'));
+		}
+		// console.log(rrr);
+		let index = rrr.indexOf('0');
+		// console.log('这是是判断子任务是否全部完成',index);
+		return index
+	}
+
+	function check_state(Task_state){
+		// 任务状态，定义“-1”为不可用，“0”为冻结，“1”为正常(未开始或暂停)，“2”为进行中，“3”为完成，默认为”1“。
+		if (Task_state == 1){
+			var pau = '<img src="/img/blue_begin.png" title ="开始" value="1">'
+		}else if(Task_state == 2){
+			var pau = '<img src="/img/red_end.png" title ="暂停" value="0">'
+		}else{
+			var pau = '<img src="/img/kb.png" title ="开始" value="11">'
+		}
+		return pau
+	}
+	function check_task(Task_state){
+		// 任务状态，定义“-1”为不可用，“0”为冻结，“1”为正常(未开始或暂停)，“2”为进行中，“3”为完成，默认为”1“。
+		if(Task_state == 3){
+			var taskState = '<img src="/img/checked.png" style="width: 17px;" value="1">'
+		}else{
+			var taskState = '<img src="/img/uncheck.png" style="width: 17px;" value="0">'
+		}
+		return taskState
+	}
+	// 子任务
+	function aaa(Task_sub,k){
+		if(Task_sub != null ){
+			// console.log('-----',Task_sub)
+			// 根据状态排序
+			for (var y = 0; y < Task_sub.length; y++) {
+				for (g = y + 1; g < Task_sub.length; g++) {
+					if (Task_sub[y].Sub_add_time > Task_sub[g].Sub_add_time) {
+						let temp = Task_sub[y];
+						Task_sub[y] = Task_sub[g];
+						Task_sub[g] = temp;
+					}
+				}
+			}
+			for (var y = 0; y < Task_sub.length; y++) {
+				for (g = y + 1; g < Task_sub.length; g++) {
+					if (Task_sub[y].Sub_state > Task_sub[g].Sub_state) {
+						let temp = Task_sub[y];
+						Task_sub[y] = Task_sub[g];
+						Task_sub[g] = temp;
+					}
+				}
+			}
+			var newarr = new Array();
+			for (let key = 0; key < Task_sub.length; key++) {
+				if(Task_sub[key].Sub_state == 5){
+					newarr.push(Task_sub[key].Sub_state)
+				}
+			}
+			if(newarr.length > 0){
+				var comshenhe = '<img style="width:16px;height:16px;" src="/img/Task/left.png" title ="已完成的" value="a">已审核的子任务('+newarr.length+')';
+			}else{
+				var comshenhe = '';
+			}
+			$('#todolist'+k).append('<div class="a" style="width: 100%;float: left;clear: both;"></div><div style="width: auto;" class="todolist-2-1" id="leftimg'+k+'" onclick="showcompot('+k+','+newarr.length+');">'+comshenhe+'</div><div class="b" style="display:none;width: 100%;float: left;clear: both;" id="showcompot'+k+'"></div>')
+			for(let i = 0;i < Task_sub.length; i++) {
+				// console.log(i)
+				// console.log(Task_sub[i])
+				let Sub_id = decodeURIComponent(Task_sub[i].Sub_id);
+				let Sub_content = decodeURIComponent(Task_sub[i].Sub_content.replace(/\+/g, '%20'));
+				let Sub_end_time = decodeURIComponent(Task_sub[i].Sub_end_time);
+				let Sub_start_time = decodeURIComponent(Task_sub[i].Sub_start_time);
+				let Sub_expect_end_time = decodeURIComponent(Task_sub[i].Sub_expect_end_time);
+				let Sub_state = decodeURIComponent(Task_sub[i].Sub_state);
+				let Sub_performance_id = decodeURIComponent(Task_sub[i].Sub_performance_id);
+				let Sub_check_result = decodeURIComponent(Task_sub[i].Sub_check_result);
+				var zipau = check_state(decodeURIComponent(Task_sub[i].Sub_state));
+				// 如果有加号，则拆分重组下
+				// let adf = Sub_content.split('+');
+				// let yyy = adf.join(" ");
+				// .replace(/\+/g, '%20')
+				// console.log(Sub_content)
+				// console.log(yyy)
+				// 任务状态，定义“-1”为不可用，“0”为冻结，“1”为正常(未开始或暂停)，“2”为进行中，“3”为完成，默认为”1“。
+				if (Sub_state == 1){
+					var zipau = '<img src="/img/blue_begin.png" title ="开始" value="1">'
+				}else if(Sub_state == 2){
+					var zipau = '<img src="/img/red_end.png" title ="暂停" value="0">'
+				}else{
+					var zipau = '<img src="/img/kb.png" title ="开始" value="11">'
+				}
+
+				// 检查项状态，定义“-1”为不可用，“0”为冻结状态，“1”为正常(未开始或暂停)，“2”为开始状态，“3”为已完成，“4”为考核中，“5”为考核完成，默认为”1“。
+				if (Sub_state == 1){
+					var subbox = '<img src="/img/uncheck.png" style="width: 17px;" title="未完成" value="0">'
+				}
+				if(Sub_state == 2){
+					var subbox = '<img src="/img/uncheck.png" style="width: 17px;" title="未完成" value="0">'
+				}
+				if(Sub_state == 3){
+					if(Sub_performance_id != 0){
+						var subbox = '<img src="/img/saveing.png" style="width: 22px;margin-left: -5px;position: relative;left: 3px;" title="已保存未提交" value="3">'
+					}else{
+						var subbox = '<img src="/img/checked.png" style="width: 17px;" title="已完成" value="1">'
+					}
+				}
+				if(Sub_state == 4){
+					var subbox = '<img src="/img/assess.png" title="考核中" style="width: 22px;margin-left: -4px;position: relative;left: 3px;" value="4">'
+				}
+				if(Sub_state == 5){
+					// Sub_check_result 0未通过，1通过。 代表审核报告表审核完成，但是没有通过
+					if(Sub_check_result == 0){
+						var subbox = '<img src="/img/Task/nothroug.png" title="考核完成但是未通过" value="5">'
+					}else{
+						var subbox = '<img src="/img/GIS-TL.png" title="考核完成" value="5">'
+					}
+					
+				}
+				if (Sub_state != '-1'){
+					if(Sub_state != 5){
+						$('#todolist'+k+' .a').append('<div class="todolist-2-1" id="zirenwua'+k+i+'"><div class="todos-2" id="todo-zi'+k+i+'"><span id="zipause'+k+i+'" class="zirenwu" onclick="zipause('+k+','+i+',\''+Sub_id+'\');">'+zipau+'</span></div><div class="todo-2" id="todo-2'+k+i+'" onclick="deletetask(1,'+k+i+',\''+Sub_id+'\');"></div><div class="todo-2" id="todo-input'+k+i+'"><span class="complete" id="cboxid'+k+i+'" onclick="zirenwu('+k+','+i+',\''+Sub_id+'\')">'+subbox+'</span></div><div class="todo-2" style="width: 80%;"><span class="arrows">'+Sub_content+'</span><span class="arrows">('+ShowTime(Sub_expect_end_time)+')</span></div></div>');
+					}else{
+						$('#todolist'+k+' .b').append('<div class="todolist-2-1" id="zirenwua'+k+i+'"><div class="todos-2" id="todo-zi'+k+i+'"><span id="zipause'+k+i+'" class="zirenwu" onclick="zipause('+k+','+i+',\''+Sub_id+'\');">'+zipau+'</span></div><div class="todo-2" id="todo-2'+k+i+'" onclick="deletetask(1,'+k+i+',\''+Sub_id+'\');"></div><div class="todo-2" id="todo-input'+k+i+'"><span class="complete" id="cboxid'+k+i+'" onclick="zirenwu('+k+','+i+',\''+Sub_id+'\')">'+subbox+'</span></div><div class="todo-2" style="width: 80%;"><span class="arrows">'+Sub_content+'</span><span class="arrows">('+ShowTime(Sub_expect_end_time)+')</span></div></div>');
+					}
+					// $('#todolist'+k).append('<div class="todolist-2-1" id="zirenwua'+k+i+'"><div class="todos-2" id="todo-zi'+k+i+'"><span id="zipause'+k+i+'" class="zirenwu" onclick="zipause('+k+','+i+',\''+Sub_id+'\');">'+zipau+'</span></div><div class="todo-2" id="todo-2'+k+i+'" onclick="deletetask(1,'+k+i+',\''+Sub_id+'\');"></div><div class="todo-2" id="todo-input'+k+i+'"><span class="complete"><input type="checkbox" id="cboxid'+k+i+'" '+subbox+'class="" onclick="zirenwu(this,'+k+','+i+',\''+Sub_id+'\')"></span></div><div class="todo-2"><span class="arrows">'+Sub_content+'</span><span class="arrows">('+Sub_expect_end_time.split('+')[0]+')</span></div></div>');
+
+					if(Sub_state ==4 || Sub_state ==5){
+						$('#zipause'+k+i).css('pointer-events','none');
+						$('#cboxid'+k+i).css('pointer-events','none');
+					}
+					if(Sub_state ==3){
+						if(Sub_performance_id != 0){
+							$('#cboxid'+k+i).css('pointer-events','none');
+							$('#zipause'+k+i).css('pointer-events','none');
+						}
+						$('#zipause'+k+i).css('pointer-events','none');
+					}
+					// if (Sub_state == 3){
+					// 	// console.log('3333',Sub_content)
+					// 	// console.log('3333',Sub_performance_id)
+					// 	if(Sub_performance_id != 0){
+					// 		$('#cboxid'+k+i).attr('checked',true);
+					// 		$('#todo-2'+k+i).css('display','none');
+					// 		$('#todo-input'+k+i).css('display','none');
+					// 		$('#zipause'+k+i).css('display','block');
+					// 		// 取消span的点击函数事件
+					// 		// $('#zipause'+k+i).css('pointer-events','none');
+					// 		$('#zipause'+k+i).css('width','60px');
+
+					// 		// $('#cboxid'+k+i).attr('checked',true);
+					// 		$('#todo-zi'+k+i).html('<span id="zipause'+k+i+'" class="zirenwu" style="margin-right:20px;;"><img src="/img/saveing.png" class="assess" title="已保存未提交" value="2"></span>');
+					// 		$('#zipause'+k+i+' img').css('float','right');
+					// 		$('#zipause'+k+i+' img').css('margin-right','5px');
+					// 		// $('#zipause'+k+i).css('visibility','hidden');
+					// 		// alert('111');
+					// 	}else{
+					// 		$('#zipause'+k+i).css('visibility','hidden');
+					// 		// alert('111');
+					// 		$('#cboxid'+k+i).attr('checked',true);
+					// 	}
+					
+					// }
+				}
+			}
+		}
+		// return pres;
+	}
+	function showcompot(k,key){
+		let imgval = $('#leftimg'+k+' img').attr("value");
+		if(imgval =='a'){
+			$('#showcompot'+k).show();
+			$('#leftimg'+k).html('<img style="width:16px;height:16px;" src="/img/Task/bottom.png" title ="已完成的" value="b">已审核的子任务('+key+')')
+		}else{
+			$('#showcompot'+k).hide();
+			$('#leftimg'+k).html('<img style="width:16px;height:16px;" src="/img/Task/left.png" title ="已完成的" value="a">已审核的子任务('+key+')')
+		}
+		
+
+	}
+
+	// 删除任务函数
+	function deletetask(zero,k,id){
+		// console.log(zero)
+		// console.log(k)
+		// console.log(id)
+		layer.confirm('您真的确定要删除吗？\n\n请确认！', {
+        btn: ['是的', '我在想想'] //按钮
+	    }, function (ind) {
+	    	// 如果zero为0，代表是触发了主任务的删除，如果是1代表触发子任务删除
+	    	if(zero == 0){
+				// console.log('1111')
+				let data = task_del(id);
+				if(data.state == 1){
+					$('#todolist-one-'+k).remove();
+				}else{
+					layer.msg(data.msg)
+				}
+				layer.close(ind);
+			}
+			
+			if(zero == 1){
+				sub_delect(id);
+			}
+
+	    }, function (ind) { 
+	    	layer.close(ind);
+    	});
+		
+	}
+
+	// 触发父任务开始暂停函数
+	function pause(k,Task_id){
+		// console.log(k)
+		// 任务状态，定义“-1”为不可用，“0”为冻结，“1”为正常(未开始或暂停)，“2”为进行中，“3”为完成，默认为”1“。
+		// alert(Task_id);
+		let pauses = $('#pause'+k+' img').attr("value");
+		// console.log('此时开始暂停按钮的value为 '+pauses)
+		if (pauses == 0){
+			setTimeout(function(){
+				$('#pause'+k).html('<img src="/img/loadinga.gif" title ="等待中">');
+				$('#pause'+k).css('pointer-events','none');
+			});
+			setTimeout(function(){
+			// 如果等于0说明任务处于开始状态，一下操作是要将它暂停
+			// 如果返回结果不等于0说明处理成功，子任务下的开始任务也要变成暂停
+				Task_Pause(Task_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#pause'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+						// console.log('Pause')
+						// let arr = $('#todolist'+k+' .zirenwu img');
+						let arr = $('#todolist'+k+' .zirenwu');
+						// console.log(arr)
+						for(let j=0;j<arr.length;j++){
+							// console.log(arr[j])
+							// console.log(typeof(arr[j]))
+							// 获取子任务下开始暂停图标的span的id
+							let fff = arr[j].getAttribute('id');
+							// console.log(fff)
+							// 获取子任务开始暂停图标的vaue值用以判断是开始还是暂停
+							let yy = $('#'+fff+' img').attr('value');
+							// console.log(yy)
+							if(yy == 0){
+								// console.log('说明该任务需要更改为暂停')
+								$('#'+fff).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+							}
+						}
+					}
+					if (data.state == 0){
+						$('#pause'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#pause'+k).html('<img src="/img/red_end.png" title ="开始" value="0">');
+					}
+				})
+			},700);
+			// task_pause(Task_id)
+
+			// $('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+		}else{
+			// console.log('111')
+			setTimeout(function(){
+				$('#pause'+k).html('<img src="/img/loadinga.gif" title ="等待中">');
+				$('#pause'+k).css('pointer-events','none');
+			});
+			setTimeout(function(){
+				Task_Start(Task_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						$('#pause'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#pause'+k).html('<img src="/img/red_end.png" title ="暂停" value="0">');
+					}
+					if (data.state == 0){
+						$('#pause'+k).css('pointer-events','');
+						layer.msg(data.msg)
+						$('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+					}
+				})
+			},700);
+			// task_start(Task_id)
+			// $('#pause'+k).html('<img src="/img/red_end.png" title ="暂停" value="0">');
+		}
+	}
+	// 触发子任务开始暂停函数
+	function zipause(k,i,Sub_id){
+
+		// 检查项状态，定义“-1”为不可用，“0”为冻结状态，“1”为正常(未开始或暂停)，“2”为开始状态，“3”为已完成，默认为”1“。
+		// alert(Sub_id);
+		let pauses = $('#zipause'+k+i+' img').attr("value");
+		// $('#zipause'+k+i).html('<img src="/img/loadinga.gif" title ="等待中">');
+		// console.log(pauses);
+		if (pauses == 0){
+			setTimeout(function(){
+				$('#zipause'+k+i).html('<img src="/img/loadinga.gif" title ="等待中">');
+				$('#zipause'+k+i).css('pointer-events','none');
+			});
+			setTimeout(function(){
+				sub_Pause(Sub_id,function(err,data){
+				if(err){
+					layer.msg(err)
+					return
+				}
+				// $('#zipause'+k+i).html('<img src="/img/loadinga.gif" title ="等待中">');
+				if(data.state == 1){
+					$('#zipause'+k+i).css('pointer-events','');
+					layer.msg(data.msg)
+					$('#zipause'+k+i).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+					// 如果返回值为-1，说明所有子任务都暂停了，父任务也暂停
+					if (zhuzi(k,i) == '-1'){
+						$('#pause'+k).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+					}
+				if (data.state == 0){
+					layer.msg(data.msg)
+					$('#zipause'+k+i).html('<img src="/img/red_end.png" title ="暂停" value="0">');
+				}
+				}
+			})
+			},700);
+			// 如果等于0说明任务处于开始状态，一下操作是要将它暂停
+			 
+		}else{
+			setTimeout(function(){
+				$('#zipause'+k+i).html('<img src="/img/loadinga.gif" title ="等待中">');
+			});
+			setTimeout(function(){
+				// 说明任务处于暂停状态，将它开始
+				sub_Start(Sub_id,function(err,data){
+					if(err){
+						layer.msg(err)
+						return
+					}
+					if (data.state == 1) {
+						layer.msg(data.msg)
+						$('#zipause'+k+i).html('<img src="/img/red_end.png" title ="暂停" value="0">');
+						$('#pause'+k).html('<img src="/img/red_end.png" title ="暂停" value="0">');
+					}
+					if (data.state == 0){
+						layer.msg(data.msg)
+						$('#zipause'+k+i).html('<img src="/img/blue_begin.png" title ="开始" value="1">');
+					}
+				})
+			},700);
+		}
+	}
+
+	// 判断子任务是否全部都设置为暂停，如果是，则主任务也暂停
+	function zhuzi(k,i){
+		var rrr = new Array();
+		// $('#zipause'+k+i).html('<img src="/img/blue_begin.png" value="1">');
+		let arr = $('#todolist'+k+' .zirenwu img');
+		for(let j=0;j<arr.length;j++){
+			// console.log(arr[j].getAttribute('value'));
+			// console.log(typeof(arr[j]))
+			rrr.push(arr[j].getAttribute('value'));
+		}
+		// console.log(rrr);
+		let index = rrr.indexOf('0');
+		return index
+	}
+
+	function closePop(sub_id,callback){
+		$.ajax({
+			type: 'get',
+			async: false,
+			xhrFields: {
+				withCredentials: true
+			},
+			url: "/task/sub_pause/" + sub_id,
+			success: function (data) {
+				callback(null,data)
+			}
+			})
+	}
+
+	// 点击加号展示子任务函数
+	function symbol(k){
+		let numval = $('#symbol'+k+' .num').text()
+		let numa = numval.split('/')
+		let subtask = (fs(k)) + '/' + String(numa[1])
+
+		// console.log(subtask);
+		var a = $('#symbol'+k+' img').attr("value");
+		if (a == 0){
+			$('#symbol'+k).html('<img src="/img/-.png" value="1"><span class="num">'+subtask+'</span>');
+			$('#todolist'+k).show();
+		}else{
+			$('#symbol'+k).html('<img src="/img/+.png" value="0"><span class="num">'+subtask+'</span>');
+			$('#todolist'+k).hide();
+		}
+		// $('.symbol'+k).append('<img src="/img/-.png">');
+
+	}
+
+	// 遍历子任务以用来判断总共几个子任务和已完成几个子任务
+	function forsub(Task_sub){
+		if(Task_sub != null){
+			var totalsub = new Array();
+			// 检查项状态，定义“-1”为不可用，“0”为冻结状态，“1”为正常(未开始或暂停)，“2”为开始状态，“3”为已完成，默认为”1“。
+			// let totalsub = Task_sub.length;
+			let subok = 0;
+			for(let k=0;k<Task_sub.length;k++){
+				let sub_state = Task_sub[k].Sub_state;
+				// -1 为删除状态。不统计已删除的
+				if (sub_state != '-1'){
+					totalsub.push(sub_state);
+					if (sub_state == '3' || sub_state == '4' || sub_state == '5'){
+					subok +=1
+				}
+				}
+				// console.log(sub_state);
+				
+			}
+			var subtask = subok+'/'+totalsub.length
+			
+		}else{
+			var subtask = '0/0'
+		}
+		return subtask
+		// console.log(subtask);
+
+	}
+	// 组合系统标签
+	function tagSet(Task_taga){
+		if(Task_taga){
+			// console.log(Task_taga)
+			// Task_taga = Task_taga.replace(/(^\s*)|(\s*$)/g, "");
+			let tagarr = Task_taga.split(',');
+			// console.log(tagarr)
+			let arritem = new Array();
+			for(let item of tagarr) {
+				// console.log(item)
+				if (item){
+					if(item == '<BUG>'){
+						let items = '<span class="tag-set" style="background-color:#df7d7d">'+htmlspecialchars(item)+'</span>';
+						// console.log(items)
+						arritem.push(items);
+					}else if(item == '<延迟>'){
+						let items = '<span class="tag-set" style="background-color:#B8860B">'+htmlspecialchars(item)+'</span>';
+						arritem.push(items);
+					}else{
+						let items = '<span class="tag-set">'+item+'</span>';
+						// console.log('2222',items)
+						arritem.push(items);
+					}
+						
+					}
+			
+			}
+			// console.log(arritem)
+			let apcd = arritem.join("");
+			var apc = '<span class="tag" style="margin: -2px;cursor: default;">'+apcd+'</span>';
+		}else{
+			var apc = '';
+		}
+		return apc;
+	}
+
+// ! #7# #self-tag# this is a task
+// ! 7 self-tag this is a task
+
+// #7 #self-tag1# #self-tag2#
+// 7  self-tag1   self-tag2#
+// 7 self-tag1 self-tag2
+// this is a task
+
+
+	// 获取完成任务
+	function complete_task(page,limit,counter,callback){
+		counter = counter+1;
+		let id = {{.ugid}};
+
+		$.ajax({
+            url : "/team/member/complete_task",
+            type : 'post',
+            dataType:'json',
+            data : 'id='+id+'&limit='+limit+'&page='+page,
+			success:function(data){
+				callback(null,data)
+				$('#zhezhao').css('display','none');
+            	$('.load-view').hide();
+            	if (data && data.state == 1){
+            		// $('#load').remove();
+            		let res = data.data;
+            		$('.lo').html('<span>上次登录时间：'+ShowTime(decodeURIComponent(res.last_login_time))+'</span>');
+            		let tasks = decodeURIComponent(res.task);
+            		document.getElementById("localname").innerHTML = decodeURIComponent(res.member_name);
+					document.getElementById("localemail").innerHTML = decodeURIComponent(res.member_mail);
+            		let obj = JSON.parse(tasks);
+            		// console.log(obj);
+					if(counter ==1 && obj.length == 0){
+						$('.todolist-complete').html('<div class="team-more">暂无数据</div></div>')
+						return;
+					}
+            		// console.log(obj.length);
+            		// console.log(typeof(obj));
+            		for(let kc=0;kc<obj.length;kc++){
+            		// for(k in obj){
+
+            			let pre = obj[kc];
+            			// console.log(pre);
+            			let Task_class_id = decodeURIComponent(pre.Task_class_id);
+            			let Task_class_name = decodeURIComponent(pre.Task_class_name);
+            			let Task_comment = decodeURIComponent(pre.Task_comment);
+            			let Task_end_time = decodeURIComponent(pre.Task_end_time);
+            			let Task_expect_end_time = decodeURIComponent(pre.Task_expect_end_time);
+            			let Task_id = decodeURIComponent(pre.Task_id);
+            			let Task_name = decodeURIComponent(pre.Task_name.replace(/\+/g,"%20"));
+            			let Task_note = decodeURIComponent(pre.Task_note.replace(/\+/g,"%20"));
+            			let Task_project_id = decodeURIComponent(pre.Task_project_id);
+            			let Task_project_name = decodeURIComponent(pre.Task_project_name.replace(/\+/g,"%20"));
+            			let Task_project_type = decodeURIComponent(pre.Task_project_type);
+            			let Task_start_time = decodeURIComponent(pre.Task_start_time);
+            			let Task_state = decodeURIComponent(pre.Task_state);
+            			let Task_sub = decodeURIComponent(pre.Task_sub);
+            			let Task_tag = decodeURIComponent(pre.Task_tag.replace(/\+/g,"%20"));
+            			// let Task_taga = decodeURIComponent(pre.Task_tag);
+            			let Task_log_comment_total = decodeURIComponent(pre.Task_log_comment_total);
+            			k = parseInt(counter +''+ kc)
+
+            			var pau = check_state(decodeURIComponent(pre.Task_state));
+
+            			// 判断有没有任务描述
+            			if(Task_note){
+            				// note_title = 'title="任务描述：'+Task_note+'"'
+            				note_title = '<span title="任务描述：'+Task_note+'"><img src="/img/detail.png" style="width: 12px;height: 12px;"></span>';
+            								// <span title="任务描述：描述"><img src="/img/detail.png"></span>
+            			}else{
+            				note_title = ''
+            			}
+
+            			// 判断有没有评论
+            			if(Task_log_comment_total.length > 0){
+            				discuss_member = '<span id="comment'+k+'" class="comment"><img src="/img/info.png" class="asd" id="imginfo'+k+'" onclick="open_discuss('+k+',\''+Task_id+'\')" value="y"><div class="team-comment" id="team-comment'+k+'"><div class="discusscomment" id="discusscomment'+k+'"><div class="pinlun"></div><div class="nomorepl" id="morepl'+k+'"></div></div></div></span>'
+
+            				// discuss_member = '<span id="comment'+k+'" class="comment"><img src="/img/info.png" class="asd" id="imginfo'+k+'" onclick="open_discuss('+k+',\''+Task_id+'\')"><div class="team-comment" id="team-comment'+k+'"><div class="closeteam"><span><a href="javascript:void(0)"></a></span></div><div class="discusscomment" id="discusscomment'+k+'"></div><div class="nomorepl" id="nomorepl'+k+'"></div></div></span>'
+
+            				
+            			}else{
+            				discuss_member = '';
+            			}
+            			// 系统标签函数
+            			let apc = tagSet(Task_tag);
+            			// console.log(apc);
+            			// console.log("当前时间："+getNowFormatDate());
+
+						let endtime = Task_expect_end_time.split('+')[0]
+						// tab(endtime,getNowFormatDate())
+						// let overdue = tab(endtime,getNowFormatDate())
+						// aaa(Task_sub);
+
+            			// if (pre.Task_sub != null){
+            				// let subtask = '0/1'
+            			var subtask = forsub(pre.Task_sub);
+            			// <div><span class="deltask" id="deltask'+k+'" onclick="deletetask(0,'+k+',\''+Task_id+'\');"><img src="/img/box.png"></span></div>
+            			$('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div></div><div class="todo-checkbox"><span class="zrw" id="zrw'+k+'" onclick="boxover('+k+',\''+Task_id+'\')"><img src="/img/uncheck.png" style="width: 17px;" value="0"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+ShowTime(endtime)+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+
+            				// $('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div class="todo-checkbox"><span class="zrw" id="zrw'+k+'" onclick="boxover('+k+',\''+Task_id+'\')"><img src="/img/uncheck.png" value="0"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+',\''+subtask+'\');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+endtime+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+
+
+            				aaa(pre.Task_sub,k);
+            			// }else{
+            			// 	var subtask = '0/0';
+            			// 	$('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div class="todo-checkbox"><span id="zrw'+k+'"><input type="checkbox" id="" class="" onclick="boxover('+k+',\''+Task_id+'\')"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+',\''+subtask+'\');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+endtime+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+            			// 	var ccc = ''
+            			// }
+            			if(pre.Task_log_comment.length < 50){
+            				$('#imginfo'+k).attr("value","n");
+            				$('#morepl'+k).html('没有更多了')
+            				$('#morepl'+k).css('display','block')
+            			}
+            			cycle(k,pre.Task_log_comment,Task_id);
+
+            			if(Task_state == 3){
+            				// alert(Task_state);
+            				//如果是完成状态，则隐藏开始暂停按钮
+							$('#pause'+k).css('pointer-events','none');
+							//如果是完成状态，则input框显示选中状态
+							// $('#zrw'+k+' input').prop('checked',true);
+							$('#zrw'+k).html('<img src="/img/checked.png" style="width: 17px;" title="已完成" value="1">')
+							$('#pause'+k).html('<img src="/img/kb.png" title="开始" value="11">')
+							// $('#todolist'+k+' input').prop('checked',true);
+							//如果是完成状态，则隐藏子任务的开始暂停按钮
+							// $('#todolist'+k+' .zirenwu').css('visibility','hidden');
+            			}
+						// $("#team-comment").one("click",function(){
+						// 	$(this).animate({fontSize:"+=6px"});
+						// });
+
+            			
+            		}
+            		// let a = decodeURIComponent(data.data)
+            		// console.log(a);
+            	}else{
+            		alert(data.msg)
+            	}
+            	// let obj = JSON.parse(data);
+            	
+            	// console.log(typeof(data));
+            	// let a = decodeURIComponent(data.task)
+            	// console.log(a);
+                
+            },
+			error: function (xhr,textStatus,errorThrown) {
+				callback(errorThrown)
+			}
+	            
+	        });
+  		
+	}
+
+	// 创建的任务
+	function add_task(page,limit,counter,callback){
+		counter = counter+1
+		
+
+		let id = {{.ugid}};
+		$.ajax({
+            url : "/team/member/add_task",
+            type : 'post',
+            dataType:'json',
+            data : 'id='+id+'&limit='+limit+'&page='+page,
+            success:function(data){
+            	callback(null,data)
+            	$('#zhezhao').css('display','none');
+            	$('.load-view').hide();
+            	if (data && data.state == 1){
+            		// $('#load').remove();
+            		let res = data.data;
+            		$('.lo').html('<span>上次登录时间：'+ShowTime(decodeURIComponent(res.last_login_time))+'</span>');
+            		let tasks = decodeURIComponent(res.task);
+            		document.getElementById("localname").innerHTML = decodeURIComponent(res.member_name);
+					document.getElementById("localemail").innerHTML = decodeURIComponent(res.member_mail);
+            		let obj = JSON.parse(tasks);
+            		// console.log(obj);
+					if(counter ==1 && obj.length == 0){
+						$('.todolist-complete').html('<div class="team-more">暂无数据</div></div>')
+						return;
+					}
+            		// console.log(obj.length);
+            		// console.log(typeof(obj));
+            		for(let ka=0;ka<obj.length;ka++){
+            		// for(k in obj){
+
+            			let pre = obj[ka];
+            			// console.log(pre);
+            			let Task_class_id = decodeURIComponent(pre.Task_class_id);
+            			let Task_class_name = decodeURIComponent(pre.Task_class_name);
+            			let Task_comment = decodeURIComponent(pre.Task_comment);
+            			let Task_end_time = decodeURIComponent(pre.Task_end_time);
+            			let Task_expect_end_time = decodeURIComponent(pre.Task_expect_end_time);
+            			let Task_id = decodeURIComponent(pre.Task_id);
+            			let Task_name = decodeURIComponent(pre.Task_name.replace(/\+/g,"%20"));
+            			let Task_note = decodeURIComponent(pre.Task_note.replace(/\+/g,"%20"));
+            			let Task_project_id = decodeURIComponent(pre.Task_project_id);
+            			let Task_project_name = decodeURIComponent(pre.Task_project_name.replace(/\+/g,"%20"));
+            			let Task_project_type = decodeURIComponent(pre.Task_project_type);
+            			let Task_start_time = decodeURIComponent(pre.Task_start_time);
+            			let Task_state = decodeURIComponent(pre.Task_state);
+            			let Task_sub = decodeURIComponent(pre.Task_sub);
+            			let Task_tag = decodeURIComponent(pre.Task_tag.replace(/\+/g,"%20"));
+            			// let Task_taga = decodeURIComponent(pre.Task_tag);
+            			let Task_log_comment_total = decodeURIComponent(pre.Task_log_comment_total);
+            			k = parseInt(counter +''+ ka)
+
+            			var pau = check_state(decodeURIComponent(pre.Task_state));
+            			var taskState = check_task(decodeURIComponent(pre.Task_state));
+
+            			// 判断有没有任务描述
+            			if(Task_note){
+            				// note_title = 'title="任务描述：'+Task_note+'"'
+            				note_title = '<span title="任务描述：'+Task_note+'"><img src="/img/detail.png" style="width: 12px;height: 12px;"></span>';
+            								// <span title="任务描述：描述"><img src="/img/detail.png"></span>
+            			}else{
+            				note_title = ''
+            			}
+
+            			// 判断有没有评论
+            			if(Task_log_comment_total.length > 0){
+            				discuss_member = '<span id="comment'+k+'" class="comment"><img src="/img/info.png" class="asd" id="imginfo'+k+'" onclick="open_discuss('+k+',\''+Task_id+'\')" value="y"><div class="team-comment" id="team-comment'+k+'"><div class="discusscomment" id="discusscomment'+k+'"><div class="pinlun"></div><div class="nomorepl" id="morepl'+k+'"></div></div></div></span>'
+
+            				
+            			}else{
+            				discuss_member = '';
+            			}
+
+            			// 系统标签函数
+            			let apc = tagSet(Task_tag);
+            			
+            	
+            			// console.log(apc);
+            			// console.log("当前时间："+getNowFormatDate());
+
+						let endtime = Task_expect_end_time.split('+')[0]
+						// tab(endtime,getNowFormatDate())
+						// let overdue = tab(endtime,getNowFormatDate())
+						// aaa(Task_sub);
+
+            			// if (pre.Task_sub != null){
+            				// let subtask = '0/1'
+            			var subtask = forsub(pre.Task_sub);
+            				// <div><span class="deltask" id="deltask'+k+'" onclick="deletetask(0,'+k+',\''+Task_id+'\');"><img src="/img/box.png"></span></div>
+            			$('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div></div><div class="todo-checkbox"><span class="zrw" id="zrw'+k+'" onclick="boxover('+k+',\''+Task_id+'\')">'+taskState+'</span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+ShowTime(endtime)+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+            				aaa(pre.Task_sub,k);
+            			// }else{
+            			// 	var subtask = '0/0';
+            			// 	$('.todolist').append('<div class="todolist-one" id="todolist-one-'+k+'"><div class="todolist-1"><div class="todo-actions" id="todo-actions-id'+k+'"><span class="pause" id="pause'+k+'" onclick="pause('+k+',\''+Task_id+'\');">'+pau+'</span></div><div class="todo-checkbox"><span id="zrw'+k+'"><input type="checkbox" id="" class="" onclick="boxover('+k+',\''+Task_id+'\')"></span></div><div class="todo-content" id="boxover'+k+'"><span class="symbolp" id="symbol'+k+'" onclick="symbol('+k+',\''+subtask+'\');"><img src="/img/+.png" value="0"><span class="num">'+subtask+'</span></span><span class="task-name">'+parsing(Task_name)+'</span>'+note_title+discuss_member+apc+'<span style="cursor: default;">('+endtime+')</span><span class="note">'+Task_project_name+'</span></div></div><div class="todolist-2" id="todolist'+k+'"></div></div>');
+            			// 	var ccc = ''
+            			// }
+            			if(pre.Task_log_comment.length < 50){
+            				$('#imginfo'+k).attr("value","n");
+            				$('#morepl'+k).html('没有更多了')
+            				$('#morepl'+k).css('display','block')
+            			}
+            			cycle(k,pre.Task_log_comment,Task_id);
+
+            			if(Task_state == 3){
+            				// alert(Task_state);
+            				//如果是完成状态，则隐藏开始暂停按钮
+							$('#pause'+k).css('pointer-events','none');
+							//如果是完成状态，则input框显示选中状态
+							// $('#zrw'+k+' input').prop('checked',true);
+							$('#zrw'+k).html('<img src="/img/checked.png" style="width: 17px;" title="已完成" value="1">')
+							$('#pause'+k).html('<img src="/img/kb.png" title="开始" value="11">')
+							// $('#todolist'+k+' input').prop('checked',true);
+							//如果是完成状态，则隐藏子任务的开始暂停按钮
+							// $('#todolist'+k+' .zirenwu').css('visibility','hidden');
+            			}
+						// $("#team-comment").one("click",function(){
+						// 	$(this).animate({fontSize:"+=6px"});
+						// });
+
+            			
+            		}
+            		// let a = decodeURIComponent(data.data)
+            		// console.log(a);
+            	}else{
+            		alert(data.msg)
+            	}
+            	// let obj = JSON.parse(data);
+            	
+            	// console.log(typeof(data));
+            	// let a = decodeURIComponent(data.task)
+            	// console.log(a);
+                
+            },
+            error: function (xhr,textStatus,errorThrown) {
+				callback(errorThrown)
+			}
+	            
+	        });
+
+	}
+</script>
+</html>

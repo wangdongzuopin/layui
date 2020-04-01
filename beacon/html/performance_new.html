@@ -1,0 +1,674 @@
+{{define "layout"}}
+<!DOCTYPE html>
+
+
+<html>
+
+<body>
+	{{.}}
+	<!--head-->
+	{{ end }}
+	{{ template "head"}}
+
+	<title>新建考核报告表 - beacon</title>
+	<form id="wd-new-performant" onsubmit="return false" method="POST">
+		<div class="wd-new-per">
+			<!-- 标题 -->
+			<div class="wd-new-title">
+				<!-- 考核报告表 -->
+				<div class="wd-new-h3" style="cursor: default;">
+					<div>考核报告表</div>
+				</div>
+				<!-- 审核用户 -->
+				<div>
+					<!-- 报告人 -->
+					<div class="wd-new-reportman" style="cursor: default;">
+						<div>报告人:
+							<div class="wd-new-reportman-people"></div>
+						</div>
+					</div>
+					<!-- 考核开始日期 -->
+					<div class="wd-new-reportdate">
+						<div>考核开始/结束日期：</div>
+						<div><input id="c10" class="timestde" name="check_start_date" placeholder="开始日期..."
+								autocomplete="off" type="text">&nbsp~&nbsp<input id="c11" class="timestde"
+								name="check_end_date" placeholder="结束日期..." autocomplete="off" type="text"></div>
+						<!-- 报告工时 -->&nbsp&nbsp
+						<input type="hidden" value="" class="timestde1">
+						<input type="hidden" value="" class="timestde2">
+						<div>
+							<div>
+								<span style="cursor: default">报告工时:</span>
+							</div>
+							<div class="wd-new-work-input" style="cursor: pointer;">
+								&nbsp<input
+									style="color: red;width: 20px;height: 24px;text-align: center;font-size: 14px;border: 0;cursor: pointer;border-bottom: 1px dashed;"
+									name="work_day_num" readonly="readonly" class="wd-new-work-days" value="0"
+									onclick="newsgong()">&nbsp天
+							</div>
+							<div class="wd_new-corre-option" style="display: none">
+								<option class="wd-new-option1" onclick="option6()"><label
+										style="cursor: pointer;">3</label>天</option>
+								<option class="wd-new-option2" onclick="option7()"><label
+										style="cursor: pointer;">4</label>天</option>
+								<option class="wd-new-option3" onclick="option8()"><label
+										style="cursor: pointer;">5</label>天</option>
+								<option class="wd-new-option4" onclick="option9()"><label
+										style="cursor: pointer;">6</label>天</option>
+								<option class="wd-new-option5" onclick="option0()"><label
+										style="cursor: pointer;">7</label>天</option>
+								<input class="wd-new-shuru-input" maxlength="2" type="text" placeholder="天数">
+								<button class="wd-new-shuru-queding" onclick="newbutton()">确定</button>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- 审核人 -->
+					<div class="wd-new-Reviewman" style="float: right;display:inline;">
+						<!-- 审核人 -->
+						<div>
+							审核人：
+						</div>
+						<!-- 审核人姓名 -->
+						<div>
+							<select class="wd-new-Reviewman-select" name="checker_id"  style="cursor: pointer;">
+								<option class="wd-new-Reviewman-opt" selecte="selected">选择审核人</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 任务检查项 -->
+			<div class="wd-new-task">
+				<!-- 任务检查项字 -->
+				<div class="wd-new-task-check-font" style="cursor: default;">
+					<div>• 任务检查项</div>
+				</div>
+				<!-- 后台升级项目 -->
+				<div class="wd-new-Backstage-update">
+					<!-- js添加项目id和名称 -->
+				</div>
+			</div>
+			<!-- 任务考核 -->
+
+			<!-- 创新检查项 -->
+			<div>
+				<!-- 创新检查字 -->
+				<div class="wd-new-update" style="cursor: default;">
+					<div>• 创新检查项</div>
+				</div>
+				<!-- 创新检查填写 -->
+				<div class="wd-new-update-text">
+					<textarea name="check_note" placeholder="内容概要"></textarea>
+				</div>
+			</div>
+			<!-- 分享检查项 -->
+			<div>
+				<!-- 分享检查项 字 -->
+				<div class="wd-new-share" style="cursor: default;">
+					<div>• 分享检查项</div>
+				</div>
+				<!-- 分享检查项日期 -->
+				<div>
+					<!-- 分享主题 -->
+					<div class="wd-new-share-theme">
+						<input type="text" name="subject" placeholder="分享的主题...">
+						<input type="text" name="participation" placeholder="实际参与人数">
+						<input id="datatime" name="date" class="wd-new-share-theme-date" autocomplete="off" type="text"
+							placeholder="请选择分享日期">
+					</div>
+				</div>
+				<!-- 分享检查项填写 -->
+				<div class="wd-new-share-text">
+					<textarea name="check_note" placeholder="内容概要"></textarea>
+				</div>
+			</div>
+			<!-- 报告附言 -->
+			<div>
+				<!-- 报告人附言 -->
+				<div class="wd-new-postscript" style="cursor: default;">
+					<div>• 报告人附言</div>
+				</div>
+				<!-- 报告人填写 -->
+				<div class="wd-new-postscript-text">
+					<textarea name="reporter_postscript" placeholder="意见、建议等"></textarea>
+				</div>
+			</div>
+			<!-- 预览 -->
+
+			<div style="text-align: center">
+				<div class="wd-new-Preview">
+					<input class="wd-Previews" type="submit" value="预览" onclick="previews()">
+					<input type="submit" value="保存" onclick="save()">
+					<button class="wd-perviews-return" onclick="retrun_previews()">取消</button>
+				</div>
+			</div>
+			<!-- 撑开 -->
+			<div>
+				<div class="wd-new-cheng"></div>
+			</div>
+			<div id="performance_tmp">
+				<i class="task_tt"></i>
+			</div>
+		</div>
+	</form>
+	<script>
+		//数据存储
+		let aee = JSON.parse(localStorage.getItem('userLogin'));
+		var ugid = aee.ugid;
+		// 保存有数据则显示下
+		var old_performance = '{{.old_performance}}'
+		// 如果保存有数据则显示下
+		if (old_performance != '') {
+			var checker = [];//审核人id
+			var save_old = decodeURIComponent(old_performance)
+			var save_obj = JSON.parse(save_old)// 类型转换
+			var old_check_start_date = save_obj.check_start_date;
+			var old_check_end_date = save_obj.check_end_date;
+			var old_checker_id = save_obj.checker_id;
+			var old_innovate_content = save_obj.innovate_content;
+			var old_reporter_postscript = save_obj.reporter_postscript;
+			var old_share_content = save_obj.share_content;
+			var old_work_day_num = save_obj.work_day_num;
+			var old_reporter_id = save_obj.reporter_id;
+			checker.push(old_checker_id)//数组添加id
+
+			$('.wd-new-work-days').val(old_work_day_num)
+			// 鼠标移入移出的干活
+			mousedeyong(old_work_day_num)
+			// 创新的类型转换
+			var inn = decodeURIComponent(old_innovate_content);
+			var inn_tmp = JSON.parse(inn)
+			//分享的类型转换
+			if (decodeURIComponent(old_share_content).length > 59) {
+				var share = decodeURIComponent(old_share_content);
+				var share_tmp = JSON.parse(share)
+				$('input[name="subject"]').val(decodeURIComponent(share_tmp.subject)) //分享主题时间
+				$('input[name="participation"]').val(decodeURIComponent(share_tmp.participation)) //实际参加人数
+				$('input[name="date"]').val(decodeURIComponent(share_tmp.date)) //实际参加时间
+				$('.wd-new-share-text textarea[name="check_note"]').val(decodeURIComponent(share_tmp.check_note)) //分享的内容概要
+			} else {
+				$('input[name="subject"]').val('') //分享主题时间
+				$('input[name="participation"]').val('') //实际参加人数
+				$('input[name="date"]').val('') //实际参加时间
+				$('.wd-new-share-text textarea[name="check_note"]').val('') //分享的内容概要
+			}
+			//报告人附言
+			var reporter = decodeURIComponent(decodeURIComponent(old_reporter_postscript));
+			// 为保存状态下为文本框添加数据
+			$('input[name="check_start_date"]').val(old_check_start_date) //开始时间
+			$('input[name="check_end_date"]').val(old_check_end_date) //结束时间
+			$('.wd-new-update-text textarea[name="check_note"]').val(decodeURIComponent(inn_tmp.check_note)) //结束时间
+			$('textarea[name="reporter_postscript"]').val(reporter) //报告人附言
+			// oldstartend() 
+
+			//循环任务下
+			var url = '{{.task}}';
+			// console.log(url)
+			var encodedUrl = decodeURIComponent(url);
+			var tmp = JSON.parse(encodedUrl);
+			// console.log(tmp)
+			// 开始遍历
+			// 判断数据是否为空，不为空则进行下一步
+			if (tmp != '') {
+				for (var i = 0; i < tmp.length; i++) {
+					// 打印出所有数据，开始遍历
+
+					// 项目的id和名称
+					let id = tmp[i].Id;
+					let Name = tmp[i].Name;
+					// 添加项目id和名称
+					// 当名称里有空格时需要替换掉成空格并重新定义项目名称
+					let name = Name.replace(/\+/g, ' ')
+					// 遍历添加项目的id和名称
+					$('.wd-new-Backstage-update').append('<div id="wd-new-div-alll' + i + '"><div class="wd-new-Backstage" style="cursor: default;" id="wd-new-Backstage' + i + '">' +
+						'<input type="hidden" value="' + id + '">' + '<input id="wd_new_div_title' + i + '" type="hidden" value="">' + '<div class="wd-new-Backstage-name">' + decodeURIComponent(name) + '</div></div></div>')
+					// 定义项目中的任务
+					let Task = tmp[i].Task;
+					// 遍历任务
+					for (k = 0; k < Task.length; k++) {
+						// console.log(Task[k])
+						for (t = 0; t < Task[k].length; t++) {
+							// console.log(Task[k][t])
+						}
+						// 定义任务中的字段
+						let Add_time = Task[k].Add_time;
+						let End_time = Task[k].End_time;
+						let Expect_end_time = Task[k].Expect_end_time;
+						let Head_user_id = Task[k].Head_user_id;
+						let task_Id = Task[k].Id;
+						let task_name = Task[k].Name.replace(/\+/g, '%20');
+						let task_note = decodeURI(Task[k].Note.replace(/\+/g, '%20'));
+						let Start_time = Task[k].Start_time;
+						let task_state = Task[k].State;
+						let Tag = Task[k].Tag.replace(/\+/g, '%20');
+						// 标签根据（，）切割
+						let task_Tag = decodeURIComponent(Tag);
+						let tag = task_Tag.split(',')
+						// console.log(tag)
+						let new_task_tag = '';
+						// 判断如果标签为空，则不显示
+						if (tag != '') {
+							for (r = 0; r < tag.length; r++) {
+								let newtag = tag[r].replace(/\+/g, '%20')
+								if (newtag == '<BUG>') {
+									new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#df7d7d;">' + htmlspecialchars(newtag) + '</div>'
+								} else if (newtag == '<延迟>') {
+									new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#B8860B;">' + htmlspecialchars(newtag) + '</div>'
+								}
+								else {
+									new_task_tag += '<div class="wd-view-bugger"  style="margin-left: 3px;background-color:rgb(135, 138, 236);">' + newtag + '</div>'
+								}
+							}
+						} else {
+							new_task_tag += ''
+						}
+						// 切割添加时间和结束时间
+						let add_time = Add_time.split('+');
+						let end_time = End_time.split('+');
+
+						if (task_state == '1' || task_state == '2') {
+							end_time[0] = Expect_end_time.split('+')[0];
+						}else{
+							if (end_time[0] == '0000-00-00') {
+								end_time[0] = Expect_end_time.split('+')[0];
+							}
+						}
+						//子任务的遍历
+						let subTask = Task[k].Sub;
+						// console.log(subTask)
+						// wd-new-Backstage-update中添加任务
+						$('#wd-new-div-alll' + i).append('<div class="wd-new-task-all" id="wd-new-task-all' + k + i + '"><div class="wd-new-task-task">' +
+							'<div class="wd-new-task-task-show" id="wd-new-task-task-show' + k + i + '" style="float: left;"><div style="float: left;">' +
+							// 任务的勾选框
+							'<input style="position: relative;right: 5px;" id="wd-new-cbx-all' + k + i + '" class="wd_new_cbx_all_input" value="" type="checkbox" name=""></div>' +
+							'<input id="wd-new-cbx-all"  type="hidden"  value="' + decodeURIComponent(task_Id) + '">' +
+							'<div style="float: left;"><label for="wd-new-cbx-all' + k + i + '" ><img style="cursor: pointer;" src="/img/u537.png"></label></div>' +
+							'<div class="wd-new-task-task-wrap" style="float: left;">' +
+							'<div class="wd-new-task-task-name">' +
+							// 任务名称
+							'<div>' + parsing(decodeURIComponent(task_name)) + '</div></div><div><img style="cursor: pointer;" class="wd-new-task_note' + k + i + '" title="' + decodeURIComponent(task_note) + '" src="/img/Remarks.png"></div>' +
+							'<div class="wd-new-task-task-tag">' + new_task_tag + '</div>' +
+							// 添加时间到结束时间
+							'<div class="wd-new-task-task-date"><div>' + decodeURIComponent(add_time[0]) + '~' + decodeURIComponent(end_time[0]) + '</div>' +
+							'<div id="wd-new-old-all' + i + k + '" style="display:none;">' + '(' + decodeURIComponent(name) + ')' + '</div>' +
+							'</div></div>' +
+							'</div>' +
+							// <!-- 子任务的显示 -->
+							'<div class="wd-new-sub" id="wd-new-sub' + k + i + '">' +
+							'</div>' +
+							'</div>')
+						// 根据任务的状态进行判断
+						taskstate(task_state, k, i)
+						newtitlenote(decodeURIComponent(task_note), k, i)
+
+
+						// 判断子任务如果为空
+						if (subTask != null) {
+							for (j = 0; j < subTask.length; j++) {
+								let sub_Add_time = subTask[j].Add_time;
+								let sub_Check_note = subTask[j].Check_note.replace(/\+/g, '%20');
+								let sub_Content = subTask[j].Content.replace(/\+/g, '%20');
+								let sub_End_time = subTask[j].End_time;
+								let sub_Expect_end_time = subTask[j].Expect_end_time;
+								let sub_Id = subTask[j].Id;
+								let sub_Start_time = subTask[j].Start_time;
+								let sub_State = subTask[j].State;
+								let sub_performance_id = subTask[j].Performance_id;
+								// 对时间的切割
+								let sub_start_time = decodeURIComponent(sub_Start_time.split('+')[0]);
+								let sub_end_time = decodeURIComponent(sub_End_time.split('+')[0]);
+								// console.log(subTask[j])
+								// 开始时间减结束时间相差几天
+								// var days = daybetween(sub_start_time, sub_end_time);
+								// 添加子任务
+
+								var days = daybetween(sub_start_time, sub_end_time);
+
+								if (sub_start_time == '0000-00-00') {
+									days = '未知';
+								} else {
+									days = days + '天'
+								}
+								$('#wd-new-sub' + k + i).prepend('<div id="wd-new-sub-task' + i + k + j + '" class="wd-new-sub-task">' +
+									// 子任务的ID
+									// '<input type="hidden" name="task_sub_id" value="'+sub_Id+'">'+
+									// <!-- 子任务的勾选框 -->
+									'<div style="float: left;">' +
+									'<input id="wd-new-sub-cbx' + i + k + j + '" class="wd-new-sub-cbx" type="checkbox" name="task_sub_id" value="' + sub_Id + '">' +
+									'<input type="hidden" class="wd-new-sub-hidden" id="wd-new-sub-hidden' + i + k + j + '" value="">' +
+									'</div>' +
+									// 子任务的预览
+
+									// <!-- 为了好看的 -->
+									'<div style="float: left;cursor: pointer;"><label for="wd-new-sub-cbx' + i + k + j + '"><img src="/img/u545.png"></label></div>' +
+									// <!-- 子任务的换行 -->
+									'<div class="wd-new-sub-task-wrap" style="float: left;width: 86%;cursor: default;">' +
+									// <!-- 子任务的名称 -->
+									'<div class="wd-new-sub-task-name">' +
+									'<div>' + decodeURIComponent(sub_Content) + '</div>' +
+									'</div>' +
+									// <!-- 子任务的时间 -->
+									'<div class="wd-new-sub-task-date">' + '(' + days + ')' + '</div></div>' +
+									// <!-- 评论框 -->
+									'<div class="wd-new-sub-task-textarea"><textarea id="wd-new-sub-task-textarea' + k + i + j + '" placeholder="考核备注" name="check_note" >' + sign(decodeURI(sub_Check_note)) + '</textarea></div>' +
+									'</div></div>')
+								// 遍历子任务
+								new_task_yulan(k, i, j, subTask)
+								erformance_id(sub_performance_id, k, i, j)
+								// checkedsub_hide(k, i, j)
+								allchecked(k, i, j)
+							}
+						}
+					}
+					// 如果为空则弹出提示框
+				}
+
+			} else {
+				$('.wd-new-Backstage-update').html('<div class="wd-new-task-shenhe">空空如也~~<div>')
+			}
+		}
+		// 如果为空则数据显示空 
+		else {
+			//循环任务下
+			// newendstart()
+			var url = '{{.task}}';
+			var encodedUrl = decodeURIComponent(url);
+			let tmp = JSON.parse(encodedUrl)
+			console.log(tmp)
+			// 开始遍历
+			// 判断数据是否为空，不为空则进行下一步
+			if (tmp != '') {
+				for (var i = 0; i < tmp.length; i++) {
+					// 打印出所有数据，开始遍历
+					// 项目的id和名称
+					let id = tmp[i].Id;
+					let Name = tmp[i].Name;
+					// 添加项目id和名称
+					// 当名称里有空格时需要替换掉成空格并重新定义项目名称
+					let name = Name.replace(/\+/g, ' ')
+					// 遍历添加项目的id和名称
+					$('.wd-new-Backstage-update').append('<div id="wd-new-div-alll' + i + '"><div class="wd-new-Backstage" style="cursor: default;" id="wd-new-Backstage' + i + '">' +
+						'<input type="hidden" value="' + id + '">' + '<input id="wd_new_div_title' + i + '" type="hidden" value="">' + '<div class="wd-new-Backstage-name">' + decodeURIComponent(name) + '</div></div></div>')
+					// 定义项目中的任务
+					let Task = tmp[i].Task;
+					// 遍历任务
+					for (k = 0; k < Task.length; k++) {
+						// console.log(Task[k])
+						// 定义任务中的字段
+						let Add_time = Task[k].Add_time;
+						let End_time = Task[k].End_time;
+						let Expect_end_time = Task[k].Expect_end_time;
+						let Head_user_id = Task[k].Head_user_id;
+						let task_Id = Task[k].Id;
+						let task_name = Task[k].Name.replace(/\+/g, '%20');
+						let task_note = Task[k].Note.replace(/\+/g, '%20');
+						let Start_time = Task[k].Start_time;
+						let task_state = Task[k].State;
+
+						let Tag = Task[k].Tag;
+						// 标签根据（，）切割
+						let task_Tag = decodeURIComponent(Tag);
+						let tag = task_Tag.split(',')
+						// console.log(tag)
+						let new_task_tag = '';
+						// 判断如果标签为空，则不显示
+						if (tag != '') {
+							for (r = 0; r < tag.length; r++) {
+								let newtag = tag[r].replace(/\+/g, '%20')
+								if (newtag == '<BUG>') {
+									new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#df7d7d;">' + htmlspecialchars(newtag) + '</div>'
+								} else if (newtag == '<延迟>') {
+									new_task_tag += '<div  class="wd-view-bugger" style="margin-left: 3px; background-color:#B8860B;">' + htmlspecialchars(newtag) + '</div>'
+								}
+								else {
+									new_task_tag += '<div class="wd-view-bugger"  style="margin-left: 3px;background-color:rgb(135, 138, 236);">' + newtag + '</div>'
+								}
+							}
+						} else {
+							new_task_tag += ''
+						}
+						// 切割添加时间和结束时间
+						let add_time = Add_time.split('+');
+						let end_time = End_time.split('+');
+
+						if (task_state == '1' || task_state == '2') {
+							end_time[0] = Expect_end_time.split('+')[0];
+						}else{
+							if (end_time[0] == '0000-00-00') {
+								end_time[0] = Expect_end_time.split('+')[0];
+							}
+						}
+
+
+						//子任务的遍历
+						let subTask = Task[k].Sub;
+						// console.log(subTask)
+						// wd-new-Backstage-update中添加任务
+						$('#wd-new-div-alll' + i).append('<div class="wd-new-task-all"  id="wd-new-task-all' + k + i + '"><div class="wd-new-task-task">' +
+							'<div class="wd-new-task-task-show" style="float: left;"><div style="float: left;">' +
+							// 任务的勾选框
+							'<input id="wd-new-cbx-all' + k + i + '" value="0" type="checkbox" name=""></div>' +
+							'<input id="wd-new-cbx-all" class="wd_new_cbx_all_input" type="hidden"  value="' + decodeURIComponent(task_Id) + '">' +
+							'<div style="float: left;"><label for="wd-new-cbx-all' + k + i + '"><img style="cursor: pointer;" src="/img/u537.png"></label></div>' +
+							'<div class="wd-new-task-task-wrap" style="float: left;">' +
+							'<div class="wd-new-task-task-name">' +
+							// 任务名称
+							'<div>' + parsing(decodeURIComponent(task_name)) + '</div></div><div><img class="wd-new-task_note' + k + i + '" title="' + decodeURIComponent(task_note) + '" src="/img/Remarks.png"></div>' +
+							'<div class="wd-new-task-task-tag">' + new_task_tag + '</div>' +
+							// 添加时间到结束时间
+							'<div class="wd-new-task-task-date"><div>' + add_time[0] + '~' + end_time[0] + '</div>' +
+							'<div id="wd-new-old-all' + i + k + '" style="display:none;">' + '(' + decodeURIComponent(name) + ')' + '</div>' +
+							'</div></div></div>' +
+							// <!-- 子任务的显示 -->
+							'<div class="wd-new-sub" id="wd-new-sub' + k + i + '">' +
+							'</div>' +
+							'</div>')
+						// 根据任务的状态进行判断
+						taskstate(task_state, k, i)
+						// titlenote(decodeURIComponent(task_note), k, i)
+						// 遍历子任务
+						// 判断子任务如果为空
+						if (subTask != null) {
+							for (j = 0; j < subTask.length; j++) {
+								// console.log(subTask[j])
+								let sub_Add_time = subTask[j].Add_time;
+								let sub_Check_note = subTask[j].Check_note.replace(/\+/g, '%20');
+								let sub_Content = subTask[j].Content.replace(/\+/g, '%20');
+								let sub_End_time = subTask[j].End_time;
+								let sub_Expect_end_time = subTask[j].Expect_end_time;
+								let sub_Id = subTask[j].Id;
+								let sub_Start_time = subTask[j].Start_time;
+								let sub_State = subTask[j].State;
+								let sub_performance_id = subTask[j].Performance_id;
+								// 对时间的切割
+								let sub_start_time = decodeURIComponent(sub_Start_time.split('+')[0]);
+								let sub_end_time = decodeURIComponent(sub_End_time.split('+')[0]);
+								// 开始时间减结束时间相差几天
+								var days = daybetween(sub_start_time, sub_end_time);
+								if (sub_start_time == '0000-00-00') {
+									days = '未知';
+								} else {
+									days = days + '天'
+								}
+								// 添加子任务
+								$('#wd-new-sub' + k + i).prepend('<div id="wd-new-sub-task' + i + k + j + '"  class="wd-new-sub-task" value="0">' +
+									// 子任务的ID
+									// '<input type="hidden" name="task_sub_id" value="'+sub_Id+'">'+
+									// <!-- 子任务的勾选框 -->
+									'<div style="float: left;">' +
+									'<input id="wd-new-sub-cbx' + i + k + j + '" class="wd-new-sub-cbx" type="checkbox" name="task_sub_id" value="' + sub_Id + '">' +
+									'<input type="hidden" class="wd-new-sub-hidden" id="wd-new-sub-hidden' + i + k + j + '" value="0">' +
+									'</div>' +
+									// <!-- 为了好看的 -->
+									'<div style="float: left;cursor: pointer;"><label for="wd-new-sub-cbx' + i + k + j + '" style=""><img src="/img/u545.png"></label></div>' +
+									// <!-- 子任务的换行 -->
+									'<div class="wd-new-sub-task-wrap" style="float: left;width: 86%;cursor: default;">' +
+									// <!-- 子任务的名称 -->
+									'<div class="wd-new-sub-task-name">' +
+									'<div>' + decodeURIComponent(sub_Content) + '</div>' +
+									'</div>' +
+									// <!-- 子任务的时间 -->
+									'<div class="wd-new-sub-task-date">' + '(' + days + ')' + '</div></div>' +
+									// <!-- 评论框 -->
+									'<div class="wd-new-sub-task-textarea"><textarea placeholder="考核备注" name="check_note" ></textarea></div>' +
+									'</div></div>')
+								erformance_id(sub_performance_id, k, i, j)
+								// checkedsub_hide(k, i, j)
+								allchecked(k, i, j)
+								//实现checkbox全选
+								let all_tmp = $('#wd-new-cbx-all' + k + i);
+								let son_tmp = $('#wd-new-sub-cbx' + i + k + j);
+								all_tmp.click(function () {
+									if (this.checked) {
+										$(son_tmp).prop('checked', true)
+									} else {
+										$(son_tmp).prop('checked', false)
+									}
+								})
+							}
+						}
+					}
+					// 如果为空则弹出提示框
+				}
+			} else {
+				$('.wd-new-Backstage-update').html('<div class="wd-new-task-shenhe">空空如也~~<div>')
+			}
+		}
+		$(document).ready(function () {
+			//数据存储
+			let aee = JSON.parse(localStorage.getItem('userLogin'));
+			var ugid = aee.ugid;
+			let na = decodeURIComponent(aee.name);
+			let nname = na.replace(/\+/g, '')
+			var result = nname.replace(/(^\s+)|(\s+$)/g, "");//去掉前后空格
+			// $('.wd-new-reportman-people').html(result);
+			// 所有人接口
+			$.get('/member/all', function (data, status) {
+				// 定义数据变量
+				let member_data = data.data;
+				// 为数据增加下标
+				var pdata = member_data.map(item => {
+					let itemKey = Object.keys(item)[0];//注释
+					return {
+						gid: itemKey,
+						name: item[itemKey]
+					}
+				})
+
+				var strong = [];
+				var memper = [];
+				// console.log(memper)
+				var mmmeee = [];
+
+				// 循环数据
+				for (i = 0; i < pdata.length; i++) {
+					// 将所有人增加入审核人中
+					let shenhen_name = decodeURIComponent(pdata[i].name);
+					let shenhe = shenhen_name.replace(/\+/g, '');
+
+					if (old_performance != '') {
+						memper.push(shenhe);
+						if (old_reporter_id == pdata[i].gid) {
+							$('.wd-new-reportman-people').html(decodeURIComponent(pdata[i].name));
+							// console.log(decodeURIComponent(pdata[i].name))
+							strong.push(decodeURIComponent(pdata[i].name));
+						}
+					} else {
+						memper.push(shenhe);
+						if (ugid == pdata[i].gid) {
+							$('.wd-new-reportman-people').html(decodeURIComponent(pdata[i].name));
+							strong.push(decodeURIComponent(pdata[i].name));
+						}
+					}
+					// 判断id相同则显示
+				}
+				//对比中将报告人与审核人接口数据对比，重复的去掉
+				for (var i = 0; i < memper.length; i++) {
+					for (k in strong) {
+						if (memper[i] != strong[k]) {
+							if (old_performance != '') {
+								// 定义id
+								// console.log(strong[k])
+								var cid = JSON.stringify(checker)
+								var temp_cid = cid.replace(/\"/g, '')
+								var obj_cid = temp_cid.replace(/\[/g, '')
+								var str_cid = obj_cid.replace(/\]/g, '')
+								$('.wd-new-Reviewman-opt').remove();
+								// 当数据和接口的id不匹配时添加其他的除数据之外的数据
+								if (str_cid != pdata[i].gid) {
+									$('.wd-new-Reviewman-select').append('<option value="' + pdata[i].gid + '">' + memper[i] + '</option>')
+									// console.log(memper[i])
+								}
+								// 相等时将数据添加
+								if (str_cid == pdata[i].gid) {
+									$('.wd-new-Reviewman-select').append('<option selected="selected" value="' + str_cid + '">' + memper[i] + '</option>')
+								}
+							} else {
+								// console.log(memper[i])
+								$('.wd-new-Reviewman-select').append('<option value="' + pdata[i].gid + '">' + memper[i] + '</option>')
+							}
+						}
+					}
+				}
+			})
+		})
+
+	</script>
+	<script>
+		// 框架在本页面，私有
+		laydate.render({
+			elem: '#c11'
+			, mark: {
+				'0-01-01': '元旦'
+			}
+			, done: function (value, date, endDate) {
+				$('.timestde1').val(value)
+				let time1 = $('#c10').val()
+				let time2 = $('#c11').val()
+				timebet1(time1, time2)
+				$('.laydate-day-mark').css({
+					'line-height': '23px',
+					'font-size': '9px'
+				})
+			}
+		});
+		laydate.render({
+			elem: '#c10'
+			, mark: {
+				'0-01-01': '元旦'
+			}
+			, done: function (value, date, endDate) {
+				$('.timestde2').val(value)
+				let time1 = $('#c10').val()
+				let time2 = $('#c11').val()
+				timebet2(time1, time2)
+				$('.laydate-day-mark').css({
+					'line-height': '23px',
+					'font-size': '9px'
+				})
+			}
+		});
+		laydate.render({
+			elem: '#datatime'
+		});
+
+		$(document).ready(function () {
+			hreff()
+		});
+		function hreff() {
+			let href = window.location.href;
+			// console.log(href)
+			let text = href.split('/')
+			let windo = text[0] + '//' + text[2] + '/' + text[3] + '/' + text[4];
+			let win = text[0] + '//' + text[2] + '/';
+			let houmain = text[3] + '/' + text[4];
+			if (houmain == houmain) {
+				$('#index_1_7 a').css('color', 'black')
+				$('#index_1_7 a').css('font-weight', 'bold')
+			} else {
+			}
+		}
+	</script>
+</body>
