@@ -85,8 +85,11 @@
 <script src="/js/layui/layui.js"></script>
 <script src="/js/vue.js"></script>
 <script src="/js/node_modules/axios/dist/axios.js"></script>
-<script>
+<script src="/js/node_modules/axios/dist/axios.init.js"></script>
+<script src="/js/qs/dist/qs.js"></script>
 
+<script>
+// import qs from 'qs'
     var login1 = new Vue({
         delimiters: ['${', '}'],
         el: '#lapp',
@@ -125,7 +128,14 @@
             },
 
             login: function () {
-                axios.post('/login/check', this.add)
+          
+                var par = window.Qs.stringify({
+                    mail: this.add.mail,
+                    passwd: this.add.passwd,
+                    is_auto:this.add.is_auto
+                })
+
+                axios.post('/login/check',par)
                     .then((res) => {
                        console.log(res)
                     })
