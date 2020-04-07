@@ -27,8 +27,8 @@
                             style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">邮箱</label>
 
                         <div class="layui-input-block layui-margin-zero">
-                            <input type="text" name="mail" v-on:focus="focus_mail" v-on:blur="mailname"
-                                placeholder="请输入标题" autocomplete="off" class="layui-input" v-model="add.mail">
+                            <input type="text" name="mail"
+                                placeholder="请输入邮箱" autocomplete="off" class="layui-input" v-model="add.mail">
                         </div>
                         <span class="login_tips">${mailtips}</span>
                     </div>
@@ -38,7 +38,7 @@
                             style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">密码</label>
                         <div class="layui-input-block layui-margin-zero">
                             <input type="password" name="passwd" placeholder="请输入密码" autocomplete="off"
-                                v-on:blur="pwdname" v-on:focus="focus_pwd" class="layui-input" v-model="add.passwd">
+                               class="layui-input" v-model="add.passwd">
                         </div>
                         <span class="login_tips">${passwdtips}</span>
                     </div>
@@ -87,6 +87,8 @@
 <script src="/js/node_modules/axios/dist/axios.js"></script>
 <script src="/js/node_modules/axios/dist/axios.init.js"></script>
 <script src="/js/qs/dist/qs.js"></script>
+<!-- <script src="/js/layui/lay/modules/layer.js"></script> -->
+
 
 <script>
 // import qs from 'qs'
@@ -106,29 +108,7 @@
             }
         },
         methods: {
-            // 验证邮箱
-            mailname: function () {
-                if (this.add.mail == "") {
-                    this.mailtips = '*邮箱不能为空'
-                } else if (!(/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.add.mail))) {
-                    this.mailtips = '*邮箱格式不正确'
-                }
-            },
-            focus_mail: function () {
-                this.mailtips = ''
-            },
-            // 验证密码
-            pwdname: function () {
-                if (this.add.passwd == "") {
-                    this.passwdtips = '*密码不能为空'
-                }
-            },
-            focus_pwd: function () {
-                this.passwdtips = ''
-            },
-
             login: function () {
-          
                 var par = window.Qs.stringify({
                     mail: this.add.mail,
                     passwd: this.add.passwd,
@@ -137,7 +117,12 @@
 
                 axios.post('/login/check',par)
                     .then((res) => {
-                       console.log(res)
+                       if(res.data.state == '0'){
+                        layer.msg(res.data.msg,{icon: 5});
+                       }else{
+                        layer.msg(res.data.msg,{icon: 1});
+                        window.location.href = "/project/list";
+                       }
                     })
             },
             is_uto: function () {
@@ -145,7 +130,10 @@
             }
         },
     })
+    layui.use('layer', function(){
+        var layer = layui.layer;
 
+}); 
 
 </script>
 
