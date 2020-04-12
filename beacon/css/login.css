@@ -52,7 +52,13 @@ body{
 /* tips */
 .login_tips{
     position: absolute;
-    color: #009688;
+    color: red;
     font-size: 10px;
-    padding-left: 1px;
+    padding-left: 10px;
+}
+.login_color{
+    border: 1px solid red;
+}
+.login_color_pwd{
+    border: 1px solid red;
 }

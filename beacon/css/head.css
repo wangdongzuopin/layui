@@ -1,0 +1,38 @@
+.nav_bar_u1{
+    display: flex;
+    align-items: center;
+}
+.nav li a{
+    color: white;
+}
+.nav_active{
+    border-bottom: 2px solid #2db5a3;
+}
+.nav_active a{
+    color: #000000 !important;
+    border-bottom: 2px solid #2db5a3;
+}
+.nav li a:hover{
+    color: #000000 !important;
+}
+.navbar-header button{
+    color: white;
+    border: 1px solid;
+}
+.navbar-header button span{
+    color: white;
+    border: 1px solid;
+}
+
+
+/* 首页 */
+.container{
+    min-height: 500px;
+    background-color: rgba(255, 255, 255, 0.932);
+    border-radius: 5px;
+    width: 95%;
+}
+.list_main{
+    min-height: 70px;
+    border-bottom: 1px solid #aaa;
+}

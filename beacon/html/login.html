@@ -24,23 +24,28 @@
                     <!-- 邮箱 -->
                     <div class="layui-form-item" style="padding-bottom: 10px;">
                         <label class="layui-form-label"
-                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">邮箱</label>
+                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">邮箱
+                            <span class="login_tips">${mailtips}</span>
+                        </label>
 
                         <div class="layui-input-block layui-margin-zero">
-                            <input type="text" name="mail"
-                                placeholder="请输入邮箱" autocomplete="off" class="layui-input" v-model="add.mail">
+                            <input type="text" :class="{login_color:clo}" name="mail" ref="mail" @focus="maildey"
+                                @blur="mailkey" placeholder="请输入邮箱" autocomplete="off" class="layui-input"
+                                v-model="add.mail">
                         </div>
-                        <span class="login_tips">${mailtips}</span>
+
                     </div>
                     <!-- 密码 -->
                     <div class="layui-form-item" style="padding-bottom: 10px;margin-bottom: 0;">
                         <label class="layui-form-label"
-                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">密码</label>
+                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">密码
+                            <span class="login_tips">${passwdtips}</span>
+                        </label>
                         <div class="layui-input-block layui-margin-zero">
-                            <input type="password" name="passwd" placeholder="请输入密码" autocomplete="off"
-                               class="layui-input" v-model="add.passwd">
+                            <input type="password" :class="{login_color_pwd:copwd}" ref="pwd" @focus="pwddkey"
+                                @blur="pwdkey" name="passwd" placeholder="请输入密码" autocomplete="off" class="layui-input"
+                                v-model="add.passwd">
                         </div>
-                        <span class="login_tips">${passwdtips}</span>
                     </div>
                     <!-- 两功能 -->
                     <div style="display: flex;justify-content: space-between;">
@@ -65,8 +70,8 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block layui-margin-zero">
                             <!-- <button style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo"></button> -->
-                            <input type="submit" value="登 录" @click="login" style="width: 100%;font-size: 17px;"
-                                class="layui-btn" lay-submit lay-filter="formDemo">
+                            <input type="submit" v-bind:value="logintext" @click="login"
+                                style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo">
                         </div>
                     </div>
                     <!-- 注册链接 -->
@@ -91,7 +96,6 @@
 
 
 <script>
-// import qs from 'qs'
     var login1 = new Vue({
         delimiters: ['${', '}'],
         el: '#lapp',
@@ -104,7 +108,10 @@
                     is_auto: true
                 },
                 mailtips: '',
-                passwdtips: ''
+                passwdtips: '',
+                clo: false,
+                copwd: false,
+                logintext: '登 录'
             }
         },
         methods: {
@@ -112,29 +119,74 @@
                 var par = window.Qs.stringify({
                     mail: this.add.mail,
                     passwd: this.add.passwd,
-                    is_auto:this.add.is_auto
+                    is_auto: this.add.is_auto
                 })
+                axios.interceptors.request.use((config) => {
+                    // 在发送请求之前做些什么
+                    this.logintext = '正在登录...'
+                    // this.isShow = true
+                    return config;
+                }, function (error) {
+                    // 对请求错误做些什么
+                    this.logintext = ''
+                    return Promise.reject(error);
+                });
 
-                axios.post('/login/check',par)
+                axios.post('/login/check', par)
                     .then((res) => {
-                       if(res.data.state == '0'){
-                        layer.msg(res.data.msg,{icon: 5});
-                       }else{
-                        layer.msg(res.data.msg,{icon: 1});
-                        window.location.href = "/project/list";
-                       }
+                        if (res.data.state == '0') {
+                            layer.msg(res.data.msg, {
+                                icon: 5
+                            });
+                            this.logintext = '登 录'
+                        } else {
+                            layer.msg(res.data.msg, {
+                                icon: 1
+                            });
+                            this.logintext = '正在登录...'
+                            window.location.href = "/project/list";
+                            // localStorage本地存储
+                            let user = JSON.stringify(res.data);
+                            localStorage.setItem('user',user);
+                        }
                     })
             },
             is_uto: function () {
                 this.add.is_auto = !this.add.is_auto
+            },
+            mailkey: function () {
+                if (this.$refs.mail.value == "" || !(
+                        /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.$refs.mail
+                            .value))) {
+                    this.mailtips = '*邮箱格式不正确'
+                    this.clo = true
+                } else {
+                    this.mailtips = ''
+                    this.clo = false
+                }
+            },
+            maildey: function () {
+                this.mailtips = ''
+            },
+            // 密码
+            pwdkey: function () {
+                if (this.$refs.pwd.value == "") {
+                    this.passwdtips = '*密码不正确'
+                    this.copwd = true
+                } else {
+                    this.passwdtips = ''
+                    this.copwd = false
+                }
+            },
+            pwddkey: function () {
+                this.passwdtips = ''
             }
         },
     })
-    layui.use('layer', function(){
+    layui.use('layer', function () {
         var layer = layui.layer;
 
-}); 
-
+    });
 </script>
 
 </html>
