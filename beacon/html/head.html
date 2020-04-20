@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <link rel="stylesheet" href="/js/bookstarp/node_modules/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/element/node_modules/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/js/layui/css/layui.css">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/head.css">
+
+    
 </head>
 <style>
     .nav>li>a:focus, .nav>li>a:hover{
@@ -16,7 +19,7 @@
 
 }
 </style>
-<body>
+
     <nav id="nav" class="navbar">
         <div class="container-fluid" style="width: 95%;">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,7 +44,11 @@
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="display: flex;align-items: center;">
+                    <li>
+    
+                        <el-link href="/project/add" :underline="false" type="_blank"><i class="el-icon-view el-icon--right"></i> 创建新的项目</el-link>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">登录 <span class="caret"></span></a>
@@ -58,17 +65,18 @@
     
     <script src="/js/layui/layui.js"></script>
     <script src="/js/vue.js"></script>
-    <script src="/js/head.js"></script>
+    <script src="/js/element/node_modules/element-ui/lib/index.js"></script>
     <script src="/js/node_modules/axios/dist/axios.js"></script>
     <script src="/js/node_modules/axios/dist/axios.init.js"></script>
     <script src="/js/qs/dist/qs.js"></script>
     <script src="/js/jquery/node_modules/dist/jquery.min.js"></script>
-
     <!-- <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script> -->
     <script src="/js/bookstarp/node_modules/dist/js/bootstrap.min.js"></script>
+    <script src="/js/head.js"></script>
     <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     {{end}}
     {{.}}
-</body>
+    
+
 
 </html>
