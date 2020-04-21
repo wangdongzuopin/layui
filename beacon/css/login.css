@@ -4,6 +4,7 @@ body{
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 .l1{
     position: absolute;
@@ -52,7 +53,13 @@ body{
 /* tips */
 .login_tips{
     position: absolute;
-    color: #009688;
+    color: red;
     font-size: 10px;
-    padding-left: 1px;
+    padding-left: 10px;
+}
+.login_color{
+    border: 1px solid red;
+}
+.login_color_pwd{
+    border: 1px solid red;
 }

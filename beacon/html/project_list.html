@@ -2,15 +2,133 @@
 <!DOCTYPE html>
 <html>
 
-
 <body>
-    <!--head-->
-
-
     {{ end }}
     {{ template "head"}}
-    <title>项目主页面 - beacon</title>
+    <title>项目</title>
+    <!-- {{.project_list}} -->
+    <!-- main -->
+    <div id="list" class="container">
+        <div class="list_main">
+            <div class="layui-tab layui-tab-card">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">项目</li>
+                    <li>已归档项目</li>
+                    <el-select v-model="value" @change="listTime" placeholder="请选择">
+                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
+                </ul>
+                <div class="layui-tab-content" style="background: white;min-height: 380px;">
+                    <div class="layui-tab-item layui-show">
+                        <div v-for="list in lists" :title="list.add_time.split(' ')[0]" @click="list_enter(list.gid)"
+                            class="listdad"><a>${list.name}${list.state}</a></div>
+                    </div>
+                    <div class="layui-tab-item">2</div>
+                </div>
+            </div>
 
+        </div>
+        <!-- 项目 -->
+        <div>
+
+        </div>
+    </div>
+
+    <div id="aa">
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+        <div style="margin: 15px 0;"></div>
+        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+            <el-checkbox v-for="city in cities" :label="city" :key="city">${city}</el-checkbox>
+        </el-checkbox-group>
+    </div>
 </body>
 
 </html>
+<script>
+    window.onload = function () {
+        new Vue({
+            delimiters: ['${', '}'],
+            el: '#list',
+            data: {
+                lists: [
+
+                ],
+                options: [{
+                        value: '正序',
+                        label: '正序'
+                    },
+                    {
+                        value: '倒序',
+                        label: '倒序'
+                    }
+                ],
+                value: '正序'
+            },
+            methods: {
+                list_enter: function (gid) {
+                    window.location.href = "/project/detail/" + gid
+                },
+                listTime: function () {
+                    this.lists.reverse()
+                }
+            },
+            mounted: function () {
+                layui.use('element', function () {
+                    var element = layui.element;
+                });
+                var listdata = '{{.project_list}}'
+                var listdata = JSON.parse(decodeURIComponent(listdata).replace(/\+/g, '%20'))
+                listdata.forEach(item => {
+                    var li = {};
+                    let [add_time, add_user_id, gid, name, note, state, type] = [item.add_time,
+                        item.add_user_id, item.gid,
+                        item.name, item.note, item.state, item.type
+                    ]
+                    li = {
+                        'add_time': decodeURIComponent(add_time),
+                        'add_user_id': decodeURIComponent(add_user_id),
+                        'gid': decodeURIComponent(gid),
+                        'name': decodeURIComponent(name),
+                        'note': decodeURIComponent(note),
+                        'state': decodeURIComponent(state),
+                        'type': decodeURIComponent(type)
+                    }
+                    this.lists.push(li)
+                });
+
+                // this.lists.name = decodeURIComponent(this.lists.name)
+
+
+            }
+        })
+    }
+</script>
+<script>
+    const cityOptions = ['上海', '北京', '广州', '深圳'];
+    var aaa = new Vue({
+        delimiters: ['${', '}'],
+                el: '#aa',
+                data() {
+                    return {
+                        checkAll: false,
+                        checkedCities: [],
+                        cities: cityOptions,
+                        isIndeterminate: false
+                    };
+                },
+                methods: {
+                    handleCheckAllChange(val) {
+                        console.log(val)
+                         console.log( this.checkedCities)
+                        this.checkedCities = val ? this.cities : [];
+                        this.isIndeterminate = false;
+                    },
+                    handleCheckedCitiesChange(value) {
+                        let checkedCount = value.length;
+                        this.checkAll = checkedCount === this.cities.length;
+                        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+                    }
+                }
+            });
+</script>

@@ -1,0 +1,119 @@
+.nav_bar_u1{
+    display: flex;
+    align-items: center;
+}
+.nav li a{
+    color: white;
+}
+.nav_active{
+    border-bottom: 2px solid #409eff;
+}
+.nav_active a{
+    color: #000000 !important;
+    border-bottom: 2px solid #409eff;
+}
+
+.navbar-header button{
+    color: white;
+    border: 1px solid;
+}
+.navbar-header button span{
+    color: white;
+    border: 1px solid;
+}
+
+
+/* 首页 */
+.container{
+    min-height: 500px;
+    /* background-color: rgba(255, 255, 255, 0.932); */
+    border-radius: 5px;
+    width: 95%;
+}
+.list_main{
+    min-height: 70px;
+    /* border-bottom: 1px solid #aaa; */
+}
+.list_main .el-tabs__content{
+    min-height: 400px;
+}
+.list_main .listdad a{
+    display: flex;
+    width: 90%;
+    /* border: 1px solid; */
+    height: 90%;
+    align-items: center;
+    justify-content: center;
+    background: #409eff;
+    white-space: normal;
+    word-break: break-all;
+    color: white;
+}
+.list_main .el-tab-pane{
+    display: flex;
+    flex-wrap: wrap;
+}
+.list_main .listdad{
+    width: 20%;
+    /* border: 1px solid; */
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    white-space: normal;
+    word-break: break-all;
+    cursor: pointer;
+    display: inline-flex;
+    min-width: 130px;
+}
+.list_main .el-select{position: absolute;right: 0;}
+.list_main .el-select input{
+    background-color: whitesmoke;
+    border: 0;
+    width: 100px;
+    text-align: center;
+}
+.nav .el-link--inner{border: 1px solid;padding: 5px;border-radius: 5px;}
+
+/* 添加项目 */
+.layuiAddform{
+    width: 90%;
+    /* height: 90%; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    margin: 0 auto;
+    padding-top: 30px;
+}
+/* 超小设备（手机，小于 768px） */
+/* Bootstrap 中默认情况下没有媒体查询 */
+
+/* 小型设备（平板电脑，768px 起） */
+@media screen and (max-width: 806px){
+    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);}
+    .nav li a{color: black;}
+    .nav li a:hover{color: #409eff;}
+ }
+
+/* 中型设备（台式电脑，992px 起） */
+@media screen and (max-width: 562px){
+    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);}
+    .nav li a{color: black;}
+    .nav li a:hover{color: #409eff;}
+}
+@media screen and (min-width: 806px){
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .nav li a{color: white;}
+    .nav li a:hover{color: #409eff;}
+
+}
+@media (min-width: 768px){
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .nav li a{color: white;}
+    .nav li a:hover{color: #409eff;}
+}
+/* 大型设备（大台式电脑，1200px 起） */
+@media (min-width: 1200px) {
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .nav li a{color: white;}
+    .nav li a:hover{color: #409eff;}
+ }

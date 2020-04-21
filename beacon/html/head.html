@@ -3,21 +3,80 @@
 <html>
 
 <head>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link rel="stylesheet" href="/js/bookstarp/node_modules/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/element/node_modules/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/js/layui/css/layui.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/head.css">
+
+    
 </head>
+<style>
+    .nav>li>a:focus, .nav>li>a:hover{
+    background-color: rgba(255, 255, 255, 0);
 
-<body>
+}
+</style>
 
+    <nav id="nav" class="navbar">
+        <div class="container-fluid" style="width: 95%;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <!-- <span class="sr-only">Toggle navigation</span> -->
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand nav_bar_u1" href="/project/list">
+                    <img src="/img/beacon-white.png" class="img-responsive" style="height: 30px;min-width: 30px;filter: drop-shadow(yellow 0px 0);" alt="">
+                </a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li v-for="list in lists" v-bind:class="list.href == winhref ?'nav_active':''">
+                        <a :href="list.href">${list.name}</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" style="display: flex;align-items: center;">
+                    <li>
+    
+                        <el-link href="/project/add" :underline="false" type="_blank"><i class="el-icon-view el-icon--right"></i> 创建新的项目</el-link>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">登录 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">个人设置</a></li>
+                            <li><a href="#">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    
     <script src="/js/layui/layui.js"></script>
     <script src="/js/vue.js"></script>
+    <script src="/js/element/node_modules/element-ui/lib/index.js"></script>
     <script src="/js/node_modules/axios/dist/axios.js"></script>
     <script src="/js/node_modules/axios/dist/axios.init.js"></script>
     <script src="/js/qs/dist/qs.js"></script>
+    <script src="/js/jquery/node_modules/dist/jquery.min.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script> -->
+    <script src="/js/bookstarp/node_modules/dist/js/bootstrap.min.js"></script>
+    <script src="/js/head.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     {{end}}
-</body>
+    {{.}}
+    
+
 
 </html>
