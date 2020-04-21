@@ -12,27 +12,27 @@
     <div id="add" class="container">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm layuiAddform">
             <el-form-item label="项目名称" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+                <el-input v-model.trim="ruleForm.name"></el-input>
             </el-form-item>
 
-            <el-form-item label="项目类型" prop="radio">
-                <el-radio-group v-model="ruleForm.radio">
+            <el-form-item label="项目类型" prop="type">
+                <el-radio-group v-model="ruleForm.type">
                     <el-radio label="1">标准项目</el-radio>
                     <el-radio label="2">看板项目</el-radio>
                 </el-radio-group>
             </el-form-item>
 
             <el-form-item label="项目成员">
-                <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
-                </el-checkbox>
+                <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
+                </el-checkbox> -->
 
-                <el-checkbox-group v-model="ruleForm.checkedCities" @change="handleCheckedCitiesChange">
+                <el-checkbox-group v-model="ruleForm.user" @change="handleCheckedCitiesChange">
                     <el-checkbox v-for="mmb in mmbers" :label="mmb.id" :key="mmb.id">${mmb.name}</el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
 
             <el-form-item label="项目标签">
-                <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false"
+                <el-tag :key="tag" v-for="tag in ruleForm.tag" closable :disable-transitions="false"
                     @close="handleClose(tag)">
                     ${tag}
                 </el-tag>
@@ -42,20 +42,33 @@
                 <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
             </el-form-item>
 
-            <el-form-item label="项目描述" prop="text">
-                <el-input type="textarea" v-model="ruleForm.text"></el-input>
+            <el-form-item label="项目描述" prop="note">
+                <el-input type="textarea" v-model="ruleForm.note"></el-input>
             </el-form-item>
 
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
-   
+
         </el-form>
 
     </div>
+
+
+    {{define "layout"}}
+    {{ end }}
+    {{ template "foot"}}
 </body>
 <style>
+    .nav-foot {
+        background: rgba(255, 255, 255, 0.932);
+        width: 95%;
+        margin: 0 auto;
+        min-height: 200px;
+        margin-top: 20px;
+    }
+
     .container {
         background-color: rgba(255, 255, 255, 0.932)
     }
@@ -85,12 +98,13 @@
         data() {
             return {
                 mmbers: [], //所有成员
-
+                checkAllChlid: true,
                 ruleForm: {
                     name: '', //名称
-                    radio: '1', //类型
-                    text: '',
-                    checkedCities: []
+                    type: '1', //类型
+                    note: '',
+                    user: [],
+                    tag: ['前端页面', '后端接口'],
                 },
                 rules: {
                     name: [{
@@ -105,12 +119,12 @@
                             trigger: 'blur'
                         }
                     ],
-                    radio: [{
+                    type: [{
                         required: false,
                         message: '请选择项目类型',
                         trigger: 'change'
                     }],
-                    text: [{
+                    note: [{
                         required: false,
                         message: '你也可以不输入项目描述',
                         trigger: 'change'
@@ -119,27 +133,51 @@
                 checkAll: false,
                 isIndeterminate: false,
 
-                dynamicTags: ['标签一', '标签二', '标签三'],
+
                 inputVisible: false,
                 inputValue: '',
             }
         },
         methods: {
             submitForm(formName) {
+                const temp = JSON.parse(JSON.stringify(this.ruleForm))
+                        let pargarm = {};
+                        const ketData = Object.keys(temp)
+                        ketData.map(v => {
+                            if (Array.prototype.isPrototypeOf(temp[v])) {
+                                temp[v] = temp[v].join(',')
+                            }
+                        })
+                        Object.assign(pargarm, temp)
+
+                        axios.post('/project/add_submit', pargarm)
+                            .then((res) => {
+                                console.log(res);
+                                
+                                if (res.data.state == '0') {
+                                    
+                                } else {
+                                   
+                                }
+                            })
                 // this.$refs[formName].validate((valid) => {
                 //     if (valid) {
-                //         console.log(this.ruleForm)
+                        
+
                 //     } else {
-                //         console.log('error submit!!');
                 //         return false;
                 //     }
                 // });
+
+
+
+
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
             handleClose(tag) {
-                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+                this.ruleForm.tag.splice(this.ruleForm.tag.indexOf(tag), 1);
             },
 
             showInput() {
@@ -152,21 +190,21 @@
             handleInputConfirm() {
                 let inputValue = this.inputValue;
                 if (inputValue) {
-                    this.dynamicTags.push(inputValue);
+                    this.ruleForm.tag.push(inputValue);
                 }
                 this.inputVisible = false;
                 this.inputValue = '';
             },
-            
+
             handleCheckAllChange(val) {
-                // console.log(this.mmbers)
-                console.log(val)
-                console.log(this.ruleForm.checkedCities)
-                this.ruleForm.checkedCities = val ? this.mmbers : [];
+                console.log(this.ruleForm.user);
+
+                this.ruleForm.user = val ? this.mmbers : [];
+
                 this.isIndeterminate = false;
             },
             handleCheckedCitiesChange(value) {
-                
+
                 let checkedCount = value.length;
                 this.checkAll = checkedCount === this.mmbers.length;
                 this.isIndeterminate = checkedCount > 0 && checkedCount < this.mmbers.length;
@@ -174,22 +212,30 @@
 
         },
         mounted() {
-            axios.get('/member/all') .then(function (response) {
+            axios.get('/member/all').then(response => {
                     if (response.data.data) {
-                        add.mmbers =  response.data.data.map(item => {
-                            var id = decodeURIComponent(Object.keys(item)[0]); //Object.keys方法，返回数组键值
+                        var foor = response.data.data.map(item => {
+                            var id = decodeURIComponent(Object.keys(item)[
+                                0]); //Object.keys方法，返回数组键值
                             var name = decodeURIComponent(item[id])
                             return {
                                 'id': id,
                                 'name': name
                             }
                         })
+                        let user = JSON.parse(localStorage.getItem('user'));
+                        const userid = user.data.ugid
+                        foor.forEach(item => {
+                            if (item.id != userid) {
+                                this.mmbers.push(item)
+                            }
+                        });
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-              
+
         }
     })
 </script>

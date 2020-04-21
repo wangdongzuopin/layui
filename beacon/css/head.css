@@ -75,6 +75,14 @@
 }
 .nav .el-link--inner{border: 1px solid;padding: 5px;border-radius: 5px;}
 
+/* 脚 */
+.nav-foot{
+    background: rgba(255, 255, 255, 0.932);
+    width: 93%;
+    margin: 0 auto;
+    min-height: 200px;
+}
+
 /* 添加项目 */
 .layuiAddform{
     width: 90%;
@@ -89,31 +97,31 @@
 
 /* 小型设备（平板电脑，768px 起） */
 @media screen and (max-width: 806px){
-    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);}
+    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);z-index: 3;}
     .nav li a{color: black;}
     .nav li a:hover{color: #409eff;}
  }
 
 /* 中型设备（台式电脑，992px 起） */
 @media screen and (max-width: 562px){
-    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);}
+    .navbar-collapse{background: white;position: absolute;width: 95%;border: 1px solid rgb(204, 204, 204);z-index: 3;}
     .nav li a{color: black;}
     .nav li a:hover{color: #409eff;}
 }
 @media screen and (min-width: 806px){
-    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;z-index: 3;}
     .nav li a{color: white;}
     .nav li a:hover{color: #409eff;}
 
 }
 @media (min-width: 768px){
-    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;z-index: 3;}
     .nav li a{color: white;}
     .nav li a:hover{color: #409eff;}
 }
 /* 大型设备（大台式电脑，1200px 起） */
 @media (min-width: 1200px) {
-    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;}
+    .navbar-collapse{background: none;position: inherit; width: 100%; border: 0;z-index: 3;}
     .nav li a{color: white;}
     .nav li a:hover{color: #409eff;}
  }

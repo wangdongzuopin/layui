@@ -19,7 +19,7 @@
                         </el-option>
                     </el-select>
                 </ul>
-                <div class="layui-tab-content" style="background: white;min-height: 380px;">
+                <div class="layui-tab-content" style="background: white;min-height: 450px;">
                     <div class="layui-tab-item layui-show">
                         <div v-for="list in lists" :title="list.add_time.split(' ')[0]" @click="list_enter(list.gid)"
                             class="listdad"><a>${list.name}${list.state}</a></div>
@@ -35,13 +35,9 @@
         </div>
     </div>
 
-    <div id="aa">
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <div style="margin: 15px 0;"></div>
-        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-            <el-checkbox v-for="city in cities" :label="city" :key="city">${city}</el-checkbox>
-        </el-checkbox-group>
-    </div>
+    {{define "layout"}}
+    {{ end }}
+    {{ template "foot"}}
 </body>
 
 </html>
@@ -103,32 +99,4 @@
             }
         })
     }
-</script>
-<script>
-    const cityOptions = ['上海', '北京', '广州', '深圳'];
-    var aaa = new Vue({
-        delimiters: ['${', '}'],
-                el: '#aa',
-                data() {
-                    return {
-                        checkAll: false,
-                        checkedCities: [],
-                        cities: cityOptions,
-                        isIndeterminate: false
-                    };
-                },
-                methods: {
-                    handleCheckAllChange(val) {
-                        console.log(val)
-                         console.log( this.checkedCities)
-                        this.checkedCities = val ? this.cities : [];
-                        this.isIndeterminate = false;
-                    },
-                    handleCheckedCitiesChange(value) {
-                        let checkedCount = value.length;
-                        this.checkAll = checkedCount === this.cities.length;
-                        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-                    }
-                }
-            });
 </script>
