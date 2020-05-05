@@ -3,9 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, 
+                                     initial-scale=1.0, 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no">
     <title>登录</title>
     <link rel="stylesheet" href="/js/layui/css/layui.css">
+    <link rel="stylesheet" href="/js/element/node_modules/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/css/login.css">
 </head>
 
@@ -15,63 +19,53 @@
     </div> -->
 
     <div id="lapp" class="l1">
-        <form onsubmit="return false">
+        <el-form :model="add" :rules="rules" ref="add" label-width="100px" class="demo-ruleForm">
             <div style="margin: 0 auto;width: 90%;height: 100%;">
                 <div class="l1-title">
                     Login
                 </div>
                 <div class="l1-form">
                     <!-- 邮箱 -->
-                    <div class="layui-form-item" style="padding-bottom: 10px;">
-                        <label class="layui-form-label"
-                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">邮箱
-                            <span class="login_tips">${mailtips}</span>
-                        </label>
-
-                        <div class="layui-input-block layui-margin-zero">
-                            <input type="text" :class="{login_color:clo}" name="mail" ref="mail" @focus="maildey"
-                                @blur="mailkey" placeholder="请输入邮箱" autocomplete="off" class="layui-input"
-                                v-model="add.mail">
+                    <div class="layui-form-item">
+                        <div class="login-name">
+                            邮箱
                         </div>
 
+                        <div class="layui-input-block layui-margin-zero">
+                            <el-form-item prop="mail">
+                                <el-input v-model="add.mail" placeholder="请输入邮箱"></el-input>
+                            </el-form-item>
+                        </div>
                     </div>
                     <!-- 密码 -->
-                    <div class="layui-form-item" style="padding-bottom: 10px;margin-bottom: 0;">
-                        <label class="layui-form-label"
-                            style="width: auto;padding: 0;text-align: left;padding-bottom: 5px;">密码
-                            <span class="login_tips">${passwdtips}</span>
-                        </label>
+                    <div class="layui-form-item" style="margin-bottom: 0;">
+                        <div class="login-name">密码</div>
                         <div class="layui-input-block layui-margin-zero">
-                            <input type="password" :class="{login_color_pwd:copwd}" ref="pwd" @focus="pwddkey"
-                                @blur="pwdkey" name="passwd" placeholder="请输入密码" autocomplete="off" class="layui-input"
-                                v-model="add.passwd">
+                            <el-form-item prop="passwd">
+                                <el-input type="password" placeholder="请输入密码" v-model="add.passwd" autocomplete="off">
+                                </el-input>
+                            </el-form-item>
                         </div>
+
                     </div>
                     <!-- 两功能 -->
                     <div style="display: flex;justify-content: space-between;">
                         <!-- 复选框 -->
-                        <div class="layui-form-item">
-                            <!-- <label class="layui-form-label">复选框</label> -->
-                            <div class="layui-input-block layui-margin-zero flex">
-                                <input id="layui_isauto" type="checkbox" name="is_auto" title="" v-model="add.is_auto"
-                                    @click="is_uto">
-                                <label for="layui_isauto" style="padding-left: 5px;">记住密码</label>
-                            </div>
-                        </div>
+                        <template>
+                            <el-checkbox v-model="add.type">记住密码</el-checkbox>
+                        </template>
                         <!-- 忘记密码 -->
-                        <div class="layui-form-item">
-                            <!-- <label class="layui-form-label">复选框</label> -->
-                            <div class="layui-input-block" style="margin-left: 0;display: flex;align-items: center;">
-                                <a href="">忘记密码？</a>
-                            </div>
+                        <div class="layui-input-block" style="margin-left: 0;display: flex;">
+                            <a href="">忘记密码？</a>
                         </div>
                     </div>
                     <!-- 提交 -->
                     <div class="layui-form-item">
                         <div class="layui-input-block layui-margin-zero">
                             <!-- <button style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo"></button> -->
-                            <input type="submit" v-bind:value="logintext" @click="login"
-                                style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo">
+
+                            <el-button style="width: 100%;" type="primary" @click="login('add')">${logintext}
+                            </el-button>
                         </div>
                     </div>
                     <!-- 注册链接 -->
@@ -83,7 +77,7 @@
                 </div>
 
             </div>
-        </form>
+        </el-form>
     </div>
 
 </body>
@@ -92,6 +86,7 @@
 <script src="/js/node_modules/axios/dist/axios.js"></script>
 <script src="/js/node_modules/axios/dist/axios.init.js"></script>
 <script src="/js/qs/dist/qs.js"></script>
+<script src="/js/element/node_modules/element-ui/lib/index.js"></script>
 <!-- <script src="/js/layui/lay/modules/layer.js"></script> -->
 
 
@@ -105,82 +100,79 @@
                 add: {
                     mail: '',
                     passwd: '',
-                    is_auto: true
+                    // type: [],
+                    type: true
                 },
-                mailtips: '',
-                passwdtips: '',
-                clo: false,
-                copwd: false,
-                logintext: '登 录'
+                logintext: '登 录',
+                rules: {
+                    mail: [{
+                            required: true,
+                            message: '请输入邮箱地址',
+                            trigger: 'blur'
+                        },
+                        {
+                            type: 'email',
+                            message: '请输入正确的邮箱地址',
+                            trigger: ['blur', 'change']
+                        }
+                    ],
+                    passwd: [{
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                    }, ]
+                }
             }
         },
         methods: {
-            login: function () {
-                var par = window.Qs.stringify({
-                    mail: this.add.mail,
-                    passwd: this.add.passwd,
-                    is_auto: this.add.is_auto
-                })
-                axios.interceptors.request.use((config) => {
-                    // 在发送请求之前做些什么
-                    this.logintext = '正在登录...'
-                    // this.isShow = true
-                    return config;
-                }, function (error) {
-                    // 对请求错误做些什么
-                    this.logintext = ''
-                    return Promise.reject(error);
-                });
-
-                axios.post('/login/check', par)
-                    .then((res) => {
-                        if (res.data.state == '0') {
-                            layer.msg(res.data.msg, {
-                                icon: 5
-                            });
-                            this.logintext = '登 录'
-                        } else {
-                            layer.msg(res.data.msg, {
-                                icon: 1
-                            });
+            login(add) {
+                this.$refs[add].validate((valid) => {
+                    if (valid) {
+                        var par = window.Qs.stringify({
+                            mail: this.add.mail,
+                            passwd: this.add.passwd,
+                            type: this.add.type
+                        })
+                        axios.interceptors.request.use((config) => {
+                            // 在发送请求之前做些什么
                             this.logintext = '正在登录...'
-                            window.location.href = "/project/list";
-                            // localStorage本地存储
-                            let user = JSON.stringify(res.data);
-                            localStorage.setItem('user',user);
-                        }
-                    })
+                            // this.isShow = true
+                            return config;
+                        }, function (error) {
+                            // 对请求错误做些什么
+                            this.logintext = ''
+                            return Promise.reject(error);
+                        });
+                        axios.post('/login/check', par)
+                            .then((res) => {
+                                if (res.data.state == '0') {
+                                    layer.msg(res.data.msg, {
+                                        icon: 5
+                                    });
+                                    this.logintext = '登 录'
+                                } else {
+                                    layer.msg(res.data.msg, {
+                                        icon: 1
+                                    });
+                                    this.logintext = '正在登录...'
+                                    window.location.href = "/project/list";
+                                    // localStorage本地存储
+                                    let user = JSON.stringify(res.data);
+                                    localStorage.setItem('user', user);
+                                }
+                            })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
             is_uto: function () {
                 this.add.is_auto = !this.add.is_auto
             },
-            mailkey: function () {
-                if (this.$refs.mail.value == "" || !(
-                        /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.$refs.mail
-                            .value))) {
-                    this.mailtips = '*邮箱格式不正确'
-                    this.clo = true
-                } else {
-                    this.mailtips = ''
-                    this.clo = false
-                }
-            },
-            maildey: function () {
-                this.mailtips = ''
-            },
+
             // 密码
-            pwdkey: function () {
-                if (this.$refs.pwd.value == "") {
-                    this.passwdtips = '*密码不正确'
-                    this.copwd = true
-                } else {
-                    this.passwdtips = ''
-                    this.copwd = false
-                }
-            },
-            pwddkey: function () {
-                this.passwdtips = ''
-            }
+
         },
     })
     layui.use('layer', function () {

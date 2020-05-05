@@ -104,7 +104,7 @@
                     type: '1', //类型
                     note: '',
                     user: [],
-                    tag: ['前端页面', '后端接口'],
+                    tag: ['BUG', '延迟'],
                 },
                 rules: {
                     name: [{
@@ -141,28 +141,35 @@
         methods: {
             submitForm(formName) {
                 const temp = JSON.parse(JSON.stringify(this.ruleForm))
-                        let pargarm = {};
-                        const ketData = Object.keys(temp)
-                        ketData.map(v => {
-                            if (Array.prototype.isPrototypeOf(temp[v])) {
-                                temp[v] = temp[v].join(',')
-                            }
-                        })
-                        Object.assign(pargarm, temp)
+                let pargarm = {};
+                const ketData = Object.keys(temp)
+                ketData.map(v => {
+                    console.log(v);
+                    if (Array.prototype.isPrototypeOf(temp[v])) {
+                        console.log(temp[v]);
+                        temp[v] = "'" + temp[v].join("','") + "'"
 
-                        axios.post('/project/add_submit', pargarm)
-                            .then((res) => {
-                                console.log(res);
-                                
-                                if (res.data.state == '0') {
-                                    
-                                } else {
-                                   
-                                }
-                            })
+                    }
+                })
+                Object.assign(pargarm, temp)
+                console.log(pargarm);
+
+                var par = window.Qs.stringify(pargarm)
+                console.log(par);
+                
+                axios.post('/project/add_submit', par)
+                    .then((res) => {
+                        console.log(res);
+
+                        if (res.data.state == '0') {
+
+                        } else {
+
+                        }
+                    })
                 // this.$refs[formName].validate((valid) => {
                 //     if (valid) {
-                        
+
 
                 //     } else {
                 //         return false;
