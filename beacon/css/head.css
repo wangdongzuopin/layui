@@ -92,6 +92,27 @@
     margin: 0 auto;
     padding-top: 30px;
 }
+/* 项目列表 */
+.main{
+    width: 90%;
+    margin: 0 auto;
+}
+.layui-tab-card>.layui-tab-title .layui-this{
+    color: #409eff;
+}
+.el-icon-s-order:before{
+    padding-right: 10px;
+}
+.el-icon-s-cooperation:before{
+    padding-right: 10px;
+}
+.el-icon-s-comment:before{
+    padding-right: 10px;
+}
+.layui-tab-content{
+    background: white;
+    min-height: 400px;
+}
 /* 超小设备（手机，小于 768px） */
 /* Bootstrap 中默认情况下没有媒体查询 */
 

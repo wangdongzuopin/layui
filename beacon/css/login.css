@@ -64,7 +64,7 @@ body{
     border: 1px solid red;
 }
 
-.el-form-item__content{
+#lapp .el-form-item__content{
     margin-left: 0px !important;
 }
 .login-name{

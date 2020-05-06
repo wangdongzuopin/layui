@@ -113,14 +113,16 @@
                         {
                             type: 'email',
                             message: '请输入正确的邮箱地址',
-                            trigger: ['blur', 'change']
+                            trigger: ['blur']
                         }
                     ],
                     passwd: [{
                         required: true,
                         message: '请输入密码',
                         trigger: 'blur'
-                    }, ]
+                    }, 
+                    { min: 8, max: 10, message: '密码在八位和十位之间', trigger: 'blur' }
+                    ]
                 }
             }
         },
