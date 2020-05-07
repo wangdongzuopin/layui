@@ -11,23 +11,80 @@
     <title>标准项目</title>
 
     <div class="main">
-        <div class="layui-tab layui-tab-card">
+        <div class="layui-tab layui-tab-card" lay-filter="test1">
             <ul class="layui-tab-title" style="display: flex;justify-content: space-between;">
-                <li class="layui-this el-icon-s-order">项目信息</li>
+                <li class="layui-this el-icon-s-order" lay-id="111">项目信息</li>
                 <div style="width: 70%;"></div>
-                <li class="el-icon-s-cooperation">项目设置</li>
-                <li class="el-icon-s-comment">项目日志</li>
+                <li class="el-icon-s-cooperation" lay-id="222" @click="proset">项目设置</li>
+                <li class="el-icon-s-comment" lay-id="333">项目日志</li>
             </ul>
-            <div class="layui-tab-content" style="height: 100px;">
-                <div class="layui-tab-item layui-show">1</div>
+            <div class="layui-tab-content">
+                <div id="project_info" class="layui-tab-item layui-show">
+                    <el-tabs :tab-position="tabPosition">
+                        <el-tab-pane label="项目的信息">
+                            <div class="projectinfo">
+                                <div class="protitle">
+                                    <el-divider content-position="left">项目名称</el-divider>
+                                    <span>{{.project_name}}</span>
+                                </div>
+                                <div class="protitle">
+                                    <el-divider content-position="left">项目参与人数</el-divider>
+                                    <span>{{.project_member}}</span>
+                                </div>
+                                <div class="protitle">
+                                    <el-divider content-position="left">项目备注</el-divider>
+                                    <span v-if="">{{.project_note}}</span>
+                                </div>
+
+                                <!-- <div class="protitle" style="display: flex;justify-content: center;">
+                                    <el-button plain>去设置 <span class="el-icon-right"></span> </el-button>
+                                </div> -->
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane label="项目的任务">项目的任务</el-tab-pane>
+
+                    </el-tabs>
+                </div>
+                <!-- 项目设置 -->
                 <div class="layui-tab-item">2</div>
                 <div class="layui-tab-item">3</div>
             </div>
         </div>
     </div>
+
+    {{define "layout"}}
+    {{ end }}
+    {{ template "foot"}}
 </body>
 <script>
+    var p1 = new Vue({
+        el: '#project_info',
+        data() {
+            return {
+                tabPosition: 'right',
+            }
+        },
+        methods: {
+
+        },
+        mounted() {
+            var info = '{{.}}'
+            console.log(info);
+
+        }
+    })
     layui.use('element', function () {
         var element = layui.element;
+        layui.use('element', function () {
+            var element = layui.element;
+            //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值
+            var layid = location.hash.replace(/^#test1=/, '');
+            element.tabChange('test1',
+                layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+            //监听Tab切换，以改变地址hash值
+            element.on('tab(test1)', function () {
+                location.hash = 'test1=' + this.getAttribute('lay-id');
+            });
+        });
     });
 </script>

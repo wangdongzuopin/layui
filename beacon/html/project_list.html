@@ -67,7 +67,9 @@
                 },
                 listTime: function () {
                     this.lists.reverse()
-                }
+                },
+
+
             },
             mounted: function () {
                 layui.use('element', function () {
@@ -92,11 +94,20 @@
                     }
                     this.lists.push(li)
                 });
-
-                // this.lists.name = decodeURIComponent(this.lists.name)
-
-
+                this.lists.sort(compare)
             }
         })
+    }
+    // 排序
+    var compare = function (obj1, obj2) {
+        var val1 = obj1.add_time;
+        var val2 = obj2.add_time;
+        if (val1 < val2) {
+            return -1;
+        } else if (val1 > val2) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 </script>

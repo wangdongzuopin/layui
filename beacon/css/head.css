@@ -94,7 +94,7 @@
 }
 /* 项目列表 */
 .main{
-    width: 90%;
+    width: 93%;
     margin: 0 auto;
 }
 .layui-tab-card>.layui-tab-title .layui-this{
@@ -110,8 +110,28 @@
     padding-right: 10px;
 }
 .layui-tab-content{
-    background: white;
+    background: rgba(255, 255, 255, 0.932);
+    
+}
+.main .layui-tab-item,.main .el-tabs__nav-wrap{
     min-height: 400px;
+}
+
+.projectinfo{
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.projectinfo .protitle{
+    width: 100%;
+    padding-bottom: 40px;
+}
+.protitle span{
+    display: block;
+    width: 96%;
+    margin: 0 auto;
 }
 /* 超小设备（手机，小于 768px） */
 /* Bootstrap 中默认情况下没有媒体查询 */
