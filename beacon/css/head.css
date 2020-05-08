@@ -118,11 +118,11 @@
 }
 
 .projectinfo{
-    min-height: 380px;
-    display: flex;
-    align-items: center;
+    min-height: 400px;
     justify-content: center;
     flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 .projectinfo .protitle{
     width: 100%;
