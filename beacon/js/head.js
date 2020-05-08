@@ -22,3 +22,7 @@ var u1 = new Vue({
         this.winhref = '/'+window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4];
     }
 })
+
+window.addEventListener("resize", function () {
+    myChart.resize();
+});
