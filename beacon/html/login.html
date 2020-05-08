@@ -64,7 +64,7 @@
                         <div class="layui-input-block layui-margin-zero">
                             <!-- <button style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo"></button> -->
 
-                            <el-button style="width: 100%;" type="primary" @click="login('add')">${logintext}
+                            <el-button style="width: 100%;" type="primary" @keyup.enter="login('add')" @click="login('add')">${logintext}
                             </el-button>
                         </div>
                     </div>
