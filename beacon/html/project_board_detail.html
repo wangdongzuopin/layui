@@ -20,8 +20,8 @@
             </ul>
             <div class="layui-tab-content">
                 <div id="project_info" class="layui-tab-item layui-show">
-                    <el-tabs :tab-position="tabPosition">
-                        <el-tab-pane label="项目的信息">
+                    <el-tabs :tab-position="tabPosition" v-model="editableTabsValue">
+                        <el-tab-pane name="1" label="项目的信息">
                             <div class="projectinfo">
                                 <div class="protitle">
                                     <el-divider content-position="left">项目名称</el-divider>
@@ -41,39 +41,101 @@
                                 </div> -->
                             </div>
                         </el-tab-pane>
-                        <el-tab-pane label="项目的任务">项目的任务</el-tab-pane>
+                        <el-tab-pane name="2" label="项目的任务">
+                            <div>
+                                <div class="task-title">
+                                    <el-breadcrumb separator-class="el-icon-arrow-right">
+                                        <el-breadcrumb-item><strong>{{.project_name}}</strong> 项目下</el-breadcrumb-item>
+                                        <el-breadcrumb-item>任务列表</el-breadcrumb-item>
+                                        <el-breadcrumb-item>
+                                            <el-dropdown split-button type="primary" @click="haddtask">
+                                                添加任务
+                                                <el-dropdown-menu slot="dropdown">
+                                                    <el-dropdown-item><span @click="addtasklist">添加任务清单</span>
+                                                    </el-dropdown-item>
+                                                </el-dropdown-menu>
+                                            </el-dropdown>
+                                        </el-breadcrumb-item>
+                                    </el-breadcrumb>
+                                </div>
+                            </div>
+
+                            <!-- 弹出 -->
+                            <el-dialog class="addtask_dislog" title="添加任务" :visible.sync="addtask">
+                                <el-form :model="add_ruleForm" :rules="add_rules" ref="add_ruleForm" label-width="100px" class="demo-ruleForm">
+                                    <!-- id -->
+                                    <el-input type="hidden" v-model="add_ruleForm.tcid"></el-input> 
+                                    <!-- 负责人 -->
+                                    <el-form-item label="任务负责人" prop="head_user_id">
+                                        <el-select v-model="add_ruleForm.head_user_id" placeholder="请选择任务负责人">
+                                            <el-option v-for="item in mmb_user" :key="item.id" :label="item.name" :value="item.id">
+                                            </el-option>
+                                          </el-select>
+                                      </el-form-item>
+                                    <!-- name -->
+                                    <el-tooltip  placement="bottom"  effect="light">
+                                    <div slot="content">任务名称示例：! #自定义标签# #自定义标签# 任务名称。!：重点；#：标签</div>
+                                    <el-form-item  label="任务名称" prop="name">
+                                      <el-input   placeholder="任务名称" v-model="add_ruleForm.name"></el-input>
+                                    </el-form-item>
+                                    </el-tooltip>
+                                    <!-- time -->
+                                    <el-form-item label="完成时间" prop="expect_end_time">
+                                        <el-date-picker  value-format="yyyy-MM-dd" v-model="add_ruleForm.expect_end_time" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions">
+                                      </el-date-picker>
+                                      </el-form-item>
+                                      <!-- tag -->
+                                      <el-form-item label="任务标签" prop="tag">
+                                        <el-select v-model="add_ruleForm.tag"  multiple  placeholder="请选择任务标签">
+                                            <el-option v-for="(item,index) in task_tag" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                          </el-select>
+                                      </el-form-item>
+                                      <!-- note -->
+                                      <el-form-item label="任务备注">
+                                        <el-input type="textarea" placeholder="任务备注" v-model="add_ruleForm.note"></el-input>
+                                      </el-form-item>
+                                      <!-- <button></button> -->
+                                      <el-form-item>
+                                        <el-button type="primary" @click="submitForm('add_ruleForm')">立即创建</el-button>
+                                        <el-button @click="resetForm('add_ruleForm')">重置</el-button>
+                                      </el-form-item>
+                                </el-form>
+                            </el-dialog>
+                            {{define "layout"}}
+                            {{ end }}
+                            {{ template "task"}}
+                        </el-tab-pane>
 
                     </el-tabs>
                 </div>
                 <!-- 项目设置 -->
-                <div class="layui-tab-item">2</div>
+                <div id="proset" class="layui-tab-item">项目设置</div>
                 <div class="layui-tab-item">3</div>
             </div>
         </div>
     </div>
 
+    <script>
+        var pset = new Vue({
+            el: '#proset',
+            data() {
+                return {
+                    gid: ''
+                }
+            },
+            mounted() {
+                var id = '{{.project_gid}}'
+                this.gid = id
 
+            }
+        })
+    </script>
     {{define "layout"}}
     {{ end }}
     {{ template "foot"}}
 </body>
 <script>
-    var p1 = new Vue({
-        el: '#project_info',
-        data() {
-            return {
-                tabPosition: 'right',
-            }
-        },
-        methods: {
-
-        },
-        mounted() {
-            var info = '{{.}}'
-            console.log(info);
-
-        }
-    })
     layui.use('element', function () {
         var element = layui.element;
         layui.use('element', function () {

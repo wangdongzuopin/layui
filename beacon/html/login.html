@@ -42,7 +42,7 @@
                         <div class="login-name">密码</div>
                         <div class="layui-input-block layui-margin-zero">
                             <el-form-item prop="passwd">
-                                <el-input type="password" placeholder="请输入密码" v-model="add.passwd" autocomplete="off">
+                                <el-input type="password"  @keyup.enter.native="login('add')"  placeholder="请输入密码" v-model="add.passwd" autocomplete="off">
                                 </el-input>
                             </el-form-item>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="layui-input-block layui-margin-zero">
                             <!-- <button style="width: 100%;font-size: 17px;" class="layui-btn" lay-submit lay-filter="formDemo"></button> -->
 
-                            <el-button style="width: 100%;" type="primary" @keyup.enter="login('add')" @click="login('add')">${logintext}
+                            <el-button style="width: 100%;" type="primary" @click="login('add')">${logintext}
                             </el-button>
                         </div>
                     </div>
@@ -172,6 +172,10 @@
             is_uto: function () {
                 this.add.is_auto = !this.add.is_auto
             },
+            ss(){
+                console.log('11');
+                
+            }
 
             // 密码
 

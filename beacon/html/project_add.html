@@ -152,17 +152,17 @@
                     }
                 })
                 Object.assign(pargarm, temp)
-                console.log(pargarm);
-
                 var par = window.Qs.stringify(pargarm)
                 console.log(par);
 
                 axios.post('/project/add_submit', par)
                     .then((res) => {
                         console.log(res);
-
                         if (res.data.state == '0') {
-
+                            this.$message({
+                                message: res.data.msg,
+                                type: 'success'
+                            });
                         } else {
                             this.$message({
                                 message: '项目创建成功',

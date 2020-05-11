@@ -133,6 +133,29 @@
     width: 96%;
     margin: 0 auto;
 }
+/* 任务头 */
+.task-title{
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+}
+.task-title .el-breadcrumb{display: flex;align-items: center;}
+.task-define{
+    display: flex;
+    justify-content: space-between;
+}
+.task-de-use{
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.task-de-list{width: 95%;}
+.task-de-use .el-button+.el-button{margin-left: 0px;}
+.task-de-use .el-button--mini, .el-button--mini.is-round{padding: 3px 15px;}
+.addtask_dislog .el-select{width: 100%;}
+.addtask_dislog .el-date-editor.el-input, .el-date-editor.el-input__inner{width: 100%;}
+.addtask_dislog .el-form-item__label{display: flex;justify-content: flex-end;}
 /* 超小设备（手机，小于 768px） */
 /* Bootstrap 中默认情况下没有媒体查询 */
 
